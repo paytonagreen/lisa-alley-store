@@ -1,0 +1,13 @@
+import React from "react";
+import SignIn from "../components/Signin";
+import SignInContainer from '../components/styles/SignInContainer';
+
+const SignInPage = () => {
+  return (
+    <SignInContainer>
+        <SignIn />
+    </SignInContainer>
+  );
+};
+
+export default SignInPage;
