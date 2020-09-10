@@ -42,7 +42,7 @@ const SIGNUP_MUTATION = gql`
 const Signup = () => {
   const signupMutation = useMutation(SIGNUP_MUTATION);
   const [signup] = signupMutation;
-  const mutationError = signmupMutation[1].error;
+  const mutationError = signupMutation[1].error;
 
   const [savingStarted, setSavingStarted] = useState(false);
 
