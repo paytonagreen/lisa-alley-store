@@ -23,7 +23,9 @@ const Item = ({ item, me }) => {
         </Link>
       </Title>
       <PriceTag>{formatMoney(item.price)}</PriceTag>
-      <p>{item.description}</p>
+      <div className="description-div">
+        <p>{item.description}</p>
+      </div>
 
       <div className="buttonList">
         {me && me.permissions.includes("ADMIN") && (

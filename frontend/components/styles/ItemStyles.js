@@ -19,6 +19,12 @@ const Item = styled.div`
     padding: 0 3rem;
     font-size: 1rem;
   }
+  .description-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+  }
   .buttonList {
     display: grid;
     width: 100%;
