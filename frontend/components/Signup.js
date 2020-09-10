@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { useMutation, gql } from "@apollo/client";
 import Form from "./styles/Form";
 import Error from "./ErrorMessage";
@@ -42,6 +42,7 @@ const SIGNUP_MUTATION = gql`
 const Signup = () => {
   const signupMutation = useMutation(SIGNUP_MUTATION);
   const [signup] = signupMutation;
+  const mutationLoading = signupMutation[1].loading;
   const mutationError = signupMutation[1].error;
 
   const [savingStarted, setSavingStarted] = useState(false);
@@ -55,6 +56,9 @@ const Signup = () => {
         variables: { ...values },
         refetchQueries: [{ query: CURRENT_USER_QUERY }],
       });
+      Router.push({
+        pathname: '/items',
+      })
     }
   }
 
@@ -63,7 +67,7 @@ const Signup = () => {
       method="post"
       onSubmit={handleSubmit}
     >
-      <fieldset disabled={loading} aria-busy={loading}>
+      <fieldset disabled={mutationLoading} aria-busy={mutationLoading}>
         <h2>Sign Up For An Account</h2>
         <Error error={mutationError} />
         <label htmlFor="email">

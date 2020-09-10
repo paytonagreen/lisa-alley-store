@@ -17,10 +17,10 @@ const Signout = (props) => {
     refetchQueries: [{query: CURRENT_USER_QUERY}] 
     })
   function handleClick() {
-    signout();
     Router.push({
       pathname: '/',
     })
+    signout();
   }
   return <button onClick={handleClick}>Sign Out</button>
 };
