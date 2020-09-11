@@ -80,6 +80,7 @@ const Mutations = {
     const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
     //set JWT as a cookie on the response
     ctx.response.cookie("token", token, {
+      domain: '.paytongreen.com',
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year cookie
     });
@@ -115,6 +116,7 @@ const Mutations = {
     const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
     //Set cookie with token
     ctx.response.cookie("token", token, {
+      domain: '.paytongreen.com',
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365,
     });
@@ -186,6 +188,7 @@ const Mutations = {
     const token = jwt.sign({ userId: updatedUser.id }, process.env.APP_SECRET);
     //Set JWT Cookie
     ctx.response.cookie("token", token, {
+      domain: '.paytongreen.com',
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365,
     });

@@ -74,4 +74,5 @@ type User {
   zip: Int!
   permissions: [Permission!]!
   cart: [CartItem!]!
+  orders: [OrderItem]
 }
