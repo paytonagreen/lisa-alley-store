@@ -125,7 +125,7 @@ const Mutations = {
   },
   signout(parent, args, ctx, info) {
     ctx.response.clearCookie("token", {
-      domain: '.paytongreen.com';
+      domain: '.paytongreen.com',
     });
     return { message: "Goodbye!" };
   },
