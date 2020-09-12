@@ -124,7 +124,9 @@ const Mutations = {
     return user;
   },
   signout(parent, args, ctx, info) {
-    ctx.response.clearCookie("token");
+    ctx.response.clearCookie("token", {
+      domain: '.paytongreen.com';
+    });
     return { message: "Goodbye!" };
   },
   async requestReset(parent, args, ctx, info) {
