@@ -3,6 +3,7 @@ import { useMutation, gql } from "@apollo/client";
 import Form from "./styles/Form";
 import Error from "./ErrorMessage";
 import PropTypes from "prop-types";
+import Router from 'next/router';
 import { CURRENT_USER_QUERY } from "./User";
 import useForm from "../lib/useForm";
 
@@ -39,6 +40,9 @@ const Reset = ({ resetToken }) => {
           ...values
         },
         refetchQueries: [{ query: CURRENT_USER_QUERY }]
+      });
+      Router.push({
+        pathname: '/',
       })
     }
   }
@@ -68,7 +72,7 @@ const Reset = ({ resetToken }) => {
             onChange={handleChange}
           />
         </label>
-        <button type="submit">Reset You Password!</button>
+        <button type="submit">Reset Your Password!</button>
       </fieldset>
     </Form>
   );

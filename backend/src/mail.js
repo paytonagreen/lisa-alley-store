@@ -20,7 +20,7 @@ const makeANiceEmail = text => `
     <h2>Hello There!</h2>
     <p>${text}</p>
 
-    <p>, Payton Green</p>
+    <p>Thanks for shopping with me!\nLisa Alley</p>
   </div>
 `
 
