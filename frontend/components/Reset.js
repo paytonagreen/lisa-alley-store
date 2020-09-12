@@ -3,7 +3,7 @@ import { useMutation, gql } from "@apollo/client";
 import Form from "./styles/Form";
 import Error from "./ErrorMessage";
 import PropTypes from "prop-types";
-import Router from 'next/router';
+import Router from "next/router";
 import { CURRENT_USER_QUERY } from "./User";
 import useForm from "../lib/useForm";
 
@@ -27,23 +27,20 @@ const RESET_MUTATION = gql`
 
 const Reset = ({ resetToken }) => {
   const { values, handleSubmit, handleChange } = useForm(callback);
-  const { savingStarted, setSavingStarted } = useState(false);
+  const [savingStarted, setSavingStarted] = useState(false);
 
   const [reset, { loading, error }] = useMutation(RESET_MUTATION);
 
   function callback() {
-    if(!savingStarted) {
+    if (!savingStarted) {
       setSavingStarted(true);
       reset({
         variables: {
-          refetchToken,
-          ...values
+          resetToken,
+          ...values,
         },
-        refetchQueries: [{ query: CURRENT_USER_QUERY }]
+        refetchQueries: [{ query: CURRENT_USER_QUERY }],
       });
-      Router.push({
-        pathname: '/',
-      })
     }
   }
 
