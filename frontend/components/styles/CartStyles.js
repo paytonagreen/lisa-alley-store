@@ -40,7 +40,8 @@ const CartStyles = styled.div`
     margin: 0;
     padding: 0;
     list-style: none;
-    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: scroll;
   }
 `;
 

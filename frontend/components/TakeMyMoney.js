@@ -49,7 +49,7 @@ const TakeMyMoney = props => {
   }
   return (
     <StripeCheckout
-      amount={calcTotalPrice(me.cart)}
+      amount={(calcTotalPrice(me.cart) + 500)}
       name="Lisa Alley"
       description={`Order of ${totalItems(me.cart)} item${totalItems(me.cart) > 1 ? 's' : '' }`}
       image={me.cart.length && me.cart[0].item && me.cart[0].item.image}

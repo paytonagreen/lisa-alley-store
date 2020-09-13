@@ -45,8 +45,9 @@ const Cart = () => {
           <CartItem key={cartItem.id} cartItem={cartItem} />
         ))}
       </ul>
+      <h3>Shipping: $5</h3>
       <footer>
-        <p>{formatMoney(calcTotalPrice(me.cart))}</p>
+        <p>Total: {formatMoney(calcTotalPrice(me.cart) + 500)}</p>
         {me.cart.length && (
           <TakeMyMoney>
             <SickButton onClick={() => toggleCart()}>Checkout</SickButton>
