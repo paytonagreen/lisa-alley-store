@@ -60,7 +60,8 @@ type Query {
   me: User
   users: [User]!
   order(id: ID!): Order
-  orders(orderBy: OrderOrderByInput): [Order]!
+  orders(orderBy: OrderOrderByInput, skip: Int, first: Int): [Order]!
+  ordersConnection(where: OrderWhereInput): OrderConnection!
 }
 
 type User {

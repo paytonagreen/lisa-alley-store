@@ -20,7 +20,7 @@ const ALL_ITEMS_QUERY = gql`
   }
 `;
 
-const Center = styled.div`
+export const Center = styled.div`
   text-align: center;
 `;
 

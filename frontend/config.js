@@ -3,3 +3,4 @@ export const endpoint = `http://localhost:4444`;
 export const prodEndpoint = `https://api.paytongreen.com`;
 
 export const perPage = 6;
+export const ordersPerPage = 8;
