@@ -341,6 +341,8 @@ const Mutations = {
     const order = await ctx.db.mutation.createOrder({
       data: {
         total: charge.amount,
+        view: 1,
+        fulfilled: false,
         charge: charge.id,
         items: { create: orderItems },
         user: { connect: { id: userId }}
