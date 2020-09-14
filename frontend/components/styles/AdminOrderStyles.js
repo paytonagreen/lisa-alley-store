@@ -2,10 +2,10 @@ import styled from 'styled-components';
 
 const OrderItemStyles = styled.li`
   box-shadow: ${props => props.theme.bs};
+  background-color: #f4f4f4;
   list-style: none;
   padding: 2rem;
   border: 1px solid ${props => props.theme.offWhite};
-  position: relative;
   h2 {
     border-bottom: 2px solid red;
     margin-top: 0;
@@ -25,19 +25,21 @@ const OrderItemStyles = styled.li`
     }
   }
   .order-meta {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
+    display: flex;
+    flex-direction: column;
     display: grid;
     grid-gap: 1rem;
     text-align: center;
     & > * {
       margin: 0;
-      background: rgba(0, 0, 0, 0.03);
-      padding: 1rem 0;
+      text-align: left;
     }
     strong {
       display: block;
       margin-bottom: 1rem;
+    }
+    button {
+
     }
   }
 `;

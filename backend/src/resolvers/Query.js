@@ -59,7 +59,12 @@ const Query = {
     const { userId } = ctx.request;
     //Check login
     if (!ctx.request.userId) {
-      throw new Error(`You aint even logged in my friend!`);
+      throw new Error(`You aint even logged in, my friend!`);
+    };
+    if (ctx.request.user.permissions.includes("ADMIN")) {
+      return ctx.db.query.orders({
+        where: { view: 1 }
+      }, info);
     }
     //Query all orders
     return ctx.db.query.orders({
@@ -68,6 +73,7 @@ const Query = {
       },
     }, info);
   },
+
 };
 
 module.exports = Query;

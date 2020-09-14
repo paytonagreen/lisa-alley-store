@@ -7,12 +7,12 @@ const Title = styled.h3`
   margin-top: -3rem;
   text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
   a {
-    background: ${props => props.theme.yellow};
+    background: ${props => props.theme.teal};
     display: inline;
     line-height: 1.3;
     font-size: 3rem;
     text-align: center;
-    color: white;
+    color: ${props => props.theme.yellow};
     padding: 0 1rem;
   }
 `;

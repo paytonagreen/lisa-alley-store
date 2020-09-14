@@ -57,6 +57,8 @@ type OrderItem {
 
 type Order {
   id: ID! @id
+  view: Int!
+  fulfilled: Boolean!
   items: [OrderItem!]!
   total: Int!
   user: User!

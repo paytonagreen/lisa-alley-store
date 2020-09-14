@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/payton-green/siiiiccccckkkkk-fits/dev
-# timestamp: Thu Sep 03 2020 20:14:40 GMT-0500 (Central Daylight Time)
+# timestamp: Mon Sep 14 2020 15:38:11 GMT-0500 (Central Daylight Time)
 
 type AggregateCartItem {
   count: Int!
@@ -812,6 +812,8 @@ interface Node {
 
 type Order implements Node {
   id: ID!
+  view: Int!
+  fulfilled: Boolean!
   items(where: OrderItemWhereInput, orderBy: OrderItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [OrderItem!]
   total: Int!
   user: User!
@@ -832,6 +834,8 @@ type OrderConnection {
 
 input OrderCreateInput {
   id: ID
+  view: Int!
+  fulfilled: Boolean!
   total: Int!
   charge: String!
   items: OrderItemCreateManyInput
@@ -1543,6 +1547,10 @@ input OrderItemWhereUniqueInput {
 enum OrderOrderByInput {
   id_ASC
   id_DESC
+  view_ASC
+  view_DESC
+  fulfilled_ASC
+  fulfilled_DESC
   total_ASC
   total_DESC
   charge_ASC
@@ -1555,6 +1563,8 @@ enum OrderOrderByInput {
 
 type OrderPreviousValues {
   id: ID!
+  view: Int!
+  fulfilled: Boolean!
   total: Int!
   charge: String!
   createdAt: DateTime!
@@ -1601,6 +1611,8 @@ input OrderSubscriptionWhereInput {
 }
 
 input OrderUpdateInput {
+  view: Int
+  fulfilled: Boolean
   total: Int
   charge: String
   items: OrderItemUpdateManyInput
@@ -1608,6 +1620,8 @@ input OrderUpdateInput {
 }
 
 input OrderUpdateManyMutationInput {
+  view: Int
+  fulfilled: Boolean
   total: Int
   charge: String
 }
@@ -1661,6 +1675,32 @@ input OrderWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  view: Int
+
+  """All values that are not equal to given value."""
+  view_not: Int
+
+  """All values that are contained in given list."""
+  view_in: [Int!]
+
+  """All values that are not contained in given list."""
+  view_not_in: [Int!]
+
+  """All values less than the given value."""
+  view_lt: Int
+
+  """All values less than or equal the given value."""
+  view_lte: Int
+
+  """All values greater than the given value."""
+  view_gt: Int
+
+  """All values greater than or equal the given value."""
+  view_gte: Int
+  fulfilled: Boolean
+
+  """All values that are not equal to given value."""
+  fulfilled_not: Boolean
   total: Int
 
   """All values that are not equal to given value."""
