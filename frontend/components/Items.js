@@ -5,6 +5,7 @@ import Item from "./Item";
 import { useUser } from "./User";
 import Pagination from "./Pagination";
 import { perPage } from "../config";
+import Loader from './Loader';
 
 const ALL_ITEMS_QUERY = gql`
   query ALL_ITEMS_QUERY($skip: Int = 0, $first: Int = ${perPage}) {
@@ -44,7 +45,7 @@ const Items = ({ page }) => {
   return (
     <Center>
       <Pagination page={page} />
-          {loading && <p>Loading...</p>}
+          {loading && <Loader/>}
           {error && <p>Error: {error.message}</p>}
           {!loading && !error && (
             <ItemsList>

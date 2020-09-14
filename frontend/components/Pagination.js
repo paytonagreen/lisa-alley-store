@@ -4,6 +4,7 @@ import { useQuery, gql } from "@apollo/client";
 import { perPage } from "../config";
 import Head from "next/head";
 import Link from "next/link";
+import Loader from './Loader';
 
 const PAGINATION_QUERY = gql`
   query PAGINATION_QUERY {
@@ -17,7 +18,7 @@ const PAGINATION_QUERY = gql`
 
 const Pagination = ({ page }) => {
   const { data, loading, error } = useQuery(PAGINATION_QUERY);
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loader/>;
   const count = data.itemsConnection.aggregate.count;
   const pages = Math.ceil(count / perPage);
   return (
