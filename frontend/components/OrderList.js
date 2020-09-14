@@ -3,9 +3,11 @@ import { useQuery, gql } from "@apollo/client";
 import Link from "next/link";
 import Error from "./ErrorMessage";
 import styled from "styled-components";
+import SickButton from './styles/SickButton'
 import { formatDistance } from "date-fns";
 import formatMoney from "../lib/formatMoney";
 import OrderItemStyles from "./styles/OrderItemStyles";
+import useUser from './User';
 
 const ALL_ORDERS_QUERY = gql`
   query ALL_ORDERS_QUERY {
@@ -33,6 +35,7 @@ const OrderUL = styled.ul`
 
 const OrderList = () => {
   const { data, error, loading } = useQuery(ALL_ORDERS_QUERY);
+  const me = useUser();
   if (loading) return <p>Loading...</p>;
   if (error) return <Error error={error} />;
   if (data) {
@@ -69,6 +72,16 @@ const OrderList = () => {
             </OrderItemStyles>
           ))}
         </OrderUL>
+        {me && me.permissions.includes("ADMIN") && (
+        <Link
+        href={{
+          pathname: '/adminOrders',
+        }}>
+          <a>
+          <SickButton>Admin View</SickButton>
+          </a>
+        </Link>
+        )}
       </div>
     );
   }
