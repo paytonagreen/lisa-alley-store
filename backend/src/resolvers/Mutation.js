@@ -63,6 +63,12 @@ const Mutations = {
   },
   async signup(parent, args, ctx, info) {
     args.email = args.email.toLowerCase();
+    const alreadyEmail = await ctx.db.query.user({
+      where: {email: args.email}
+    });
+    if(alreadyEmail) {
+      throw new Error (`There's already a user registered with that email!`)
+    }
     //hash their password
     const password = await bcrypt.hash(args.password, 10);
     //create user in db
@@ -83,6 +89,17 @@ const Mutations = {
       domain: '.paytongreen.com',
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year cookie
+    });
+    //Send a welcome email
+    const mailResponse = await transport.sendMail({
+      from: "lisaalley@paytongreen.com",
+      to: user.email,
+      subject: "Welcome from Lisa Alley!",
+      html: makeANiceEmail(
+        `Thanks so much for signing up! \n\n You can browse all my prints <a href="${
+          process.env.FRONTEND_URL
+        }/order?id=${order.id}">here</a>. If you're interested in commission work, please get in touch directly!`
+      ),
     });
     //Finally return user to browser
     return user;
@@ -351,7 +368,28 @@ const Mutations = {
     //6. Clear user's cart, delete cartItems
     const cartItemIds = user.cart.map(cartItem => cartItem.id);
     await ctx.db.mutation.deleteManyCartItems({ where: { id_in: cartItemIds }})
-    //7. Return the order to the client
+    //7. Send e-mail confirmation to user
+    const mailResponse = await transport.sendMail({
+      from: "paytonagreen@gmail.com",
+      to: user.email,
+      subject: "Thank you for your order!",
+      html: makeANiceEmail(
+        `Thanks for your order! \n\n You can review your entire order <a href="${
+          process.env.FRONTEND_URL
+        }/order?id=${order.id}">here</a>.`
+      ),
+    });
+    const adminMailResponse = await transport.sendMail({
+      from: "lisaalley@paytongreen.com",
+      to: 'paytonagreen@gmail.com',
+      subject: "New Order Received!",
+      html: makeANiceEmail(
+        `You've receved a new order! \n\n You can review all your orders <a href="${
+          process.env.FRONTEND_URL
+        }/adminOrders">here</a>.`
+      ),
+    });
+    //8. Return the order to the client
     return order;
   },
   updateOrder(parent, args, ctx, info) {
