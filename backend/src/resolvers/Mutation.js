@@ -354,6 +354,19 @@ const Mutations = {
     //7. Return the order to the client
     return order;
   },
+  updateOrder(parent, args, ctx, info) {
+    const updates = {...args};
+    delete updates.id;
+    return ctx.db.mutation.updateOrder(
+      {
+        data: updates,
+        where: {
+          id: args.id
+        },
+      },
+      info
+    )
+  },
 };
 
 module.exports = Mutations;
