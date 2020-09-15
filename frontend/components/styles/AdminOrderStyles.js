@@ -44,4 +44,39 @@ const OrderItemStyles = styled.li`
   }
 `;
 
+const Title = styled.span`
+  color: ${(props) => props.theme.red};
+`;
+
+const ButtonDiv = styled.div`
+  display: flex;
+  position: relative;
+`;
+
+const FulfilledButton = styled.button`
+  border: none;
+  background: ${(props) =>
+    props.fulfilled ? props.theme.teal : props.theme.yellow};
+  color: ${(props) =>
+    props.fulfilled ? props.theme.lightgrey : props.theme.black};
+  padding: 1rem;
+  display: inline-block;
+  position: absolute;
+  top: -1.25rem;
+  right: -1.25rem;
+  outline: none;
+  transition: all .5s;
+`;
+
+const OrderUL = styled.ul`
+  display: grid;
+  grid-gap: 4rem;
+  padding: 0;
+  grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
+  @media(max-width: 700px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
 export default OrderItemStyles;
+export { Title, ButtonDiv, FulfilledButton, OrderUL }
