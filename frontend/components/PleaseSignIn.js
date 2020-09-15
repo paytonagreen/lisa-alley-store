@@ -5,7 +5,7 @@ import Signin from './Signin'
 const PleaseSignIn = props => {
   const { data, loading, error } = useQuery(CURRENT_USER_QUERY);
   if(loading) return <p>Loading...</p>
-  if(!data.me) {
+  if(data && !data.me) {
     return (
       <div>
         <p>Please Sign In Before Continuing</p>

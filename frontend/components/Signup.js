@@ -40,10 +40,7 @@ const SIGNUP_MUTATION = gql`
 `;
 
 const Signup = () => {
-  const signupMutation = useMutation(SIGNUP_MUTATION);
-  const [signup] = signupMutation;
-  const mutationLoading = signupMutation[1].loading;
-  const mutationError = signupMutation[1].error;
+  const [signup, {loading, error, called }] = useMutation(SIGNUP_MUTATION);
 
   const [savingStarted, setSavingStarted] = useState(false);
 
@@ -56,9 +53,6 @@ const Signup = () => {
         variables: { ...values },
         refetchQueries: [{ query: CURRENT_USER_QUERY }],
       });
-      Router.push({
-        pathname: '/items',
-      })
     }
   }
 
@@ -67,9 +61,11 @@ const Signup = () => {
       method="post"
       onSubmit={handleSubmit}
     >
-      <fieldset disabled={mutationLoading} aria-busy={mutationLoading}>
+      <fieldset disabled={loading} aria-busy={loading}>
         <h2>Sign Up For An Account</h2>
-        <Error error={mutationError} />
+
+        <Error error={error} />
+        {!loading && !error && called && <p>Success! Thanks for signing up!</p>}
         <label htmlFor="email">
           Email
           <input
