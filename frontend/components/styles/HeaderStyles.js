@@ -10,7 +10,7 @@ export const HamburgerButton = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
+    position: fixed;
     top: 4%;
     right: 3%;
     width: 3rem;

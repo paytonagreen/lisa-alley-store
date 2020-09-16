@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const CloseButton = styled.button`
+const BurgerCloseButton = styled.button`
   background: ${props => props.theme.teal};
   color: ${props => props.theme.yellow};
   max-width: 4rem;
@@ -12,4 +12,4 @@ const CloseButton = styled.button`
   right: 0;
 `;
 
-export default CloseButton;
+export default BurgerCloseButton;
