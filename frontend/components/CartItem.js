@@ -5,13 +5,13 @@ import PropTypes from "prop-types";
 import RemoveFromCart from "./RemoveFromCart";
 
 const CartItemStyles = styled.li`
-  padding: 1rem 0;
+  /* padding: rem 0; */
   border-bottom: 1px solid ${(props) => props.theme.lightgrey};
   display: grid;
   align-items: center;
   grid-template-columns: auto 1fr auto;
   img {
-    margin-right: 10px;
+    margin-right: 5px;
   }
   h3,
   p {

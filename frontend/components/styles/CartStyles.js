@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const CartStyles = styled.div`
   padding: 20px;
@@ -17,14 +17,19 @@ const CartStyles = styled.div`
   z-index: 5;
   display: grid;
   grid-template-rows: auto 1fr auto;
-  ${props => props.open && `transform: translateX(0);`};
+  ${(props) => props.open && `transform: translateX(0);`};
+  h3 {
+    border-top: 3px solid ${props => props.theme.black};
+    margin: 0;
+    padding-top: 5px;
+  }
   header {
-    border-bottom: 5px solid ${props => props.theme.black};
+    border-bottom: 5px solid ${(props) => props.theme.black};
     margin-bottom: 2rem;
     padding-bottom: 2rem;
   }
   footer {
-    border-top: 10px double ${props => props.theme.black};
+    border-top: 10px double ${(props) => props.theme.black};
     margin-top: 2rem;
     padding-top: 2rem;
     display: grid;
@@ -42,6 +47,53 @@ const CartStyles = styled.div`
     list-style: none;
     overflow-x: hidden;
     overflow-y: scroll;
+  }
+  @media (max-width: 700px) {
+    font-size: 1rem;
+    padding: 1rem;
+    position: relative;
+    background: white;
+    position: fixed;
+    height: 100%;
+    top: 0;
+    right: 0;
+    max-width: 200px;
+    min-width: 200px;
+    bottom: 0;
+    transform: translateX(100%);
+    transition: all 0.3s;
+    box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.2);
+    z-index: 5;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    ${(props) => props.open && `transform: translateX(0);`};
+    header {
+      font-size: 1.5rem;
+      border-bottom: 5px solid ${(props) => props.theme.black};
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+    }
+    footer {
+      border-top: 10px double ${(props) => props.theme.black};
+      margin-top: 1rem;
+      padding-top: 1rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      align-items: center;
+      font-size: 1rem;
+      font-weight: 900;
+      p {
+        font-size: 1.5rem;
+        margin: 0;
+      }
+    }
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      overflow-x: hidden;
+      overflow-y: scroll;
+    }
   }
 `;
 
