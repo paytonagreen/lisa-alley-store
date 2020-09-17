@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 import Meta from "../components/Meta";
 
 const theme = {
@@ -67,6 +68,7 @@ const Page = ({children}) => {
         <Meta />
         <Header />
         <Inner>{children}</Inner>
+        <Footer/>
       </StyledPage>
     </ThemeProvider>
   );
