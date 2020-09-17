@@ -15,6 +15,9 @@ const SickButton = styled.button`
   &[disabled] {
     opacity: 0.5;
   }
+  @media(max-width: 700px) {
+    font-size: 1.5rem;
+  }
 `;
 
 export default SickButton;

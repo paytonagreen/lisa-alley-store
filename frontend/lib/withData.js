@@ -2,6 +2,7 @@ import withApollo from 'next-with-apollo';
 import ApolloClient from 'apollo-boost';
 import { endpoint, prodEndpoint } from '../config';
 import { LOCAL_STATE_QUERY } from '../components/Cart'
+import { LOCAL_BURGER_QUERY } from '../components/HamburgerMenu'
 
 function createClient({ headers }) {
   return new ApolloClient({
@@ -29,10 +30,22 @@ function createClient({ headers }) {
             cache.writeData(data);
             return data;
           },
+          toggleBurger(_, variables, { cache }) {
+            //Read the cartOpen value from the cache
+            const { burgerOpen } = cache.readQuery({
+              query: LOCAL_BURGER_QUERY,
+            });
+            const data = {
+              data: {burgerOpen: !burgerOpen},
+            }
+            cache.writeData(data);
+            return data;
+          },
         },
       },
       defaults: {
         cartOpen: false,
+        burgerOpen: false,
       }
     }
   });

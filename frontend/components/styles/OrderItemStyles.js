@@ -30,6 +30,10 @@ const OrderItemStyles = styled.li`
     display: grid;
     grid-gap: 1rem;
     text-align: center;
+    @media(max-width: 700px) {
+      grid-template-columns: 1fr;
+      font-size: 1.25rem;
+    }
     & > * {
       margin: 0;
       background: rgba(0, 0, 0, 0.03);
