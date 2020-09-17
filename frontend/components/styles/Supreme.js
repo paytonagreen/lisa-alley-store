@@ -9,6 +9,9 @@ const Supreme = styled.h3`
   transform: skew(-3deg);
   margin: 0;
   font-size: 3rem;
+  @media(max-width: 700px) {
+    font-size: 2rem;
+  }
 `;
 
 export default Supreme;

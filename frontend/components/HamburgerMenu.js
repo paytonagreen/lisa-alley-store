@@ -26,7 +26,6 @@ const HamburgerMenu = () => {
   const [toggleCart ] = useMutation(TOGGLE_CART_MUTATION)
   const { data } = useQuery(LOCAL_BURGER_QUERY);
   const burgerOpen = data.burgerOpen
-  console.log(burgerOpen);
   return (
     <BurgerStyles open={burgerOpen}>
       <BurgerCloseButton onClick={toggleBurger}>
@@ -52,7 +51,10 @@ const HamburgerMenu = () => {
             <a>Account</a>
           </Link>
           <Signout />
-          <button onClick={toggleCart}>
+          <button onClick={() => {
+            toggleBurger();
+            toggleCart();
+          }}>
             My Cart <BurgerCartCount
               count={me.cart.reduce(
                 (tally, cartItem) => tally + cartItem.quantity,
