@@ -1,5 +1,5 @@
 import App from "next/app";
-import Page from '../components/Page'
+import Page from '../components/page/Page'
 import { ApolloProvider } from '@apollo/client'
 import withData from '../lib/withData';
 

@@ -1,5 +1,5 @@
 import React from "react";
-import UpdateUser from "../components/UpdateUser";
+import UpdateUser from "../components/signup-signin/UpdateUser";
 import SignInContainer from "../components/styles/SignInContainer";
 
 const Account = () => (

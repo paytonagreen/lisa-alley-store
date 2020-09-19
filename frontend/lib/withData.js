@@ -1,8 +1,8 @@
 import withApollo from 'next-with-apollo';
 import ApolloClient from 'apollo-boost';
 import { endpoint, prodEndpoint } from '../config';
-import { LOCAL_STATE_QUERY } from '../components/Cart'
-import { LOCAL_BURGER_QUERY } from '../components/HamburgerMenu'
+import { LOCAL_STATE_QUERY } from '../components/cart/Cart'
+import { LOCAL_BURGER_QUERY } from '../components/burger-menu/HamburgerMenu'
 
 function createClient({ headers }) {
   return new ApolloClient({

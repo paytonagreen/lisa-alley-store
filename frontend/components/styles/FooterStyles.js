@@ -2,14 +2,15 @@ import styled from 'styled-components';
 
 const FooterStyles = styled.footer`
   background: ${(props) => props.theme.teal};
-  position: relative;
+  position: absolute;
   bottom: 0;
   width: 100%;
+  height: 12vh;
   .social {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 12vh;
+    margin-top: 2rem;
     img {
       height: 4rem;
       color: white;
@@ -21,6 +22,7 @@ const FooterStyles = styled.footer`
   }
   .created {
     text-align: center;
+    margin-top: 1rem;
     @media(max-width: 700) {
       font-size: .75rem;
     }
