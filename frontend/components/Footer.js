@@ -3,7 +3,10 @@ import styled from "styled-components";
 import Link from 'next/link';
 
 const FooterStyles = styled.footer`
-    background: ${(props) => props.theme.teal};
+  background: ${(props) => props.theme.teal};
+  position: relative;
+  bottom: 0;
+  width: 100%;
   .social {
     display: flex;
     justify-content: center;
