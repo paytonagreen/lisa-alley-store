@@ -1,5 +1,5 @@
 import React from 'react';
-import AdminOrderList from '../components/AdminOrderList'
+import AdminOrderList from '../components/orders/AdminOrderList'
 
 const AdminOrders = props => (
   <div>

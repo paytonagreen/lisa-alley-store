@@ -1,4 +1,4 @@
-import SingleItem from '../components/SingleItem'
+import SingleItem from '../components/items/SingleItem'
 
 const Item = props => (
   <div>

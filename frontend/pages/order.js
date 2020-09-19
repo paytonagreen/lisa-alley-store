@@ -1,5 +1,5 @@
-import PleaseSignIn from "../components/PleaseSignIn";
-import Order from "../components/Order";
+import PleaseSignIn from "../components/utils/PleaseSignIn";
+import Order from "../components/orders/Order";
 
 const OrderPage = (props) => (
   <div>
