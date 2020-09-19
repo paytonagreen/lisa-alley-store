@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useMutation, gql } from "@apollo/client";
 import Form from "../styles/Form";
-import Error from "./ErrorMessage";
+import Error from "../utils/ErrorMessage";
 import PropTypes from "prop-types";
 import { CURRENT_USER_QUERY } from "../utils/User";
 import useForm from "../../lib/useForm";
