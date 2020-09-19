@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 
 import Header from "../components/Header";
@@ -21,12 +21,14 @@ const theme = {
 const StyledPage = styled.div`
   background: ${(props) => props.theme.lavender};
   color: ${(props) => props.theme.black};
-`;
+  `
 
 const Inner = styled.div`
   max-width: ${(props) => props.theme.maxWidth};
+  width: 100%;
   margin: 0 auto;
   padding: 2rem;
+  min-height: 60vh;
 `;
 
 const GlobalStyle = createGlobalStyle`
@@ -50,7 +52,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     font-size: 1.5rem;
     line-height: 2;
-    font-family: 'radnika_next'
+    font-family: 'radnika_next';
   }
   a,
   button{

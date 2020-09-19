@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery, gql } from "@apollo/client";
-import styled from "styled-components";
+import { Center, ItemsList} from './styles/ItemListStyles';
 import Item from "./Item";
 import { useUser } from "./User";
 import Pagination from "./Pagination";
@@ -17,22 +17,6 @@ const ALL_ITEMS_QUERY = gql`
       image
       largeImage
     }
-  }
-`;
-
-export const Center = styled.div`
-  text-align: center;
-`;
-
-const ItemsList = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 60px;
-  max-width: ${(props) => props.theme.maxWidth};
-  margin: 0 auto;
-  @media (max-width: 700px) {
-    grid-template-columns: 1fr;
-    max-width: 70vw;
   }
 `;
 
