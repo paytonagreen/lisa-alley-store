@@ -6,7 +6,7 @@ import Error from "./ErrorMessage";
 import { formatDistance } from "date-fns";
 import formatMoney from "../lib/formatMoney";
 import AdminOrderStyles, { Title, ButtonDiv, FulfilledButton, OrderUL } from "./styles/AdminOrderStyles";
-import { Center } from "./ItemListStyles";
+import { Center } from "./styles/ItemListStyles";
 import { ordersPerPage } from "../config";
 import FulfillmentToggler from './FulfillmentToggler';
 
