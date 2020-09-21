@@ -5,7 +5,7 @@ const FooterStyles = styled.footer`
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 12vh;
+  min-height: 12vh;
   .social {
     display: flex;
     justify-content: center;
