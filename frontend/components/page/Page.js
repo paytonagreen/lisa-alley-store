@@ -23,6 +23,7 @@ const StyledPage = styled.div`
   color: ${(props) => props.theme.black};
   position: relative;
   min-height: 100vh;
+  padding-bottom: 14vh;
   `
 
 const Inner = styled.div`
