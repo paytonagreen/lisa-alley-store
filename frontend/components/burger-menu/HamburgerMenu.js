@@ -22,7 +22,7 @@ const TOGGLE_BURGER_MUTATION = gql`
 
 const HamburgerMenu = () => {
   const me = useUser();
-  const [toggleBurger, {loading, error, called }] = useMutation(TOGGLE_BURGER_MUTATION);
+  const [toggleBurger] = useMutation(TOGGLE_BURGER_MUTATION);
   const [toggleCart ] = useMutation(TOGGLE_CART_MUTATION)
   const { data } = useQuery(LOCAL_BURGER_QUERY);
   const burgerOpen = data.burgerOpen
