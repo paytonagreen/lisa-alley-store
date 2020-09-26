@@ -98,7 +98,7 @@ const Mutations = {
       html: makeANiceEmail(
         `Thanks so much for signing up! \n\n You can browse all my prints <a href="${
           process.env.FRONTEND_URL
-        }/order?id=${order.id}">here</a>. If you're interested in commission work, please get in touch directly!`
+        }>here</a>. If you're interested in commission work, please get in touch directly!`
       ),
     });
     //Finally return user to browser
