@@ -25,10 +25,7 @@ const HamburgerMenu = () => {
   const [toggleBurger] = useMutation(TOGGLE_BURGER_MUTATION);
   const [toggleCart] = useMutation(TOGGLE_CART_MUTATION);
   const { data } = useQuery(LOCAL_BURGER_QUERY);
-  let burgerOpen = '';
-  if (data) {
-    return (burgerOpen = data.burgerOpen);
-  }
+  let burgerOpen = data.burgerOpen;
   return (
     <BurgerStyles data-testid="burger" open={burgerOpen}>
       <BurgerCloseButton onClick={toggleBurger}>&times;</BurgerCloseButton>
