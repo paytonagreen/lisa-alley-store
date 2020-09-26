@@ -1,8 +1,8 @@
 import { mount } from "enzyme";
 import wait from "waait";
 import toJSON from "enzyme-to-json";
-import Nav from "../components/Nav";
-import { CURRENT_USER_QUERY } from "../components/User";
+import Nav from "../components/page/header/Nav";
+import { CURRENT_USER_QUERY } from "../components/utils/User";
 import { MockedProvider } from "@apollo/client/testing";
 import { act } from "react-dom/test-utils";
 import { fakeUser, fakeCartItem, fakeRegularUser } from "../lib/testUtils";
@@ -52,7 +52,7 @@ describe("<Nav/>", () => {
         </MockedProvider>
       );
     });
-    const nav = wrapper.find('ul[data-test="nav"]');
+    const nav = wrapper.find('ul[data-testid="nav"]');
     expect(toJSON(nav)).toMatchSnapshot();
   });
 
@@ -66,7 +66,7 @@ describe("<Nav/>", () => {
       await wait();
       wrapper.update();
     });
-    const nav = wrapper.find('ul[data-test="nav"]');
+    const nav = wrapper.find('ul[data-testid="nav"]');
     expect(nav.children().length).toBe(5);
   });
 
@@ -80,7 +80,7 @@ describe("<Nav/>", () => {
       await wait();
       wrapper.update();
     });
-    const nav = wrapper.find('ul[data-test="nav"]');
+    const nav = wrapper.find('ul[data-testid="nav"]');
     expect(nav.children().length).toBe(6);
   });
 
@@ -94,7 +94,7 @@ describe("<Nav/>", () => {
       await wait();
       wrapper.update();
     });
-    const nav = wrapper.find('ul[data-test="nav"]');
+    const nav = wrapper.find('ul[data-testid="nav"]');
     const count = nav.find("div.count");
     expect(toJSON(count)).toMatchSnapshot();
   });

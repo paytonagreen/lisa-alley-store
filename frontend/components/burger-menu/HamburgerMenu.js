@@ -1,11 +1,11 @@
-import React from "react";
-import { useQuery, useMutation, gql } from "@apollo/client";
-import { useUser } from "../utils/User";
+import React from 'react';
+import { useQuery, useMutation, gql } from '@apollo/client';
+import { useUser } from '../utils/User';
 import Link from 'next/link';
-import BurgerStyles from "../styles/BurgerStyles";
-import BurgerCloseButton from "../styles/BurgerCloseButton";
-import Signout from "../signup-signin/Signout";
-import BurgerCartCount from "./BurgerCartCount";
+import BurgerStyles from '../styles/BurgerStyles';
+import BurgerCloseButton from '../styles/BurgerCloseButton';
+import Signout from '../signup-signin/Signout';
+import BurgerCartCount from './BurgerCartCount';
 import { TOGGLE_CART_MUTATION } from '../cart/Cart';
 
 const LOCAL_BURGER_QUERY = gql`
@@ -23,53 +23,59 @@ const TOGGLE_BURGER_MUTATION = gql`
 const HamburgerMenu = () => {
   const me = useUser();
   const [toggleBurger] = useMutation(TOGGLE_BURGER_MUTATION);
-  const [toggleCart ] = useMutation(TOGGLE_CART_MUTATION)
+  const [toggleCart] = useMutation(TOGGLE_CART_MUTATION);
   const { data } = useQuery(LOCAL_BURGER_QUERY);
-  const burgerOpen = data.burgerOpen
+  let burgerOpen = '';
+  if (data) {
+    return (burgerOpen = data.burgerOpen);
+  }
   return (
-    <BurgerStyles open={burgerOpen}>
-      <BurgerCloseButton onClick={toggleBurger}>
-        &times;
-      </BurgerCloseButton>
+    <BurgerStyles data-testid="burger" open={burgerOpen}>
+      <BurgerCloseButton onClick={toggleBurger}>&times;</BurgerCloseButton>
       <div className="links">
-      {/* //Admin Only */}
-      {me && me.permissions.includes("ADMIN") && (
-        <Link href="/sell">
-          <a>Sell</a>
-        </Link>
-      )}
-     <Link href="/items">
-        <a>Browse</a>
-      </Link>
-      {/* Signed In */}
-      {me && (
-        <>
-          <Link href="/orders">
-            <a>Orders</a>
+        {/* //Admin Only */}
+        {me && me.permissions.includes('ADMIN') && (
+          <Link href="/sell">
+            <a>Sell</a>
           </Link>
-          <Link href="/me">
-            <a>Account</a>
-          </Link>
-          <Signout />
-          <button onClick={() => {
-            toggleBurger();
-            toggleCart();
-          }}>
-            My Cart <BurgerCartCount
-              count={me.cart.reduce(
-                (tally, cartItem) => tally + cartItem.quantity,
-                0
-              )}
-            />
-          </button>
-        </>
-      )}
-      {/* //Not Signed In */}
-      {!me && (
-        <Link href="/signin">
-          <a>Sign In</a>
+        )}
+        <Link href="/items">
+          <a>Browse</a>
         </Link>
-      )}
+        {/* Signed In */}
+        {me && (
+          <>
+            <Link href="/orders">
+              <a>Orders</a>
+            </Link>
+            <Link href="/me">
+              <a>Account</a>
+            </Link>
+            <Signout />
+            <button
+              onClick={() => {
+                toggleBurger();
+                toggleCart();
+              }}
+            >
+              My Cart{' '}
+              <BurgerCartCount
+                data-testid="burger-count"
+                count={me.cart.reduce(
+                  (tally, cartItem) => tally + cartItem.quantity,
+                  0
+                )}
+              />
+            </button>
+          </>
+        )}
+        {/* //Not Signed In */}
+        
+        {!me && (
+          <Link href="/signin">
+            <a>Sign In</a>
+          </Link>
+        )}
       </div>
     </BurgerStyles>
   );

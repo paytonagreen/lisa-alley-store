@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { useMutation, useQuery, gql } from "@apollo/client";
-import Form from "../styles/Form";
-import Error from "../utils/ErrorMessage";
-import Router from "next/router";
+import React, { useState } from 'react';
+import { useMutation, useQuery, gql } from '@apollo/client';
+import Form from '../styles/Form';
+import Error from '../utils/ErrorMessage';
+import Router from 'next/router';
 
 const SINGLE_ITEM_QUERY = gql`
   query SINGLE_ITEM_QUERY($id: ID!) {
@@ -48,9 +48,7 @@ const UpdateItem = ({ id }) => {
 
   const [savingStarted, setSavingStarted] = useState(false);
 
-  const { values, handleChange, handleSubmit } = useForm(
-    callback,
-  );
+  const { values, handleChange, handleSubmit } = useForm(callback);
 
   function callback() {
     if (!savingStarted) {
@@ -59,7 +57,7 @@ const UpdateItem = ({ id }) => {
         variables: { id, ...values },
       });
       Router.push({
-        pathname: "/item",
+        pathname: '/item',
         query: { id },
       });
     }
@@ -106,7 +104,7 @@ const UpdateItem = ({ id }) => {
             onChange={handleChange}
           />
         </label>
-        <button type="submit">Sav{loading ? "ing" : "e"} Changes</button>
+        <button type="submit">Sav{loading ? 'ing' : 'e'} Changes</button>
       </fieldset>
     </Form>
   );

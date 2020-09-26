@@ -1,13 +1,13 @@
-import React from "react";
-import styled from "styled-components";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
+import React from 'react';
+import styled from 'styled-components';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 const AnimationStyles = styled.span`
   position: relative;
   .count {
     display: block;
     position: relative;
-    transition: all .4s;
+    transition: all 0.4s;
     backface-visibility: hidden;
   }
   /* Initial state of entered dot */
@@ -29,14 +29,14 @@ const AnimationStyles = styled.span`
 
 const Dot = styled.div`
   background: ${(props) => props.theme.yellow};
-  color: ${props => props.theme.teal};
+  color: ${(props) => props.theme.teal};
   border-radius: 50%;
   margin: auto;
   padding: 0.5rem;
   line-height: 2rem;
   max-width: 3rem;
   font-weight: 100;
-  font-feature-settings: "tnum";
+  font-feature-settings: 'tnum';
   font-variant-numeric: tabular-nums;
 `;
 

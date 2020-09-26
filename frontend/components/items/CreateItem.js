@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { useMutation, gql } from "@apollo/client";
-import Router from "next/router";
-import useForm from "../../lib/useForm";
-import Form from "../styles/Form";
-import Error from "../utils/ErrorMessage";
-import { ALL_ITEMS_QUERY } from "./Items";
+import React, { useState } from 'react';
+import { useMutation, gql } from '@apollo/client';
+import Router from 'next/router';
+import useForm from '../../lib/useForm';
+import Form from '../styles/Form';
+import Error from '../utils/ErrorMessage';
+import { ALL_ITEMS_QUERY } from './Items';
 import { PAGINATION_QUERY } from './Pagination';
 
 const CREATE_ITEM_MUTATION = gql`
@@ -28,7 +28,7 @@ const CREATE_ITEM_MUTATION = gql`
 `;
 
 function update(cache, payload) {
-  cache.modify("ROOT_QUERY", {
+  cache.modify('ROOT_QUERY', {
     allItems(items, { readField }) {
       return [payload.data.createItem, ...items];
     },
@@ -37,29 +37,26 @@ function update(cache, payload) {
 
 function CreateItem() {
   const { values, handleChange } = useForm();
-  const [image, setImage] = useState("");
-  const [largeImage, setLargeImage] = useState("");
+  const [image, setImage] = useState('');
+  const [largeImage, setLargeImage] = useState('');
 
-  const [createItem, { loading, error } ] = useMutation(CREATE_ITEM_MUTATION, {
+  const [createItem, { loading, error }] = useMutation(CREATE_ITEM_MUTATION, {
     variables: { ...values, image, largeImage },
     update,
-    refetchQueries: [
-      { query: ALL_ITEMS_QUERY },
-      { query: PAGINATION_QUERY },
-    ],
+    refetchQueries: [{ query: ALL_ITEMS_QUERY }, { query: PAGINATION_QUERY }],
   });
 
   async function uploadFile(e) {
-    console.log("uploading file...");
+    console.log('uploading file...');
     const files = e.target.files;
     const data = new FormData();
-    data.append("file", files[0]);
-    data.append("upload_preset", "sickfits");
+    data.append('file', files[0]);
+    data.append('upload_preset', 'sickfits');
 
     const res = await fetch(
-      "https://api.cloudinary.com/v1_1/dtqqdu0so/image/upload",
+      'https://api.cloudinary.com/v1_1/dtqqdu0so/image/upload',
       {
-        method: "POST",
+        method: 'POST',
         body: data,
       }
     );
@@ -70,16 +67,17 @@ function CreateItem() {
   }
 
   return (
-    <Form data-test="form" onSubmit={
-      async e => {
+    <Form
+      data-test="form"
+      onSubmit={async (e) => {
         e.preventDefault();
         const res = await createItem();
         Router.push({
           pathname: '/item',
-          query: { id: res.data.createItem.id }
-        })
-      }
-    }>
+          query: { id: res.data.createItem.id },
+        });
+      }}
+    >
       <Error error={error} />
       <fieldset disabled={loading} aria-busy={loading}>
         <label htmlFor="file">

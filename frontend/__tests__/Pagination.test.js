@@ -1,9 +1,9 @@
-import { mount } from "enzyme";
-import { act } from "react-dom/test-utils";
-import wait from "waait";
-import toJSON from "enzyme-to-json";
-import Pagination, { PAGINATION_QUERY } from "../components/Pagination";
-import { MockedProvider } from "@apollo/client/testing";
+import { render, screen, waitFor } from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
+import userEvent from '@testing-library/user-event';
+import { MockedProvider } from '@apollo/client/testing';
+import toJSON from 'enzyme-to-json';
+import Pagination, { PAGINATION_QUERY } from '../components/items/Pagination';
 
 function makeMocksFor(length) {
   return [
@@ -14,9 +14,9 @@ function makeMocksFor(length) {
       result: {
         data: {
           itemsConnection: {
-            __typename: "aggregage",
+            __typename: 'aggregage',
             aggregate: {
-              __typename: "count",
+              __typename: 'count',
               count: length,
             },
           },
@@ -26,60 +26,48 @@ function makeMocksFor(length) {
   ];
 }
 
-const makeWrapper = (mockNumber, page = 1) => {
-  const wrapper = mount(
+const makeContainer = (mockNumber, page = 1) => {
+  const { container } = render(
     <MockedProvider mocks={makeMocksFor(mockNumber)}>
       <Pagination page={page} />
     </MockedProvider>
   );
-  return wrapper;
+  return container;
 };
 
-describe("<Pagination/>", () => {
-  let wrapper = "";
-  it("displays a loading message", () => {
-    act (() => {
-      wrapper = makeWrapper(1);
-    });
-    expect(wrapper.text()).toContain("Loading...");
+describe('<Pagination/>', () => {
+  it('displays a loading message', () => {
+    makeContainer(1);
+    waitFor(() => expect(screen.getByTestId('loader')).toBeInTheDocument());
   });
 
-  it("displays pagination for 18 items", async () => {
-    await act(async () => {
-      wrapper = makeWrapper(18);
-      await wait();
-      wrapper.update();
+  it('displays pagination for 18 items', async () => {
+    makeContainer(18);
+    waitFor(() => {
+      expect(screen.getByText('2').toBeInTheDocument());
+      expect(screen.getByTestID('pagination').toMatchSnapshot());
     });
-    expect(wrapper.find(".totalPages").text()).toEqual("3");
-    const pagination = wrapper.find('div[data-test="pagination"]');
-    expect(toJSON(pagination)).toMatchSnapshot();
   });
 
-  it("disables prev button on first page", async () => {
-    await act(async () => {
-      wrapper = makeWrapper(28);
-      await wait();
-      wrapper.update();
-    });
-    expect(wrapper.find("a.prev").prop("aria-disabled")).toEqual(true);
+  it('disables prev button on first page', async () => {
+    makeContainer(28);
+    waitFor(() => {
+      expect(screen.getByText('Prev').prop('aria-disabled')).toEqual(true);
+    })
   });
 
-  it("disables next button on last page", async () => {
-    await act(async () => {
-      wrapper = makeWrapper(28, 5);
-      await wait();
-      wrapper.update();
+  it('disables next button on last page', async () => {
+    makeContainer(28, 5);
+    waitFor(() => {
+      expect(screen.getByText('Next').prop('aria-disabled')).toEqual(true);
     });
-    expect(wrapper.find("a.next").prop("aria-disabled")).toEqual(true);
   });
 
-  it("enables all buttons on a middle page", async () => {
-    await act(async () => {
-      wrapper = makeWrapper(28, 3);
-      await wait();
-      wrapper.update();
+  it('enables all buttons on a middle page', async () => {
+    makeContainer(28, 3);
+    waitFor(() => {
+      expect(screen.getByText('Prev').prop('aria-disabled')).toEqual(false);
+      expect(screen.getByText('Next').prop('aria-disabled')).toEqual(false);
     });
-    expect(wrapper.find("a.prev").prop("aria-disabled")).toEqual(false);
-    expect(wrapper.find("a.next").prop("aria-disabled")).toEqual(false);
   });
 });

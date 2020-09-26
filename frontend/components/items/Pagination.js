@@ -1,9 +1,9 @@
-import React from "react";
-import PaginationStyles from "../styles/PaginationStyles";
-import { useQuery, gql } from "@apollo/client";
-import { perPage } from "../../config";
-import Head from "next/head";
-import Link from "next/link";
+import React from 'react';
+import PaginationStyles from '../styles/PaginationStyles';
+import { useQuery, gql } from '@apollo/client';
+import { perPage } from '../../config';
+import Head from 'next/head';
+import Link from 'next/link';
 import Loader from '../utils/Loader';
 
 const PAGINATION_QUERY = gql`
@@ -18,11 +18,12 @@ const PAGINATION_QUERY = gql`
 
 const Pagination = ({ page }) => {
   const { data, loading, error } = useQuery(PAGINATION_QUERY);
-  if (loading) return <Loader/>;
+  if (loading) return <Loader />;
   const count = data.itemsConnection.aggregate.count;
   const pages = Math.ceil(count / perPage);
+  ;
   return (
-    <PaginationStyles data-test="pagination">
+    <PaginationStyles data-testid="pagination">
       <Head>
         <title>
           Lisa Alley - Page {page} of {pages}
@@ -30,7 +31,7 @@ const Pagination = ({ page }) => {
       </Head>
       <Link
         href={{
-          pathname: "items",
+          pathname: 'items',
           query: { page: page - 1 },
         }}
       >
@@ -44,7 +45,7 @@ const Pagination = ({ page }) => {
       <p>{count} Items Total</p>
       <Link
         href={{
-          pathname: "items",
+          pathname: 'items',
           query: { page: page + 1 },
         }}
       >

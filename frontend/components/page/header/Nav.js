@@ -10,7 +10,7 @@ function Nav() {
   const [toggleCart] = useMutation(TOGGLE_CART_MUTATION);
   const me = useUser();
   return (
-    <NavStyles data-test="nav">
+    <NavStyles data-testid="nav">
       <Link href="/items">
         <a>Browse</a>
       </Link>

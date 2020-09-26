@@ -1,21 +1,21 @@
-import React from "react";
-import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
+import React from 'react';
+import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 
-import Header from "./header/Header";
-import Footer from "./Footer";
-import Meta from "./Meta";
+import Header from './header/Header';
+import Footer from './Footer';
+import Meta from './Meta';
 
 const theme = {
-  red: "#FF0000",
-  lavender: "#E6E6FA",
-  yellow: "#FFDB58",
-  black: "#393939",
-  grey: "3A3A3A",
-  teal: "#008080",
-  lightgrey: "#E1E1E1",
-  offWhite: "#EDEDED",
-  maxWidth: "1000px",
-  bs: "0 12px 24px 0 rgba(0,0,0,0.09)",
+  red: '#FF0000',
+  lavender: '#E6E6FA',
+  yellow: '#FFDB58',
+  black: '#393939',
+  grey: '3A3A3A',
+  teal: '#008080',
+  lightgrey: '#E1E1E1',
+  offWhite: '#EDEDED',
+  maxWidth: '1000px',
+  bs: '0 12px 24px 0 rgba(0,0,0,0.09)',
 };
 
 const StyledPage = styled.div`
@@ -24,7 +24,7 @@ const StyledPage = styled.div`
   position: relative;
   min-height: 100vh;
   padding-bottom: 14vh;
-  `
+`;
 
 const Inner = styled.div`
   max-width: ${(props) => props.theme.maxWidth};
@@ -44,6 +44,7 @@ const GlobalStyle = createGlobalStyle`
   html {
     box-sizing: border-box;
     font-size: 10px;
+    overflow-y: scroll;
   }
   *, *:before, *:after {
     box-sizing: inherit;
@@ -64,7 +65,7 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const Page = ({children}) => {
+const Page = ({ children }) => {
   return (
     <ThemeProvider theme={theme}>
       <StyledPage>
@@ -72,7 +73,7 @@ const Page = ({children}) => {
         <Meta />
         <Header />
         <Inner>{children}</Inner>
-        <Footer/>
+        <Footer />
       </StyledPage>
     </ThemeProvider>
   );

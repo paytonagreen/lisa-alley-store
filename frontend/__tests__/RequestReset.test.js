@@ -3,7 +3,7 @@ import wait from "waait";
 import toJSON from "enzyme-to-json";
 import { MockedProvider } from "@apollo/client/testing";
 import { act } from 'react-dom/test-utils';
-import RequestReset, { REQUEST_RESET_MUTATION } from "../components/RequestReset";
+import RequestReset, { REQUEST_RESET_MUTATION } from "../components/signup-signin/RequestReset";
 
 const mocks = [
   {

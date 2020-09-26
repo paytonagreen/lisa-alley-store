@@ -15,7 +15,7 @@ const FooterStyles = styled.footer`
       height: 4rem;
       color: white;
       margin: 0 1rem;
-      @media(max-width: 700px) {
+      @media (max-width: 700px) {
         height: 3rem;
       }
     }
@@ -23,8 +23,8 @@ const FooterStyles = styled.footer`
   .created {
     text-align: center;
     margin-top: 1rem;
-    @media(max-width: 700) {
-      font-size: .75rem;
+    @media (max-width: 700) {
+      font-size: 0.75rem;
     }
   }
 `;
