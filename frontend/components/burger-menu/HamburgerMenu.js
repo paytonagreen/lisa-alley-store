@@ -60,7 +60,6 @@ const HamburgerMenu = () => {
             >
               My Cart
               <BurgerCartCount
-                data-testid="burger-count"
                 count={me.cart.reduce(
                   (tally, cartItem) => tally + cartItem.quantity,
                   0

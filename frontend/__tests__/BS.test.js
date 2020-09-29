@@ -19,7 +19,6 @@ describe('this thing', () => {
     await waitFor(() => {
       expect(screen.getByRole('heading', {name: /wang/i})).toBeInTheDocument();
     })
-    screen.debug();
   });
   
 });

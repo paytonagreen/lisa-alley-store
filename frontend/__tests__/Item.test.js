@@ -1,22 +1,8 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import ItemComponent from '../components/items/item-card/Item';
 import { MockedProvider } from '@apollo/client/testing';
-import { fakeUser, fakeRegularUser } from '../lib/testUtils';
-import { CURRENT_USER_QUERY } from '../components/utils/User';
-
-const userMocks = [
-  {
-    request: { query: CURRENT_USER_QUERY },
-    result: { data: { me: fakeRegularUser() } },
-  },
-];
-
-const adminMocks = [
-  {
-    request: { query: CURRENT_USER_QUERY },
-    result: { data: { me: fakeUser() } },
-  },
-];
+import { render, fakeUser, fakeRegularUser } from '../lib/testUtils';
+import formatMoney from '../lib/formatMoney';
 
 const fakeItem = {
   id: 'ABC123',
@@ -28,53 +14,33 @@ const fakeItem = {
 };
 
 describe('<Item/>', () => {
-  it('renders the image properly', () => {
-    const { container } = render(
-      <MockedProvider mocks={userMocks}>
-        <ItemComponent item={fakeItem}/>
-      </MockedProvider>
-    );
-    waitFor(() => {
-      const img = screen.getByAltText(fakeItem.title);
-      expect(img.props().src).toBe(fakeItem.image);
-    })
+  it('renders the image properly', async () => {
+    render(<ItemComponent item={fakeItem} />);
+    const img = await screen.findByAltText(fakeItem.title);
+    expect(img.src).toContain(fakeItem.image);
   });
 
-  it('renders the pricetag and title properly', () => {
-    const { container } = render(
-      <MockedProvider mocks={userMocks}>
-        <ItemComponent item={fakeItem}/>
-      </MockedProvider>
-    )
-    waitFor(() => {
-      expect(screen.getByText('fakeItem.price')).toBeInTheDocument();
-      expect(screen.getByText('fakeItem.title')).toBeInTheDocument();
-    })
+  it('renders the pricetag and title properly', async () => {
+    render(<ItemComponent item={fakeItem} />);
+    expect(await screen.findByText(formatMoney(fakeItem.price))).toBeInTheDocument();
+    expect(await screen.findByText(fakeItem.title)).toBeInTheDocument();
   });
 
-  it("renders the buttons properly for Admin", () => {
-    const { container } = render(
-      <MockedProvider mocks={adminMocks}>
-        <ItemComponent item={fakeItem} />
-      </MockedProvider>
-    );
-    waitFor(() => {
-      expect(screen.getByText("Edit")).toBeInTheDocument();
-      expect(screen.getByText("Add To Cart")).toBeInTheDocument();
-      expect(screen.getByText("Delete Item")).toBeInTheDocument();
-    })
+  it('renders the buttons properly for Admin', async () => {
+    render(<ItemComponent item={fakeItem} me={fakeUser()} />);
+    await waitFor(() => {
+      expect(screen.getByRole('link', {name: /Edit/i})).toBeInTheDocument();
+      expect(screen.getByRole('button', {name: /Add To Cart/i})).toBeInTheDocument();
+      expect(screen.getByRole('button', {name: /Delete This Item/i})).toBeInTheDocument();
+    });
   });
 
-  it('renders the buttons properly for User', () => {
-    const { container } = render(
-        <MockedProvider mocks={userMocks}>
-          <ItemComponent item={fakeItem} />
-        </MockedProvider>
-    );
-    waitFor(() => {
-      expect(screen.getByText('Edit')).not.toBeInTheDocument();
-      expect(screen.getByText('Add To Cart')).toBeInTheDocument();
-      expect(screen.getByText('Delete Item')).not.toBeInTheDocument();
-    })
+  it('renders the buttons properly for User', async () => {
+    render(<ItemComponent item={fakeItem} me={fakeRegularUser()} />);
+    await waitFor(() => {
+      expect(screen.queryByRole('link', {name: /Edit/i})).not.toBeInTheDocument();
+      expect(screen.getByRole('button', {name: /Add To Cart/i})).toBeInTheDocument();
+      expect(screen.queryByRole('button', {name: /Delete This Item/i})).not.toBeInTheDocument();
+    });
   });
 });
