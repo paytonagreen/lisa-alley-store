@@ -5,6 +5,7 @@ import Link from 'next/link';
 import BurgerStyles from '../styles/BurgerStyles';
 import BurgerCloseButton from '../styles/BurgerCloseButton';
 import Signout from '../signup-signin/Signout';
+import Loader from '../utils/Loader';
 import BurgerCartCount from './BurgerCartCount';
 import { TOGGLE_CART_MUTATION } from '../cart/Cart';
 
@@ -24,8 +25,10 @@ const HamburgerMenu = () => {
   const me = useUser();
   const [toggleBurger] = useMutation(TOGGLE_BURGER_MUTATION);
   const [toggleCart] = useMutation(TOGGLE_CART_MUTATION);
-  const { data } = useQuery(LOCAL_BURGER_QUERY);
-  let burgerOpen = data.burgerOpen;
+  const { loading, error, data } = useQuery(LOCAL_BURGER_QUERY);
+  if (loading) (<Loader/>)
+  if (error) (<Error error={error}/>)
+  let burgerOpen = data ? data.burgerOpen: false;
   return (
     <BurgerStyles data-testid="burger" open={burgerOpen}>
       <BurgerCloseButton onClick={toggleBurger}>&times;</BurgerCloseButton>
@@ -33,29 +36,29 @@ const HamburgerMenu = () => {
         {/* //Admin Only */}
         {me && me.permissions.includes('ADMIN') && (
           <Link href="/sell">
-            <a>Sell</a>
+            <a name="sell">Sell</a>
           </Link>
         )}
         <Link href="/items">
-          <a>Browse</a>
+          <a name="browse">Browse</a>
         </Link>
         {/* Signed In */}
         {me && (
           <>
             <Link href="/orders">
-              <a>Orders</a>
+              <a name="orders">Orders</a>
             </Link>
-            <Link href="/me">
-              <a>Account</a>
+            <Link href="/me" name="account">
+              <a name="account">Account</a>
             </Link>
-            <Signout />
-            <button
+            <Signout name="signout"/>
+            <button name="toggleCart"
               onClick={() => {
                 toggleBurger();
                 toggleCart();
               }}
             >
-              My Cart{' '}
+              My Cart
               <BurgerCartCount
                 data-testid="burger-count"
                 count={me.cart.reduce(
@@ -70,7 +73,7 @@ const HamburgerMenu = () => {
         
         {!me && (
           <Link href="/signin">
-            <a>Sign In</a>
+            <a name="signin">Sign In</a>
           </Link>
         )}
       </div>

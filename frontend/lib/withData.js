@@ -4,9 +4,16 @@ import { endpoint, prodEndpoint } from '../config';
 import { LOCAL_STATE_QUERY } from '../components/cart/Cart'
 import { LOCAL_BURGER_QUERY } from '../components/burger-menu/HamburgerMenu'
 
+function determineEndpoint() {
+  if (process.env.NODE_ENV === 'development') return endpoint;
+  if (process.env.NODE_ENV === 'production') return prodEndpoint;
+  if (process.env.NODE_ENV === 'test') return 'http://localhost:3000/graphql';
+}
+
 function createClient({ headers }) {
   return new ApolloClient({
-    uri: process.env.NODE_ENV === 'development' ? endpoint : prodEndpoint,
+    uri: determineEndpoint(),
+    fetch: (...args) => fetch(...args),
     request: operation => {
       operation.setContext({
         fetchOptions: {

@@ -32,7 +32,7 @@ const Items = ({ page }) => {
     <Center>
       <Pagination page={page} />
       {loading && <Loader />}
-      {error && <p>Error: {error.message}</p>}
+      {error && <Error error={error.message}/>}
       {!loading && !error && (
         <ItemsList>
           {data.items.map((item) => (

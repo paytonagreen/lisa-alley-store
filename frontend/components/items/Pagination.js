@@ -19,8 +19,13 @@ const PAGINATION_QUERY = gql`
 const Pagination = ({ page }) => {
   const { data, loading, error } = useQuery(PAGINATION_QUERY);
   if (loading) return <Loader />;
-  const count = data.itemsConnection.aggregate.count;
-  const pages = Math.ceil(count / perPage);
+  let count = 0;
+  let pages = 0;
+  if (!data && !error) {
+    count = data.itemsConnection.aggregate.count;
+    pages = Math.ceil(count / perPage);
+    return count, pages;
+  }
   ;
   return (
     <PaginationStyles data-testid="pagination">

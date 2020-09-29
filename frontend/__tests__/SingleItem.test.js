@@ -22,17 +22,15 @@ describe('<SingleItem/>', () => {
         },
       },
     ];
-    act(() => {
-      wrapper = mount(
-        <MockedProvider mocks={mocks}>
-          <SingleItem id="123" />
-        </MockedProvider>
-      );
-    });
+    wrapper = mount(
+      <MockedProvider mocks={mocks}>
+        <SingleItem id="123" />
+      </MockedProvider>
+    );
     expect(wrapper.text()).toContain('Loading...');
     await act(async () => {
       await wait();
-      wrapper.update();
+      await wrapper.update();
     });
     expect(toJSON(wrapper.find('h2'))).toMatchSnapshot();
     expect(toJSON(wrapper.find('img'))).toMatchSnapshot();

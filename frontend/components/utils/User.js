@@ -2,7 +2,7 @@ import { useQuery, gql } from '@apollo/client';
 import propTypes from 'prop-types';
 
 const CURRENT_USER_QUERY = gql`
-  query {
+  query CURRENT_USER_QUERY {
     me {
       id
       email

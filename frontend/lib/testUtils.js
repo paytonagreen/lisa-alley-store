@@ -1,4 +1,17 @@
 import casual from 'casual';
+import React from 'react';
+import { render } from '@testing-library/react';
+import { ApolloProvider } from '@apollo/client';
+import withData from '../lib/withData';
+
+const Providers = ({ children, apollo }) => {
+  return <ApolloProvider client={apollo} addTypename={false}>{children}</ApolloProvider>;
+};
+
+const customProviders = withData(Providers);
+
+const customRender = (ui, options) =>
+  render(ui, { wrapper: customProviders, ...options });
 
 // seed it so we get consistent results
 casual.seed(777);
@@ -12,7 +25,7 @@ const fakeItem = () => ({
   title: 'dogs are best',
   description: 'dogs',
   largeImage: 'dog.jpg',
-  createdAt: 1
+  createdAt: 1,
 });
 
 const fakeUser = () => ({
@@ -37,14 +50,14 @@ const fakeRegularUser = () => ({
   email: casual.email,
   address1: casual.address,
   address2: '',
-  
+
   city: casual.city,
   state: casual.state,
   zip: 11111,
   permissions: ['USER'],
   orders: [],
   cart: [],
-})
+});
 
 const fakeOrderItem = () => ({
   __typename: 'OrderItem',
@@ -66,13 +79,18 @@ const fakeOrder = () => ({
   user: fakeUser(),
 });
 
-const fakeCartItem = overrides => ({
+const fakeCartItem = (overrides) => ({
   __typename: 'CartItem',
   id: 'omg123',
   quantity: 3,
   item: fakeItem(),
   user: fakeUser(),
   ...overrides,
+});
+
+const fakeCartUser = () => ({
+  ...fakeRegularUser(),
+  cart: [fakeCartItem(), fakeCartItem(), fakeCartItem()],
 });
 
 // Fake LocalStorage
@@ -106,4 +124,6 @@ export {
   fakeCartItem,
   fakeOrder,
   fakeOrderItem,
+  fakeCartUser,
+  customRender as render,
 };
