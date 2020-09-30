@@ -1,6 +1,5 @@
 import { screen, waitFor } from '@testing-library/react';
 import ItemComponent from '../components/items/item-card/Item';
-import { MockedProvider } from '@apollo/client/testing';
 import { render, fakeUser, fakeRegularUser } from '../lib/testUtils';
 import formatMoney from '../lib/formatMoney';
 

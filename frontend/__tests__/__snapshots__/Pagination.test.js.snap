@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Pagination/> displays pagination for 20 items 1`] = `
+<div
+  class="PaginationStyles-aduuar-0 kZtpSQ"
+  data-testid="pagination"
+>
+  <a
+    aria-disabled="true"
+    class="prev"
+    href="/items?page=0"
+  >
+    Prev
+  </a>
+  <p
+    data-testid="pages-index"
+  >
+    Page 
+    1
+     of 
+    <span
+      class="totalPages"
+    >
+      4
+    </span>
+  </p>
+  <p>
+    20
+     Items Total
+  </p>
+  <a
+    aria-disabled="false"
+    class="next"
+    href="/items?page=2"
+  >
+    Next
+  </a>
+</div>
+`;
