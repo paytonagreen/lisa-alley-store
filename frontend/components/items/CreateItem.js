@@ -28,9 +28,12 @@ const CREATE_ITEM_MUTATION = gql`
 `;
 
 function update(cache, payload) {
-  cache.modify('ROOT_QUERY', {
-    allItems(items, { readField }) {
-      return [payload.data.createItem, ...items];
+  cache.modify({
+    id: cache.identify(payload.data.createItem),
+    fields: {
+      allItems(items, { readField }) {
+        return [payload.data.createItem, ...items];
+      },
     },
   });
 }
@@ -42,8 +45,8 @@ function CreateItem() {
 
   const [createItem, { loading, error }] = useMutation(CREATE_ITEM_MUTATION, {
     variables: { ...values, image, largeImage },
-    update,
-    refetchQueries: [{ query: ALL_ITEMS_QUERY }, { query: PAGINATION_QUERY }],
+    // update,
+    refetchQueries: [{ query: ALL_ITEMS_QUERY }],
   });
 
   async function uploadFile(e) {
