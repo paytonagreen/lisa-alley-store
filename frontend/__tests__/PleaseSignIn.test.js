@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/react';
-import { render, fakeUser } from '../lib/testUtils';
+import { render } from '../lib/testUtils';
 import PleaseSignIn from '../components/utils/PleaseSignIn';
 import { server } from '../mocks/server';
 import { graphql } from 'msw';
@@ -27,4 +27,3 @@ test('renders signin dialog if no active user session', async () => {
     /Please sign in/i
   );
 });
-

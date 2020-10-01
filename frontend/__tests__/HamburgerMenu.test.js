@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
-import { render, fakeRegularUser, fakeCartItem, fakeItem } from '../../lib/testUtils';
-import HamburgerMenu from '../../components/burger-menu/HamburgerMenu';
-import { server } from '../../mocks/server';
+import { render, fakeRegularUser, fakeCartItem } from '../lib/testUtils';
+import HamburgerMenu from '../components/burger-menu/HamburgerMenu';
+import { server } from '../mocks/server';
 import { graphql } from 'msw';
 
 describe('<HamburgerMenu/>', () => {
@@ -15,8 +15,6 @@ describe('<HamburgerMenu/>', () => {
     const signIn = await screen.findByRole('link', { name: /Sign In/i });
     expect(signIn).toBeInTheDocument();
   });
-
-  server.resetHandlers();
 
   it('renders a full admin nav when admin signed in', async () => {
     render(<HamburgerMenu />);
@@ -39,5 +37,22 @@ describe('<HamburgerMenu/>', () => {
       screen.getByRole('button', { name: /My Cart/i })
     ).toBeInTheDocument();
   });
-});
 
+  it('displays the correct cart count', async () => {
+    server.use(
+      graphql.query('CURRENT_USER_QUERY', (req, res, ctx) => {
+        return res.once(
+          ctx.data({
+            me: {
+              ...fakeRegularUser(),
+              cart: [fakeCartItem(), fakeCartItem(), fakeCartItem()],
+            },
+          })
+        );
+      })
+    );
+    render(<HamburgerMenu/>);
+    const cartCount = await screen.findByText('9');
+    expect(cartCount).toBeInTheDocument();
+  });
+});
