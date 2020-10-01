@@ -79,4 +79,14 @@ export const handlers = [
       })
     );
   }),
+
+  graphql.mutation('SIGNUP_MUTATION', (req, res, ctx) => {
+    return res(
+      ctx.data({
+        signup: {
+          ...user,
+        }
+      })
+    )
+  })
 ];

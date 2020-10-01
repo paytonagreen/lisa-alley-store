@@ -1,12 +1,9 @@
 import React from 'react';
-import { useQuery } from '@apollo/client';
 import { screen, waitFor } from '@testing-library/react';
 import SingleItem from '../components/items/SingleItem';
 import { render, fakeItem } from '../lib/testUtils';
 import { server } from '../mocks/server';
-import { CURRENT_USER_QUERY } from '../components/utils/User';
 import { graphql } from 'msw';
-import withData from '../lib/withData';
 
 const item = fakeItem();
 

@@ -57,17 +57,19 @@ const Signup = () => {
 
   return (
     <Form
+      data-testid="signup-form"
       method="post"
       onSubmit={handleSubmit}
     >
       <fieldset disabled={loading} aria-busy={loading}>
         <h2>Sign Up For An Account</h2>
 
-        <Error error={error} />
+        {called && error && <Error error={error} />}
         {!loading && !error && called && <p>Success! Thanks for signing up!</p>}
         <label htmlFor="email">
           Email
           <input
+            id="email"
             type="email"
             name="email"
             placeholder="email"
@@ -78,6 +80,7 @@ const Signup = () => {
         <label htmlFor="name">
           Name
           <input
+            id="name"
             type="text"
             name="name"
             placeholder="name"
@@ -88,6 +91,7 @@ const Signup = () => {
         <label htmlFor="password">
           Password
           <input
+            id="password"
             type="password"
             name="password"
             placeholder="password"
@@ -98,6 +102,7 @@ const Signup = () => {
         <label htmlFor="address1">
           Address Line 1
           <input
+            id="address1"
             type="text"
             name="address1"
             placeholder="Address Line 1"
@@ -108,6 +113,7 @@ const Signup = () => {
         <label htmlFor="address2">
           Address Line 2
           <input
+            id="address2"
             type="text"
             name="address2"
             placeholder="Address Line 2"
@@ -118,6 +124,7 @@ const Signup = () => {
         <label htmlFor="city">
           City
           <input
+            id="city"
             type="text"
             name="city"
             placeholder="City"
@@ -128,6 +135,7 @@ const Signup = () => {
         <label htmlFor="state">
           State
           <input
+            id="state"
             type="input"
             name="state"
             placeholder="State"
@@ -135,9 +143,10 @@ const Signup = () => {
             onChange={handleChange}
           />
         </label>
-        <label htmlFor="password">
+        <label htmlFor="zip">
           Zip Code
           <input
+            id="zip"
             type="number"
             name="zip"
             placeholder="Zip Code"
