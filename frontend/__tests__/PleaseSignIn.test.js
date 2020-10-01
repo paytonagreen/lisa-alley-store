@@ -1,60 +1,30 @@
-import { mount } from 'enzyme';
-import wait from 'waait';
+import { screen } from '@testing-library/react';
+import { render, fakeUser } from '../lib/testUtils';
 import PleaseSignIn from '../components/utils/PleaseSignIn';
-import { CURRENT_USER_QUERY } from '../components/utils/User';
-import { MockedProvider } from '@apollo/client/testing';
-import { fakeUser } from '../lib/testUtils';
-import { act } from 'react-dom/test-utils';
+import { server } from '../mocks/server';
+import { graphql } from 'msw';
 
-const notSignedInMocks = [
-  {
-    request: { query: CURRENT_USER_QUERY },
-    result: { data: { me: null } },
-  },
-];
-
-const signedInMocks = [
-  {
-    request: { query: CURRENT_USER_QUERY },
-    result: { data: { me: fakeUser() } },
-  },
-];
-
-describe('<PleaseSignIn/>', () => {
-  it('renders the sign in dialog to logged out users', async () => {
-    let wrapper = mount(
-      <MockedProvider mocks={notSignedInMocks}>
-        <PleaseSignIn />
-      </MockedProvider>
-    );
-    expect(wrapper.text()).toContain('Loading...');
-    await act(async () => {
-      wrapper = mount(
-        <MockedProvider mocks={notSignedInMocks}>
-          <PleaseSignIn />
-        </MockedProvider>
-      );
-      await wait();
-      wrapper.update();
-    });
-    expect(wrapper.text()).toContain('Please Sign In Before Continuing');
-    expect(wrapper.find('Signin').exists()).toBe(true);
-  });
-
-  it('renders the child component when the user IS signed in', async () => {
-    const Hey = () => <p>Hey!</p>;
-    let wrapper = '';
-    await act(async () => {
-      wrapper = mount(
-        <MockedProvider mocks={signedInMocks}>
-          <PleaseSignIn>
-            <Hey />
-          </PleaseSignIn>
-        </MockedProvider>
-      );
-      await wait();
-      wrapper.update();
-    });
-    expect(wrapper.contains(<Hey />)).toBe(true);
-  });
+test('renders a child component if active user session', async () => {
+  const Sup = () => {
+    return <p>Sup</p>;
+  };
+  render(
+    <PleaseSignIn>
+      <Sup />
+    </PleaseSignIn>
+  );
+  expect(await screen.findByText('Sup')).toBeInTheDocument();
 });
+
+test('renders signin dialog if no active user session', async () => {
+  server.resetHandlers(
+    graphql.query('CURRENT_USER_QUERY', (req, res, ctx) => {
+      return res.once(ctx.data({ me: null }));
+    })
+  );
+  render(<PleaseSignIn />);
+  expect(await screen.findByTestId('prompt')).toHaveTextContent(
+    /Please sign in/i
+  );
+});
+

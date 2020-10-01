@@ -3,11 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { MockedProvider } from '@apollo/client/testing';
 import Router from 'next/router';
 import { render, fakeItem } from '../lib/testUtils';
-import CreateItem, {
-  CREATE_ITEM_MUTATION,
-} from '../components/items/CreateItem';
-import { ALL_ITEMS_QUERY } from '../components/items/Items';
-import { PAGINATION_QUERY } from '../components/items/Pagination';
+import CreateItem from '../components/items/CreateItem';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),
@@ -24,9 +20,7 @@ describe('<CreateItem/>', () => {
 
   it('handles state updating', async () => {
     render(
-      <MockedProvider>
-        <CreateItem />
-      </MockedProvider>
+      <CreateItem />
     );
 
     await userEvent.type(screen.getByPlaceholderText('Title'), item.title);

@@ -27,7 +27,7 @@ const SingleItem = ({ id }) => {
   return (
     <SingleItemStyles>
       <Head>
-        <title>Sick Fits | {item.title}</title>F
+        <title>Lisa Alley | {item.title}</title>F
       </Head>
       <img src={item.largeImage} alt={item.title} />
       <div className="details">

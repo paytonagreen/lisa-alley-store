@@ -1,8 +1,9 @@
 import withApollo from 'next-with-apollo';
-import ApolloClient from 'apollo-boost';
+import { ApolloClient } from '@apollo/client';
 import { endpoint, prodEndpoint } from '../config';
 import { LOCAL_STATE_QUERY } from '../components/cart/Cart'
 import { LOCAL_BURGER_QUERY } from '../components/burger-menu/HamburgerMenu'
+import { InMemoryCache } from 'apollo-boost';
 
 function determineEndpoint() {
   if (process.env.NODE_ENV === 'development') return endpoint;
@@ -10,10 +11,12 @@ function determineEndpoint() {
   if (process.env.NODE_ENV === 'test') return 'http://localhost:3000/graphql';
 }
 
+const cache = new InMemoryCache();
+
 function createClient({ headers }) {
   return new ApolloClient({
+    cache,
     uri: determineEndpoint(),
-    fetch: (...args) => fetch(...args),
     request: operation => {
       operation.setContext({
         fetchOptions: {
@@ -21,6 +24,14 @@ function createClient({ headers }) {
         },
         headers,
       });
+    },
+    defaultOptions: {
+      watchQuery: {
+        fetchPolicy: (process.env.NODE_ENV === 'test' ? 'no-cache' : 'cache-first'),
+      },
+      query: {
+        fetchPolicy: (process.env.NODE_ENV === 'test' ? 'no-cache' : 'cache-first'),
+      }
     },
     //local data
     clientState: {

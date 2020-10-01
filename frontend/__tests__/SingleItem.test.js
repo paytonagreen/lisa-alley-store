@@ -1,64 +1,44 @@
-import { mount } from 'enzyme';
-import toJSON from 'enzyme-to-json';
-import wait from 'waait';
-import SingleItem, { SINGLE_ITEM_QUERY } from '../components/items/SingleItem';
-import { MockedProvider } from '@apollo/client/testing';
-import { fakeItem } from '../lib/testUtils';
-import { act } from 'react-dom/test-utils';
+import React from 'react';
+import { useQuery } from '@apollo/client';
+import { screen, waitFor } from '@testing-library/react';
+import SingleItem from '../components/items/SingleItem';
+import { render, fakeItem } from '../lib/testUtils';
+import { server } from '../mocks/server';
+import { CURRENT_USER_QUERY } from '../components/utils/User';
+import { graphql } from 'msw';
+import withData from '../lib/withData';
+
+const item = fakeItem();
 
 describe('<SingleItem/>', () => {
-  let wrapper = '';
+  beforeAll(() => server.listen());
   it('renders with proper data', async () => {
-    const mocks = [
-      {
-        request: {
-          query: SINGLE_ITEM_QUERY,
-          variables: { id: '123' },
-        },
-        result: {
-          data: {
-            item: fakeItem(),
-          },
-        },
-      },
-    ];
-    wrapper = mount(
-      <MockedProvider mocks={mocks}>
-        <SingleItem id="123" />
-      </MockedProvider>
-    );
-    expect(wrapper.text()).toContain('Loading...');
-    await act(async () => {
-      await wait();
-      await wrapper.update();
+    render(<SingleItem id="abc123" />);
+    const loading = await screen.findByText('Loading...');
+    expect(loading).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByRole('heading', { name: `Viewing ${item.title}` }));
+      const img = screen.getByAltText(item.title);
+      expect(img.src).toContain(item.largeImage);
+      expect(screen.getByText(item.description)).toBeInTheDocument();
     });
-    expect(toJSON(wrapper.find('h2'))).toMatchSnapshot();
-    expect(toJSON(wrapper.find('img'))).toMatchSnapshot();
-    expect(toJSON(wrapper.find('p'))).toMatchSnapshot();
   });
+
   it('errors with an unfound item', async () => {
-    const mocks = [
-      {
-        request: {
-          query: SINGLE_ITEM_QUERY,
-          variables: { id: '123' },
-        },
-        result: {
-          errors: [{ message: 'Items Not Found!' }],
-        },
-      },
-    ];
-    await act(async () => {
-      wrapper = mount(
-        <MockedProvider mocks={mocks}>
-          <SingleItem id="123" />
-        </MockedProvider>
-      );
-      await wait();
-      wrapper.update();
-    });
-    const item = wrapper.find('[data-test="graphql-error"]');
-    expect(item.text()).toContain('Items Not Found!');
-    expect(toJSON(item)).toMatchSnapshot();
+    server.use(
+      graphql.query('SINGLE_ITEM_QUERY', (req, res, ctx) => {
+        return res.once(
+          ctx.errors([
+            {
+              status: 500,
+              message: 'Items Not Found!',
+            },
+          ])
+        );
+      })
+    );
+    render(<SingleItem id="abc123" />);
+    const item = await screen.findByTestId('graphql-error');
+    expect(item).toHaveTextContent('Items Not Found!');
   });
 });
