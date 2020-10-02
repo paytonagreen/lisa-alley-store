@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { useMutation, gql } from "@apollo/client";
-import Form from "../styles/Form";
-import Error from "../utils/ErrorMessage";
-import PropTypes from "prop-types";
-import { CURRENT_USER_QUERY } from "../utils/User";
-import useForm from "../../lib/useForm";
+import React, { useState } from 'react';
+import { useMutation, gql } from '@apollo/client';
+import Form from '../styles/Form';
+import Error from '../utils/ErrorMessage';
+import PropTypes from 'prop-types';
+import { CURRENT_USER_QUERY } from '../utils/User';
+import useForm from '../../lib/useForm';
 
 const RESET_MUTATION = gql`
   mutation RESET_MUTATION(
@@ -28,7 +28,7 @@ const Reset = ({ resetToken }) => {
   const { values, handleSubmit, handleChange } = useForm(callback);
   const [savingStarted, setSavingStarted] = useState(false);
 
-  const [reset, { loading, error }] = useMutation(RESET_MUTATION);
+  const [reset, { loading, error, called }] = useMutation(RESET_MUTATION);
 
   function callback() {
     if (!savingStarted) {
@@ -44,13 +44,15 @@ const Reset = ({ resetToken }) => {
   }
 
   return (
-    <Form method="post" onSubmit={handleSubmit}>
+    <Form data-testid="reset-form" method="post" onSubmit={handleSubmit}>
       <fieldset disabled={loading} aria-busy={loading}>
         <h2>Reset Your Password</h2>
         <Error error={error} />
+        {!loading && !error && called && <p>Success! Your password has been reset.</p>}
         <label htmlFor="password">
           Password
           <input
+            id="password"
             type="password"
             name="password"
             placeholder="password"
@@ -59,8 +61,9 @@ const Reset = ({ resetToken }) => {
           />
         </label>
         <label htmlFor="confirmPassword">
-          Password
+          Confirm
           <input
+            id="confirmPassword"
             type="password"
             name="confirmPassword"
             placeholder="confirmPassword"

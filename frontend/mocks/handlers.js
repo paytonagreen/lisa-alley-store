@@ -98,5 +98,15 @@ export const handlers = [
         }
       })
     )
+  }),
+
+  graphql.mutation('RESET_MUTATION', (req, res, ctx) => {
+    return res(
+      ctx.data({
+        resetPassword: {
+          ...user
+        }
+      })
+    )
   })
 ];
