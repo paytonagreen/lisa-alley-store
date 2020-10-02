@@ -53,7 +53,7 @@ export const handlers = [
           requestReset: {
             message: 'success',
             __typename: 'Message',
-          }
+          },
         })
       );
     } else {
@@ -61,10 +61,10 @@ export const handlers = [
         ctx.errors([
           {
             status: 400,
-            message: 'Oops, no go'
-          }
+            message: 'Oops, no go',
+          },
         ])
-      )
+      );
     }
   }),
 
@@ -85,6 +85,16 @@ export const handlers = [
       ctx.data({
         signup: {
           ...user,
+        },
+      })
+    );
+  }),
+
+  graphql.mutation('UPDATE_USER_MUTATION', (req,res,ctx) => {
+    return res(
+      ctx.data({
+        updateUser: {
+          ...user
         }
       })
     )
