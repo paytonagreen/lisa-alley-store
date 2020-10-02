@@ -25,13 +25,10 @@ const Items = ({ page }) => {
   const { data, error, loading } = useQuery(ALL_ITEMS_QUERY, {
     variables: { skip: page * perPage - perPage, first: perPage },
   });
-  {
-    data && console.log(data);
-  }
   return (
     <Center>
       <Pagination page={page} />
-      {loading && <Loader />}
+      {loading && <Center><Loader /></Center>}
       {error && <Error error={error.message}/>}
       {!loading && !error && (
         <ItemsList>

@@ -19,7 +19,8 @@ describe('<Pagination/>', () => {
     setScreenPage();
 
     expect(await screen.findByTestId('pages-index')).toHaveTextContent('Page 1 of 4');
-    expect(await screen.findByTestId('pagination')).toMatchSnapshot();
+    expect(await screen.findByTestId('pagination')).toMatchSnapshot()
+    ;
   });
 
   it('disables prev button on first page', async () => {

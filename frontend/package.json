@@ -1,10 +1,10 @@
 {
-  "name": "sick-fits-frontend",
+  "name": "lisa-alley-store-frontend",
   "version": "1.0.0",
   "engines": {
     "node": "12.x"
   },
-  "description": "Sick Fits! An example React, GraphQL, Next and Apollo",
+  "description": "Lisa Alley Store",
   "main": "index.js",
   "scripts": {
     "dev": "next -p 7777",
@@ -19,14 +19,14 @@
   "license": "ISC",
   "dependencies": {
     "@apollo/client": "^3.0.2",
+    "@apollo/react-ssr": "^4.0.0",
     "apollo-boost": "^0.1.16",
+    "apollo-upload-client": "^14.1.2",
     "babel-core": "^7.0.0-bridge.0",
     "babel-plugin-styled-components": "^1.7.1",
     "core-js": "^3.6.5",
     "date-fns": "^2.0.0-alpha.7",
     "downshift": "^2.2.3",
-    "enzyme": "^3.6.0",
-    "enzyme-adapter-react-16": "^1.5.0",
     "graphql": "^14.0.2",
     "lodash.debounce": "^4.0.8",
     "next": "^9.5.2",

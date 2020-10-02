@@ -37,7 +37,8 @@ const Signin = () => {
       method="post"
       onSubmit={async (e) => {
         e.preventDefault();
-        await signin();
+        const res = await signin();
+        console.log(res);
         Router.push({
           pathname: "/items",
         });

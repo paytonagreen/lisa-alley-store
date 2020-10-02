@@ -1,13 +1,12 @@
-import Link from "next/link";
-import { useMutation } from "@apollo/client";
-import NavStyles from "../../styles/NavStyles";
-import { useUser } from "../../utils/User";
-import Signout from "../../signup-signin/Signout";
-import CartCount from "../../cart/CartCount";
-import { TOGGLE_CART_MUTATION } from "../../cart/Cart";
+import { useTogglers } from '../../utils/LocalState';
+import Link from 'next/link';
+import NavStyles from '../../styles/NavStyles';
+import { useUser } from '../../utils/User';
+import Signout from '../../signup-signin/Signout';
+import CartCount from '../../cart/CartCount';
 
 function Nav() {
-  const [toggleCart] = useMutation(TOGGLE_CART_MUTATION);
+  const {toggleCart} = useTogglers();
   const me = useUser();
   return (
     <NavStyles data-testid="nav">
@@ -36,7 +35,7 @@ function Nav() {
         </>
       )}
       {/* //Admin Only */}
-      {me && me.permissions.includes("ADMIN") && (
+      {me && me.permissions.includes('ADMIN') && (
         <Link href="/sell">
           <a>Sell</a>
         </Link>
