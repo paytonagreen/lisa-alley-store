@@ -1,6 +1,5 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MockedProvider } from '@apollo/client/testing';
 import Router from 'next/router';
 import { render, fakeItem } from '../lib/testUtils';
 import CreateItem from '../components/items/CreateItem';

@@ -1,7 +1,6 @@
-import { screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { screen } from '@testing-library/react';
 import { render } from '../lib/testUtils';
-import Pagination, { PAGINATION_QUERY } from '../components/items/Pagination';
+import Pagination from '../components/items/Pagination';
 
 const setScreenPage = (page = 1) => {
   render(
