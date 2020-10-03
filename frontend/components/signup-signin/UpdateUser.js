@@ -64,7 +64,7 @@ const UpdateUser = () => {
   if (error) return <Error error={error} />;
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form data-testid="updateUserForm" onSubmit={handleSubmit}>
       <fieldset disabled={mutationLoading} aria-busy={mutationLoading}>
         {!mutationError && !mutationLoading && mutationCalled && (
           <p>Success! Account updated.</p>
@@ -74,6 +74,7 @@ const UpdateUser = () => {
         <label htmlFor="email">
           Email
           <input
+            id="email"
             type="email"
             name="email"
             placeholder="email"
@@ -85,6 +86,7 @@ const UpdateUser = () => {
         <label htmlFor="name">
           Name
           <input
+            id="name"
             type="text"
             name="name"
             placeholder="name"
@@ -96,6 +98,7 @@ const UpdateUser = () => {
         <label htmlFor="address1">
           Address Line 1
           <input
+            id="address1"
             type="text"
             name="address1"
             placeholder="Address Line 1"
@@ -107,6 +110,7 @@ const UpdateUser = () => {
         <label htmlFor="address2">
           Address Line 2
           <input
+            id="address2"
             type="text"
             name="address2"
             placeholder="Address Line 2"
@@ -117,6 +121,7 @@ const UpdateUser = () => {
         <label htmlFor="city">
           City
           <input
+            id="city"
             type="text"
             name="city"
             placeholder="City"
@@ -128,6 +133,7 @@ const UpdateUser = () => {
         <label htmlFor="state">
           State
           <input
+            id="state"
             type="input"
             name="state"
             placeholder="State"
@@ -136,9 +142,10 @@ const UpdateUser = () => {
             onChange={handleChange}
           />
         </label>
-        <label htmlFor="password">
+        <label htmlFor="zip">
           Zip Code
           <input
+            id="zip"
             type="number"
             name="zip"
             placeholder="Zip Code"
@@ -147,7 +154,7 @@ const UpdateUser = () => {
             onChange={handleChange}
           />
         </label>
-        <button type="submit">Sav{loading ? "ing" : "e"} Changes</button>
+        <button type="submit">Sav{mutationLoading ? "ing" : "e"} Changes</button>
       </fieldset>
     </Form>
   );

@@ -86,7 +86,7 @@ const Mutations = {
     const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
     //set JWT as a cookie on the response
     ctx.response.cookie("token", token, {
-      domain: '.lisa-alley.com',
+      // domain: '.lisa-alley.com',
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year cookie
     });
@@ -98,7 +98,7 @@ const Mutations = {
       html: makeANiceEmail(
         `Thanks so much for signing up! \n\n You can browse all my prints <a href="${
           process.env.FRONTEND_URL
-        }/order?id=${order.id}">here</a>. If you're interested in commission work, please get in touch directly!`
+        }>here</a>. If you're interested in commission work, please get in touch directly!`
       ),
     });
     //Finally return user to browser
@@ -133,7 +133,7 @@ const Mutations = {
     const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
     //Set cookie with token
     ctx.response.cookie("token", token, {
-      domain: '.lisa-alley.com',
+      // domain: '.lisa-alley.com',
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365,
     });
@@ -142,7 +142,7 @@ const Mutations = {
   },
   signout(parent, args, ctx, info) {
     ctx.response.clearCookie("token", {
-      domain: '.lisa-alley.com',
+      // domain: '.lisa-alley.com',
     });
     return { message: "Goodbye!" };
   },
@@ -208,7 +208,7 @@ const Mutations = {
     const token = jwt.sign({ userId: updatedUser.id }, process.env.APP_SECRET);
     //Set JWT Cookie
     ctx.response.cookie("token", token, {
-      domain: '.lisa-alley.com',
+      // domain: '.lisa-alley.com',
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365,
     });

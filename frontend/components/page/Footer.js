@@ -11,7 +11,7 @@ const Footer = () => {
             <img src="../static/PNG/ig.png" alt="Instagram" />
           </a>
         </Link>
-        <Link href="mailto: lisaalley@lisaalley.com">
+        <Link href="mailto:lisaalley@lisaalley.com">
           <a>
             <img src="../static/PNG/email.png" alt="Email" />
           </a>

@@ -2,7 +2,7 @@ import { useQuery, gql } from '@apollo/client';
 import propTypes from 'prop-types';
 
 const CURRENT_USER_QUERY = gql`
-  query {
+  query CURRENT_USER_QUERY {
     me {
       id
       email
@@ -19,7 +19,6 @@ const CURRENT_USER_QUERY = gql`
         item {
           id
           price
-          
           image
           title
           description
@@ -30,7 +29,7 @@ const CURRENT_USER_QUERY = gql`
 `;
 
 const useUser = () => {
-  const {data, loading ,error } = useQuery(CURRENT_USER_QUERY)
+  const { data } = useQuery(CURRENT_USER_QUERY)
   if (data) {
     return data.me;
   }

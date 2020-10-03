@@ -19,7 +19,7 @@ const RequestReset = () => {
     return (
           <Form
             method="post"
-            data-test="form"
+            data-testid="form"
             onSubmit={async (e) => {
               e.preventDefault();
               await reset();

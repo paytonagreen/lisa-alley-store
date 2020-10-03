@@ -1,9 +1,9 @@
-import React from "react";
-import { useQuery, gql } from "@apollo/client";
-import Error from "../utils/ErrorMessage";
-import Head from "next/head";
-import AddToCart from "./item-card/AddToCart";
-import SingleItemStyles from "../styles/SingleItemStyles";
+import React from 'react';
+import { useQuery, gql } from '@apollo/client';
+import Error from '../utils/ErrorMessage';
+import Head from 'next/head';
+import AddToCart from './item-card/AddToCart';
+import SingleItemStyles from '../styles/SingleItemStyles';
 
 const SINGLE_ITEM_QUERY = gql`
   query SINGLE_ITEM_QUERY($id: ID!) {
@@ -27,7 +27,7 @@ const SingleItem = ({ id }) => {
   return (
     <SingleItemStyles>
       <Head>
-        <title>Sick Fits | {item.title}</title>
+        <title>Lisa Alley | {item.title}</title>F
       </Head>
       <img src={item.largeImage} alt={item.title} />
       <div className="details">

@@ -40,7 +40,7 @@ const LoaderStyles = styled.div`
 `;
 
 const Loader = () => (
-  <LoaderStyles>
+  <LoaderStyles data-testid="loader">
     <div></div>
     <div></div>
     <div></div>

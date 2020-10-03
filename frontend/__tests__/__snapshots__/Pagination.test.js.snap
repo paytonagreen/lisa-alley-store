@@ -1,70 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Pagination/> displays pagination for 18 items 1`] = `
+exports[`<Pagination/> displays pagination for 20 items 1`] = `
 <div
-  className="PaginationStyles-aduuar-0 kZtpSQ"
-  data-test="pagination"
+  class="PaginationStyles-aduuar-0 kZtpSQ"
+  data-testid="pagination"
 >
-  <Head>
-    <_default
-      headManager={Object {}}
-      inAmpMode={false}
-      reduceComponentsToState={[Function]}
-    />
-  </Head>
-  <Link
-    href={
-      Object {
-        "pathname": "items",
-        "query": Object {
-          "page": 0,
-        },
-      }
-    }
+  <a
+    aria-disabled="true"
+    class="prev"
+    href="/items?page=0"
   >
-    <a
-      aria-disabled={true}
-      className="prev"
-      href="/items?page=0"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-    >
-      Prev
-    </a>
-  </Link>
-  <p>
+    Prev
+  </a>
+  <p
+    data-testid="pages-index"
+  >
     Page 
     1
      of 
     <span
-      className="totalPages"
+      class="totalPages"
     >
-      3
+      4
     </span>
   </p>
   <p>
-    18
+    20
      Items Total
   </p>
-  <Link
-    href={
-      Object {
-        "pathname": "items",
-        "query": Object {
-          "page": 2,
-        },
-      }
-    }
+  <a
+    aria-disabled="false"
+    class="next"
+    href="/items?page=2"
   >
-    <a
-      aria-disabled={false}
-      className="next"
-      href="/items?page=2"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-    >
-      Next
-    </a>
-  </Link>
+    Next
+  </a>
 </div>
 `;

@@ -1,54 +1,40 @@
 import withApollo from 'next-with-apollo';
-import ApolloClient from 'apollo-boost';
+import { ApolloClient, ApolloLink, InMemoryCache } from '@apollo/client';
+import { getDataFromTree } from '@apollo/react-ssr';
+import { createUploadLink } from 'apollo-upload-client';
 import { endpoint, prodEndpoint } from '../config';
-import { LOCAL_STATE_QUERY } from '../components/cart/Cart'
-import { LOCAL_BURGER_QUERY } from '../components/burger-menu/HamburgerMenu'
+
+function determineEndpoint() {
+  if (process.env.NODE_ENV === 'development') return endpoint;
+  if (process.env.NODE_ENV === 'production') return prodEndpoint;
+  if (process.env.NODE_ENV === 'test') return 'http://localhost:3000/graphql';
+}
+
+const cache = new InMemoryCache();
 
 function createClient({ headers }) {
   return new ApolloClient({
-    uri: process.env.NODE_ENV === 'development' ? endpoint : prodEndpoint,
-    request: operation => {
-      operation.setContext({
+    cache,
+    link: ApolloLink.from([
+      createUploadLink({
+        uri: determineEndpoint,
         fetchOptions: {
           credentials: 'include',
         },
         headers,
-      });
-    },
-    //local data
-    clientState: {
-      resolvers: {
-        Mutation: {
-          toggleCart(_, variables, { cache }) {
-            //Read the cartOpen value from the cache
-            const { cartOpen } = cache.readQuery({
-              query: LOCAL_STATE_QUERY,
-            });
-            const data = {
-              data: {cartOpen: !cartOpen},
-            }
-            cache.writeData(data);
-            return data;
-          },
-          toggleBurger(_, variables, { cache }) {
-            //Read the cartOpen value from the cache
-            const { burgerOpen } = cache.readQuery({
-              query: LOCAL_BURGER_QUERY,
-            });
-            const data = {
-              data: {burgerOpen: !burgerOpen},
-            }
-            cache.writeData(data);
-            return data;
-          },
-        },
+      }),
+    ]),
+    defaultOptions: {
+      watchQuery: {
+        fetchPolicy:
+          process.env.NODE_ENV === 'test' ? 'no-cache' : 'cache-first',
       },
-      defaults: {
-        cartOpen: false,
-        burgerOpen: false,
-      }
-    }
+      query: {
+        fetchPolicy:
+          process.env.NODE_ENV === 'test' ? 'no-cache' : 'cache-first',
+      },
+    },
   });
 }
 
-export default withApollo(createClient);
+export default withApollo(createClient, { getDataFromTree });

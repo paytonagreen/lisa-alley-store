@@ -1,12 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Link from "next/link";
-import Title from "../../styles/Title";
-import ItemStyles from "../../styles/ItemStyles";
-import PriceTag from "../../styles/PriceTag";
-import formatMoney from "../../../lib/formatMoney";
-import DeleteItem from "./DeleteItem";
-import AddToCart from "./AddToCart";
+import React from 'react';
+import PropTypes from 'prop-types';
+import Link from 'next/link';
+import Title from '../../styles/Title';
+import ItemStyles from '../../styles/ItemStyles';
+import PriceTag from '../../styles/PriceTag';
+import formatMoney from '../../../lib/formatMoney';
+import DeleteItem from './DeleteItem';
+import AddToCart from './AddToCart';
 
 const Item = ({ item, me }) => {
   return (
@@ -15,7 +15,7 @@ const Item = ({ item, me }) => {
       <Title>
         <Link
           href={{
-            pathname: "/item",
+            pathname: '/item',
             query: { id: item.id },
           }}
         >
@@ -28,10 +28,10 @@ const Item = ({ item, me }) => {
       </div>
 
       <div className="buttonList">
-        {me && me.permissions.includes("ADMIN") && (
+        {me && me.permissions.includes('ADMIN') && (
           <Link
             href={{
-              pathname: "/update",
+              pathname: '/update',
               query: { id: item.id },
             }}
           >
@@ -39,7 +39,7 @@ const Item = ({ item, me }) => {
           </Link>
         )}
         <AddToCart id={item.id} />
-        {me && me.permissions.includes("ADMIN") && (
+        {me && me.permissions.includes('ADMIN') && (
           <DeleteItem id={item.id}>Delete This Item</DeleteItem>
         )}
       </div>
