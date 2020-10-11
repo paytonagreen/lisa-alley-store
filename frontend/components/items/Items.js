@@ -6,6 +6,7 @@ import { useUser } from '../utils/User';
 import Pagination from './Pagination';
 import { perPage } from '../../config';
 import Loader from '../utils/Loader';
+import Error from '../utils/ErrorMessage';
 
 const ALL_ITEMS_QUERY = gql`
   query ALL_ITEMS_QUERY($skip: Int = 0, $first: Int = ${perPage}) {

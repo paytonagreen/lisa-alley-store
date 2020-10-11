@@ -5,6 +5,7 @@ import { perPage } from '../../config';
 import Head from 'next/head';
 import Link from 'next/link';
 import Loader from '../utils/Loader';
+import Error from '../utils/ErrorMessage';
 
 const PAGINATION_QUERY = gql`
   query PAGINATION_QUERY {

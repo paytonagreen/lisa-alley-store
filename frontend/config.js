@@ -2,5 +2,5 @@
 export const endpoint = `http://localhost:4444`;
 export const prodEndpoint = `https://api.lisa-alley.com`;
 
-export const perPage = 6;
+export const perPage = 9;
 export const ordersPerPage = 8;

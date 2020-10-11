@@ -11,13 +11,9 @@ const FooterStyles = styled.footer`
     justify-content: center;
     align-items: center;
     margin-top: 2rem;
-    img {
-      height: 4rem;
-      color: white;
-      margin: 0 1rem;
-      @media (max-width: 700px) {
-        height: 3rem;
-      }
+    font-size: 2rem;
+    @media(max-width: 700px) {
+      font-size: 1.5rem;
     }
   }
   .created {

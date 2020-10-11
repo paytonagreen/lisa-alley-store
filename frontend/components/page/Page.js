@@ -13,13 +13,13 @@ const theme = {
   grey: '3A3A3A',
   teal: '#008080',
   lightgrey: '#E1E1E1',
-  offWhite: '#EDEDED',
+  offwhite: '#FCF5EB',
   maxWidth: '1000px',
   bs: '0 12px 24px 0 rgba(0,0,0,0.09)',
 };
 
 const StyledPage = styled.div`
-  background: ${(props) => props.theme.lavender};
+  background-color: ${(props) => props.theme.offwhite};
   color: ${(props) => props.theme.black};
   position: relative;
   min-height: 100vh;
@@ -27,21 +27,15 @@ const StyledPage = styled.div`
 `;
 
 const Inner = styled.div`
-  max-width: ${(props) => props.theme.maxWidth};
+  max-width: ${props => props.theme.maxWidth};
   width: 100%;
   margin: 0 auto;
   padding: 2rem;
 `;
 
 const GlobalStyle = createGlobalStyle`
-@font-face{
-  font-family: 'radnika_next';
-  src: url('static/radnikanext-medium-webfont.woff2')
-  format('woff2');
-  font-weight: normal;
-  font-style: normal;
-}
   html {
+    font-family: 'Alegreya Sans SC', sans-serif;
     box-sizing: border-box;
     font-size: 10px;
     overflow-y: scroll;
@@ -50,18 +44,18 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: inherit;
   }
   body {
-    background-color: ${(props) => props.theme.lavender};
+    background-color: ${props => props.theme.offwhite};
     padding: 0;
     margin: 0;
     font-size: 1.5rem;
     line-height: 2;
-    font-family: 'radnika_next';
+    font-family: 'Alegreya Sans SC', sans-serif;
   }
   a,
   button{
     text-decoration: none;
     color: ${theme.black};
-    font-family: 'radnika_next'
+    font-family: 'Alegreya Sans SC', sans-serif;
   }
 `;
 

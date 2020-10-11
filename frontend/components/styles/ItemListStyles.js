@@ -7,7 +7,7 @@ export const Center = styled.div`
 export const ItemsList = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 60px;
+  grid-gap: 2rem;
   max-width: ${(props) => props.theme.maxWidth};
   margin: 0 auto;
   @media (max-width: 700px) {
