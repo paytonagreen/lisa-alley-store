@@ -4,12 +4,14 @@ import Error from '../utils/ErrorMessage';
 import Head from 'next/head';
 import AddToCart from './item-card/AddToCart';
 import SingleItemStyles from '../styles/SingleItemStyles';
+import formatMoney from '../../lib/formatMoney'
 
 const SINGLE_ITEM_QUERY = gql`
   query SINGLE_ITEM_QUERY($id: ID!) {
     item(where: { id: $id }) {
       id
       title
+      price
       description
       largeImage
     }
@@ -31,7 +33,8 @@ const SingleItem = ({ id }) => {
       </Head>
       <img src={item.largeImage} alt={item.title} />
       <div className="details">
-        <h2>Viewing {item.title}</h2>
+        <h2>{item.title}</h2>
+        <p>Price: {formatMoney(item.price)}</p>
         <p>{item.description}</p>
         <AddToCart id={item.id} />
       </div>

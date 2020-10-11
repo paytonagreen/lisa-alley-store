@@ -8,22 +8,18 @@ const Footer = () => {
       <div className="social">
         <Link href="https://instagram.com/lalley">
           <a>
-            <img src="../static/PNG/ig.png" alt="Instagram" />
+            <p>Instagram: @lalley</p>
           </a>
         </Link>
+        <p> | </p>
         <Link href="mailto:lisaalley@lisaalley.com">
           <a>
-            <img src="../static/PNG/email.png" alt="Email" />
-          </a>
-        </Link>
-        <Link href="https://facebook.com/lisa.alley">
-          <a>
-            <img src="../static/PNG/facebook3.png" alt="Email" />
+            <p>Email: lisadianealley@gmail.com</p>
           </a>
         </Link>
       </div>
       <div className="created">
-        <a href="https://github.com/paytonagreen">
+        <a target="_blank" href="https://paytongreen.com">
           Created By Payton Green &copy; 2020
         </a>
       </div>
