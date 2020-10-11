@@ -12,6 +12,9 @@ const FooterStyles = styled.footer`
     align-items: center;
     margin-top: 2rem;
     font-size: 2rem;
+    @media(max-width: 700px) {
+      font-size: 1.5rem;
+    }
   }
   .created {
     text-align: center;
