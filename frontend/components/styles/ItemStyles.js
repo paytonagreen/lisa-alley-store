@@ -7,11 +7,41 @@ const Item = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+  .overlay {
+    transition: all 1s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    p {
+      position: relative;
+      top: 50%;
+      left: 50%;
+      opacity: 0;
+      z-index: 2;
+      margin-top: 150px;
+      padding: 0;
+      color: ${props => props.theme.teal};
+      font-size: 3rem;
+    }
+    }
+  }
+  .overlay:hover {
+    p {
+      opacity: 1;
+    }
+  }
   img {
     width: 100%;
     height: 300px;
+    margin-top: -150px;
     object-fit: contain;
+    transition: all 1s;
   }
+  img:hover {
+      opacity: .5;
+      z-index: 1;
+    }
   p {
     line-height: 1.5;
     font-weight: 300;

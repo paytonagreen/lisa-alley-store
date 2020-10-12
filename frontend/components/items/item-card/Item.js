@@ -14,7 +14,12 @@ const Item = ({ item, me }) => {
           query: { id: item.id },
         }}
       >
-        <a>{item.image && <img src={item.image} alt={item.title} />}</a>
+        <a>
+          <div className="overlay">
+          <p>{item.title}</p>
+          {item.image && <img src={item.image} alt={item.title} />}
+          </div>
+</a>
       </Link>
       <div className="description-div"></div>
 
