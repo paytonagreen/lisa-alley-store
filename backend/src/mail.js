@@ -12,25 +12,22 @@ const transport = nodemailer.createTransport({
 const makeANiceEmail = (text) => `
 <div className="email" style="
   border: 1px solid #FFDB58;
-  background: #E6E6FA;
+  background: #FCF5EB;
+  color: #008080
   padding: 20px;
   font-family: sans-serif;
   line-height: 2;
   font-size: 20px  
   ">
-  <h2 style="
-    color: #008080
-  ">
+  <p>
     Hi There!
-  </h2>
+  </p>
   <p>
     ${text}
   </p>
 
   <p>Thanks for shopping with me!</p>
-  <p style="
-    color: #008080;
-  ">
+  <p>
     Lisa Alley
   </p>
 </div>

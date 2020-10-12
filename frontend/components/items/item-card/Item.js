@@ -1,20 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
+import formatMoney from '../../../lib/formatMoney'
 import ItemStyles from '../../styles/ItemStyles';
 import DeleteItem from './DeleteItem';
 import AddToCart from './AddToCart';
 
 const Item = ({ item, me }) => {
   return (
-    <ItemStyles>
+    <ItemStyles background={item.image}>
       <Link
         href={{
           pathname: '/item',
           query: { id: item.id },
         }}
       >
-        <a>{item.image && <img src={item.image} alt={item.title} />}</a>
+        <a>
+          <div className="overlay">
+              <p>{item.title}, {formatMoney(item.price)}</p>
+          </div>
+        </a>
       </Link>
       <div className="description-div"></div>
 

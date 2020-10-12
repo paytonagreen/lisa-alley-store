@@ -23,7 +23,6 @@ const StyledPage = styled.div`
   color: ${(props) => props.theme.black};
   position: relative;
   min-height: 100vh;
-  padding-bottom: 14vh;
 `;
 
 const Inner = styled.div`
@@ -31,6 +30,10 @@ const Inner = styled.div`
   width: 100%;
   margin: 0 auto;
   padding: 2rem;
+  padding-bottom: 14vh;
+  @media(max-width: 700px) {
+    padding-bottom: 20vh;
+  }
 `;
 
 const GlobalStyle = createGlobalStyle`

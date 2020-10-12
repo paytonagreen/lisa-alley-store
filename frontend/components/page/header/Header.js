@@ -29,7 +29,7 @@ const Header = () => {
         <div className="bar">
           <Logo>
             <Link href="/">
-              <a>Lisa Alley</a>
+              <a>Lisa Alley Store</a>
             </Link>
           </Logo>
           <Nav />

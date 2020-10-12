@@ -162,7 +162,7 @@ const Mutations = {
     });
     // Email reset token
     const mailResponse = await transport.sendMail({
-      from: "paytonagreen@gmail.com",
+      from: "lisadianealley@gmail.com",
       to: user.email,
       subject: "Your Password Reset Token",
       html: makeANiceEmail(
@@ -371,7 +371,7 @@ const Mutations = {
     await ctx.db.mutation.deleteManyCartItems({ where: { id_in: cartItemIds }})
     //7. Send e-mail confirmation to user
     const mailResponse = await transport.sendMail({
-      from: "paytonagreen@gmail.com",
+      from: "lisadianealley@gmail.com",
       to: user.email,
       subject: "Thank you for your order!",
       html: makeANiceEmail(
@@ -381,8 +381,8 @@ const Mutations = {
       ),
     });
     const adminMailResponse = await transport.sendMail({
-      from: "lisaalley@paytongreen.com",
-      to: 'paytonagreen@gmail.com',
+      from: "lisadianealley@gmail.com",
+      to: 'lisadianealley@gmail.com',
       subject: "New Order Received!",
       html: makeANiceEmail(
         `You've receved a new order! \n\n You can review all your orders <a href="${
