@@ -34,7 +34,7 @@ const BurgerStyles = styled.div`
     border: none;
     outline: none;
     padding: 1rem 0rem;
-    color: ${(props) => props.theme.yellow};
+    color: ${(props) => props.theme.lavender};
     background: ${(props) => props.theme.teal};
     div {
       color: ${(props) => props.theme.teal};

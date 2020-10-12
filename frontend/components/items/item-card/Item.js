@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
+import formatMoney from '../../../lib/formatMoney'
 import ItemStyles from '../../styles/ItemStyles';
 import DeleteItem from './DeleteItem';
 import AddToCart from './AddToCart';
 
 const Item = ({ item, me }) => {
   return (
-    <ItemStyles>
+    <ItemStyles background={item.image}>
       <Link
         href={{
           pathname: '/item',
@@ -16,10 +17,9 @@ const Item = ({ item, me }) => {
       >
         <a>
           <div className="overlay">
-          <p>{item.title}</p>
-          {item.image && <img src={item.image} alt={item.title} />}
+              <p>{item.title}, {formatMoney(item.price)}</p>
           </div>
-</a>
+        </a>
       </Link>
       <div className="description-div"></div>
 

@@ -4,12 +4,15 @@ import Link from 'next/link';
 import BurgerStyles from '../styles/BurgerStyles';
 import BurgerCloseButton from '../styles/BurgerCloseButton';
 import Signout from '../signup-signin/Signout';
-import Loader from '../utils/Loader';
 import BurgerCartCount from './BurgerCartCount';
 
 const HamburgerMenu = () => {
   const me = useUser();
   const { burgerOpen, toggleBurger, toggleCart } = useTogglers();
+
+  const handleLinkClick = () => {
+    toggleBurger()
+  }
   return (
     <BurgerStyles data-testid="burger" open={burgerOpen}>
       <BurgerCloseButton onClick={toggleBurger}>&times;</BurgerCloseButton>
@@ -17,22 +20,22 @@ const HamburgerMenu = () => {
         {/* //Admin Only */}
         {me && me.permissions.includes('ADMIN') && (
           <Link href="/sell">
-            <a name="sell">Sell</a>
+            <a onClick={handleLinkClick}name="sell">Sell</a>
           </Link>
         )}
         <Link href="/items">
-          <a name="browse">Browse</a>
+          <a onClick={handleLinkClick} name="browse">Browse</a>
         </Link>
         {/* Signed In */}
         {me && (
           <>
             <Link href="/orders">
-              <a name="orders">Orders</a>
+              <a onClick={handleLinkClick} name="orders">Orders</a>
             </Link>
             <Link href="/me" name="account">
-              <a name="account">Account</a>
+              <a onClick={handleLinkClick} name="account">Account</a>
             </Link>
-            <Signout name="signout"/>
+            <Signout onClick={handleLinkClick} name="signout"/>
             <button name="toggleCart"
               onClick={() => {
                 toggleBurger();
@@ -53,7 +56,7 @@ const HamburgerMenu = () => {
         
         {!me && (
           <Link href="/signin">
-            <a name="signin">Sign In</a>
+            <a onClick={handleLinkClick} name="signin">Sign In</a>
           </Link>
         )}
       </div>
