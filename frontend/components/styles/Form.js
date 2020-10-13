@@ -20,6 +20,10 @@ const Form = styled.form`
   font-size: 1.5rem;
   line-height: 1.5;
   font-weight: 600;
+  .validationError {
+    font-size: 1.25rem;
+    color: red;    
+  }
   label {
     display: block;
     margin-bottom: 1rem;
