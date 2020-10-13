@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/payton-green/siiiiccccckkkkk-fits/dev
-# timestamp: Mon Sep 14 2020 15:38:11 GMT-0500 (Central Daylight Time)
+# timestamp: Mon Oct 12 2020 22:14:29 GMT-0500 (Central Daylight Time)
 
 type AggregateCartItem {
   count: Int!
@@ -325,9 +325,13 @@ scalar DateTime
 type Item implements Node {
   id: ID!
   title: String!
+  lowercaseTitle: String!
   description: String!
+  lowercaseDescription: String!
   image: String
   largeImage: String
+  type: String!
+  size: String!
   price: Int!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -347,9 +351,13 @@ type ItemConnection {
 input ItemCreateInput {
   id: ID
   title: String!
+  lowercaseTitle: String!
   description: String!
+  lowercaseDescription: String!
   image: String
   largeImage: String
+  type: String!
+  size: String!
   price: Int!
   user: UserCreateOneInput!
 }
@@ -373,12 +381,20 @@ enum ItemOrderByInput {
   id_DESC
   title_ASC
   title_DESC
+  lowercaseTitle_ASC
+  lowercaseTitle_DESC
   description_ASC
   description_DESC
+  lowercaseDescription_ASC
+  lowercaseDescription_DESC
   image_ASC
   image_DESC
   largeImage_ASC
   largeImage_DESC
+  type_ASC
+  type_DESC
+  size_ASC
+  size_DESC
   price_ASC
   price_DESC
   createdAt_ASC
@@ -390,9 +406,13 @@ enum ItemOrderByInput {
 type ItemPreviousValues {
   id: ID!
   title: String!
+  lowercaseTitle: String!
   description: String!
+  lowercaseDescription: String!
   image: String
   largeImage: String
+  type: String!
+  size: String!
   price: Int!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -439,27 +459,39 @@ input ItemSubscriptionWhereInput {
 
 input ItemUpdateDataInput {
   title: String
+  lowercaseTitle: String
   description: String
+  lowercaseDescription: String
   image: String
   largeImage: String
+  type: String
+  size: String
   price: Int
   user: UserUpdateOneRequiredInput
 }
 
 input ItemUpdateInput {
   title: String
+  lowercaseTitle: String
   description: String
+  lowercaseDescription: String
   image: String
   largeImage: String
+  type: String
+  size: String
   price: Int
   user: UserUpdateOneRequiredInput
 }
 
 input ItemUpdateManyMutationInput {
   title: String
+  lowercaseTitle: String
   description: String
+  lowercaseDescription: String
   image: String
   largeImage: String
+  type: String
+  size: String
   price: Int
 }
 
@@ -566,6 +598,46 @@ input ItemWhereInput {
 
   """All values not ending with the given string."""
   title_not_ends_with: String
+  lowercaseTitle: String
+
+  """All values that are not equal to given value."""
+  lowercaseTitle_not: String
+
+  """All values that are contained in given list."""
+  lowercaseTitle_in: [String!]
+
+  """All values that are not contained in given list."""
+  lowercaseTitle_not_in: [String!]
+
+  """All values less than the given value."""
+  lowercaseTitle_lt: String
+
+  """All values less than or equal the given value."""
+  lowercaseTitle_lte: String
+
+  """All values greater than the given value."""
+  lowercaseTitle_gt: String
+
+  """All values greater than or equal the given value."""
+  lowercaseTitle_gte: String
+
+  """All values containing the given string."""
+  lowercaseTitle_contains: String
+
+  """All values not containing the given string."""
+  lowercaseTitle_not_contains: String
+
+  """All values starting with the given string."""
+  lowercaseTitle_starts_with: String
+
+  """All values not starting with the given string."""
+  lowercaseTitle_not_starts_with: String
+
+  """All values ending with the given string."""
+  lowercaseTitle_ends_with: String
+
+  """All values not ending with the given string."""
+  lowercaseTitle_not_ends_with: String
   description: String
 
   """All values that are not equal to given value."""
@@ -606,6 +678,46 @@ input ItemWhereInput {
 
   """All values not ending with the given string."""
   description_not_ends_with: String
+  lowercaseDescription: String
+
+  """All values that are not equal to given value."""
+  lowercaseDescription_not: String
+
+  """All values that are contained in given list."""
+  lowercaseDescription_in: [String!]
+
+  """All values that are not contained in given list."""
+  lowercaseDescription_not_in: [String!]
+
+  """All values less than the given value."""
+  lowercaseDescription_lt: String
+
+  """All values less than or equal the given value."""
+  lowercaseDescription_lte: String
+
+  """All values greater than the given value."""
+  lowercaseDescription_gt: String
+
+  """All values greater than or equal the given value."""
+  lowercaseDescription_gte: String
+
+  """All values containing the given string."""
+  lowercaseDescription_contains: String
+
+  """All values not containing the given string."""
+  lowercaseDescription_not_contains: String
+
+  """All values starting with the given string."""
+  lowercaseDescription_starts_with: String
+
+  """All values not starting with the given string."""
+  lowercaseDescription_not_starts_with: String
+
+  """All values ending with the given string."""
+  lowercaseDescription_ends_with: String
+
+  """All values not ending with the given string."""
+  lowercaseDescription_not_ends_with: String
   image: String
 
   """All values that are not equal to given value."""
@@ -686,6 +798,86 @@ input ItemWhereInput {
 
   """All values not ending with the given string."""
   largeImage_not_ends_with: String
+  type: String
+
+  """All values that are not equal to given value."""
+  type_not: String
+
+  """All values that are contained in given list."""
+  type_in: [String!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [String!]
+
+  """All values less than the given value."""
+  type_lt: String
+
+  """All values less than or equal the given value."""
+  type_lte: String
+
+  """All values greater than the given value."""
+  type_gt: String
+
+  """All values greater than or equal the given value."""
+  type_gte: String
+
+  """All values containing the given string."""
+  type_contains: String
+
+  """All values not containing the given string."""
+  type_not_contains: String
+
+  """All values starting with the given string."""
+  type_starts_with: String
+
+  """All values not starting with the given string."""
+  type_not_starts_with: String
+
+  """All values ending with the given string."""
+  type_ends_with: String
+
+  """All values not ending with the given string."""
+  type_not_ends_with: String
+  size: String
+
+  """All values that are not equal to given value."""
+  size_not: String
+
+  """All values that are contained in given list."""
+  size_in: [String!]
+
+  """All values that are not contained in given list."""
+  size_not_in: [String!]
+
+  """All values less than the given value."""
+  size_lt: String
+
+  """All values less than or equal the given value."""
+  size_lte: String
+
+  """All values greater than the given value."""
+  size_gt: String
+
+  """All values greater than or equal the given value."""
+  size_gte: String
+
+  """All values containing the given string."""
+  size_contains: String
+
+  """All values not containing the given string."""
+  size_not_contains: String
+
+  """All values starting with the given string."""
+  size_starts_with: String
+
+  """All values not starting with the given string."""
+  size_not_starts_with: String
+
+  """All values ending with the given string."""
+  size_ends_with: String
+
+  """All values not ending with the given string."""
+  size_not_ends_with: String
   price: Int
 
   """All values that are not equal to given value."""

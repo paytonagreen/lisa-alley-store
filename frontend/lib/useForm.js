@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 
 const useForm = (callback, initValues = {}) => {
   const [values, setValues] = useState(initValues)
+  const [lowercaseValues, setLowercaseValues] = useState(initValues)
   const [isSubmitting, setIsSubmitting] = useState(false);
   
   useEffect(() => {
@@ -23,12 +24,17 @@ const useForm = (callback, initValues = {}) => {
     setValues(v => ({
       ...v, [e.target.name]: val
     }))
+    setLowercaseValues(v => ({
+      ...v, [e.target.name]: typeof(val) === 'string' ? val.toLowerCase() : val
+    }))
+    
   };
 
   return {
     handleChange,
     handleSubmit,
-    values
+    values,
+    lowercaseValues
   }
 }
 

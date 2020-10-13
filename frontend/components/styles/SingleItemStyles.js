@@ -16,6 +16,9 @@ const SingleItemStyles = styled.div`
   .details {
     margin: 3rem;
     font-size: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     h2 {
       color: ${(props) => props.theme.red};
     }

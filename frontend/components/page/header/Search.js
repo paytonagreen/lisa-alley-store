@@ -11,7 +11,10 @@ const SEARCH_ITEMS_QUERY = gql`
       where: {
         OR: [
           { title_contains: $searchTerm }
+          { lowercaseTitle_contains: $searchTerm }
+          { lowercaseDescription_contains: $searchTerm }
           { description_contains: $searchTerm }
+          { size_contains: $searchTerm }
         ]
       }
     ) {
