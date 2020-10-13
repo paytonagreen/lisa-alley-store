@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation, useQuery, gql } from '@apollo/client';
 import Form from '../styles/Form';
+import useForm from '../../lib/useForm'
 import Error from '../utils/ErrorMessage';
 import Router from 'next/router';
 
@@ -37,7 +38,7 @@ const UPDATE_ITEM_MUTATION = gql`
 `;
 
 const UpdateItem = ({ id }) => {
-  const { data, loading, error } = useQuery(CURRENT_USER_QUERY, {
+  const { data, loading, error } = useQuery(SINGLE_ITEM_QUERY, {
     variables: { id },
   });
   const itemMutation = useMutation(UPDATE_ITEM_MUTATION);
