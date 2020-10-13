@@ -32,14 +32,18 @@ const Reset = ({ resetToken }) => {
 
   function callback() {
     if (!savingStarted) {
-      setSavingStarted(true);
-      reset({
-        variables: {
-          resetToken,
-          ...values,
-        },
-        refetchQueries: [{ query: CURRENT_USER_QUERY }],
-      });
+      try {
+        setSavingStarted(true);
+        reset({
+          variables: {
+            resetToken,
+            ...values,
+          },
+          refetchQueries: [{ query: CURRENT_USER_QUERY }],
+        });
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
 

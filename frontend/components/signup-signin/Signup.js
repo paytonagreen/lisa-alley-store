@@ -43,15 +43,21 @@ const Signup = () => {
 
   const [savingStarted, setSavingStarted] = useState(false);
 
-  const { values, handleSubmit, handleChange } = useForm(callback);
+  const { values, handleSubmit, handleChange, errors } = useForm(callback);
+
+  console.log(errors);
 
   function callback() {
     if (!savingStarted) {
-      setSavingStarted(true);
-      signup({
-        variables: { ...values },
-        refetchQueries: [{ query: CURRENT_USER_QUERY }],
-      });
+      try {
+        setSavingStarted(true);
+        signup({
+          variables: { ...values },
+          refetchQueries: [{ query: CURRENT_USER_QUERY }],
+        });
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
 
@@ -63,7 +69,7 @@ const Signup = () => {
     >
       <fieldset disabled={loading} aria-busy={loading}>
         <h2>Sign Up For An Account</h2>
-
+        {errors.form && <p className={errors.form}></p>}
         {called && error && <Error error={error} />}
         {!loading && !error && called && <p>Success! Thanks for signing up!</p>}
         <label htmlFor="email">
@@ -77,6 +83,7 @@ const Signup = () => {
             onChange={handleChange}
           />
         </label>
+        {errors.email && <p className="validationError">{errors.email}</p>}
         <label htmlFor="name">
           Name
           <input
@@ -99,6 +106,7 @@ const Signup = () => {
             onChange={handleChange}
           />
         </label>
+        {errors.password && <p className="validationError">{errors.password}</p>}
         <label htmlFor="address1">
           Address Line 1
           <input

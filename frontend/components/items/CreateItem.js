@@ -3,7 +3,6 @@ import { useMutation, gql } from '@apollo/client';
 import Router from 'next/router';
 
 import useForm from '../../lib/useForm';
-import formatMoney from '../../lib/formatMoney';
 import Form from '../styles/Form';
 import Error from '../utils/ErrorMessage';
 import { ALL_ITEMS_QUERY } from './Items';
@@ -99,11 +98,15 @@ function CreateItem() {
       data-test="form"
       onSubmit={async (e) => {
         e.preventDefault();
-        const res = await createItem();
-        Router.push({
-          pathname: '/item',
-          query: { id: res.data.createItem.id },
-        });
+        try {
+          const res = await createItem();
+          Router.push({
+            pathname: '/item',
+            query: { id: res.data.createItem.id },
+          });
+        } catch(error) {
+          console.log(error);
+        }
       }}
     >
       <Error error={error} />

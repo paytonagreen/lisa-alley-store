@@ -53,14 +53,18 @@ const UpdateItem = ({ id }) => {
 
   function callback() {
     if (!savingStarted) {
-      setSavingStarted(true);
-      updateItem({
-        variables: { id, ...values },
-      });
-      Router.push({
-        pathname: '/item',
-        query: { id },
-      });
+      try {
+        setSavingStarted(true);
+        updateItem({
+          variables: { id, ...values },
+        });
+        Router.push({
+          pathname: '/item',
+          query: { id },
+        });
+      } catch(error) {
+        console.log(error);
+      }
     }
   }
 

@@ -42,12 +42,15 @@ const Signin = () => {
         method="post"
         onSubmit={async (e) => {
           e.preventDefault();
-          const res = await signin();
-          console.log(res);
-          if (!error)
+          try {
+            const res = await signin();
+            console.log(res);
             Router.push({
               pathname: '/items',
             });
+          } catch (error) {
+            console.log(error);
+          }
         }}
       >
         <fieldset disabled={loading} aria-busy={loading}>

@@ -30,7 +30,7 @@ const Inner = styled.div`
   width: 100%;
   margin: 0 auto;
   padding: 2rem;
-  padding-bottom: 14vh;
+  padding-bottom: 20vh;
   @media(max-width: 700px) {
     padding-bottom: 20vh;
   }

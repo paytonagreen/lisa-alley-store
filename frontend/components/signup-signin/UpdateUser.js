@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { useMutation, useQuery, gql } from "@apollo/client";
-import Form from "../styles/Form";
-import useForm from "../../lib/useForm";
-import Error from "../utils/ErrorMessage";
-import { CURRENT_USER_QUERY } from "../utils/User";
+import React, { useState } from 'react';
+import { useMutation, useQuery, gql } from '@apollo/client';
+import Form from '../styles/Form';
+import useForm from '../../lib/useForm';
+import Error from '../utils/ErrorMessage';
+import { CURRENT_USER_QUERY } from '../utils/User';
 
 const UPDATE_USER_MUTATION = gql`
   mutation UPDATE_USER_MUTATION(
@@ -47,16 +47,20 @@ const UpdateUser = () => {
   const mutationError = userMutation[1].error;
   const mutationCalled = userMutation[1].called;
 
-  const [savingStarted, setSavingStarted ] = useState(false);
+  const [savingStarted, setSavingStarted] = useState(false);
 
   const { values, handleChange, handleSubmit } = useForm(callback);
 
   function callback() {
     if (!savingStarted) {
-      setSavingStarted(true);
-      updateUser({
-        variables: { id: data.me.id, ...values },
-      });
+      try {
+        setSavingStarted(true);
+        updateUser({
+          variables: { id: data.me.id, ...values },
+        });
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
 
@@ -154,7 +158,9 @@ const UpdateUser = () => {
             onChange={handleChange}
           />
         </label>
-        <button type="submit">Sav{mutationLoading ? "ing" : "e"} Changes</button>
+        <button type="submit">
+          Sav{mutationLoading ? 'ing' : 'e'} Changes
+        </button>
       </fieldset>
     </Form>
   );

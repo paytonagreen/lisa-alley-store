@@ -4,6 +4,7 @@ const useForm = (callback, initValues = {}) => {
   const [values, setValues] = useState(initValues)
   const [lowercaseValues, setLowercaseValues] = useState(initValues)
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors ] = useState({});
   
   useEffect(() => {
     if(isSubmitting) {
@@ -15,17 +16,44 @@ const useForm = (callback, initValues = {}) => {
     if (e) {
       e.preventDefault()
     };
-    setIsSubmitting(true)
+    if(!errors.email || !errors.password) {
+      setIsSubmitting(true)
+    } else {
+      setErrors({...errors, form: 'Please check form for errors'})
+    }
   };
 
   const handleChange = e => {
     e.persist();
-    let val = e.target.type === 'number' ? parseFloat(e.target.value) : e.target.value;
+    const { name, value, type } = e.target;
+
+    const validEmailRegex = RegExp(
+      /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+    );
+
+    let val = type === 'number' ? parseFloat(value) : value;
+    switch (name) {
+      case 'email':
+        setErrors({
+          ...errors,
+          email: validEmailRegex.test(value) ? '' : 'Please enter a valid email'
+        }
+        )
+        break;
+      case 'password':
+        setErrors({
+          ...errors,
+          password: value.length < 8 ? 'Password must be at least 8 characters long' : ''
+        })
+        break;
+      default:
+        break;
+    }
     setValues(v => ({
-      ...v, [e.target.name]: val
+      ...v, [name]: val
     }))
     setLowercaseValues(v => ({
-      ...v, [e.target.name]: typeof(val) === 'string' ? val.toLowerCase() : val
+      ...v, [name]: typeof(val) === 'string' ? val.toLowerCase() : val
     }))
     
   };
@@ -34,7 +62,8 @@ const useForm = (callback, initValues = {}) => {
     handleChange,
     handleSubmit,
     values,
-    lowercaseValues
+    lowercaseValues,
+    errors
   }
 }
 

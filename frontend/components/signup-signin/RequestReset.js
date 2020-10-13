@@ -22,8 +22,12 @@ const RequestReset = () => {
             data-testid="form"
             onSubmit={async (e) => {
               e.preventDefault();
-              await reset();
-              setEmail("");
+              try {
+                await reset();
+                setEmail("");
+              } catch(error) {
+                console.log(error);
+              }
             }}
           >
             <fieldset disabled={loading} aria-busy={loading}>
