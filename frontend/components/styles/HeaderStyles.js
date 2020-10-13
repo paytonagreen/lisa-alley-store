@@ -26,6 +26,7 @@ export const Logo = styled.h1`
   position: relative;
   z-index: 2;
   a {
+  font-family: 'Cinzel', serif;
     padding: 0.5rem 1rem;
     color: ${(props) => props.theme.teal};
     text-transform: uppercase;
