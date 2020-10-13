@@ -29,7 +29,7 @@ const stripeProductionKey = "pk_live_51HbZ0QHvjzQ7TFDFAG6OvUO1pUG34S0pVLkl3KpTFZ
 const stripeTestKey = "pk_test_51HbZ0QHvjzQ7TFDF6sK5qjatPa6jUjXVmelXgDj7C5BBi2Hb988ICnUEDh7Z3uz8pnxtA8qX7jjEKyzzrSGReNF400nC0cdvNH"
 
 function determineStripeKey(env) {
-  env === 'production' ? stripeProductionKey : stripeTestKey
+  return env === 'production' ? stripeProductionKey : stripeTestKey
 }
 
 const TakeMyMoney = props => {
