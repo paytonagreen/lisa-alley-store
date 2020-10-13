@@ -3,7 +3,6 @@ import StripeCheckout from "react-stripe-checkout";
 import { useMutation, gql } from "@apollo/client";
 import Router from "next/router";
 import NProgress from "nprogress";
-import PropTypes from "prop-types";
 import calcTotalPrice from "../../lib/calcTotalPrice";
 import { CURRENT_USER_QUERY, useUser } from "../utils/User";
 
@@ -60,7 +59,7 @@ const TakeMyMoney = props => {
       name="Lisa Alley"
       description={`Order of ${totalItems(me.cart)} item${totalItems(me.cart) > 1 ? 's' : '' }`}
       image={me.cart.length && me.cart[0].item && me.cart[0].item.image}
-      stripeKey={determineStripeKey()}
+      stripeKey={determineStripeKey(process.env.NODE_ENV)}
       currency="USD"
       email={me.email}
       token={(res) => onToken(res)}
