@@ -25,8 +25,8 @@ function totalItems(cart) {
   return cart.reduce((tally, cartItem) => tally + cartItem.quantity, 0);
 }
 
-const stripeProductionKey = pk_live_51HbZ0QHvjzQ7TFDFAG6OvUO1pUG34S0pVLkl3KpTFZN31BmFq8BG8TI9P8jXBUDnVqA7ysf1oNBONyB9hUzA3Uxa00T8kp8AmF
-const stripeTestKey = pk_test_51HbZ0QHvjzQ7TFDF6sK5qjatPa6jUjXVmelXgDj7C5BBi2Hb988ICnUEDh7Z3uz8pnxtA8qX7jjEKyzzrSGReNF400nC0cdvNH
+const stripeProductionKey = "pk_live_51HbZ0QHvjzQ7TFDFAG6OvUO1pUG34S0pVLkl3KpTFZN31BmFq8BG8TI9P8jXBUDnVqA7ysf1oNBONyB9hUzA3Uxa00T8kp8AmF"
+const stripeTestKey = "pk_test_51HbZ0QHvjzQ7TFDF6sK5qjatPa6jUjXVmelXgDj7C5BBi2Hb988ICnUEDh7Z3uz8pnxtA8qX7jjEKyzzrSGReNF400nC0cdvNH"
 
 function determineStripeKey(env) {
   env === 'production' ? stripeProductionKey : stripeTestKey
