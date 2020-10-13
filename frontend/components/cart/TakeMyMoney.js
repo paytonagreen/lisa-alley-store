@@ -53,7 +53,7 @@ const TakeMyMoney = props => {
       name="Lisa Alley"
       description={`Order of ${totalItems(me.cart)} item${totalItems(me.cart) > 1 ? 's' : '' }`}
       image={me.cart.length && me.cart[0].item && me.cart[0].item.image}
-      stripeKey="pk_test_51HHaBNGY3WPM8iu0GDEVbjMMfpaJFBGQ35ClzDDs5IDWpzgnt0qjRWA3yGxwpycHl7Mvq1SHOUuuHLU6gZUqvl1K00poHcVcp2"
+      stripeKey="pk_test_51HbZ0QHvjzQ7TFDF6sK5qjatPa6jUjXVmelXgDj7C5BBi2Hb988ICnUEDh7Z3uz8pnxtA8qX7jjEKyzzrSGReNF400nC0cdvNH"
       currency="USD"
       email={me.email}
       token={(res) => onToken(res)}

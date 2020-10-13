@@ -1,13 +1,11 @@
 import { useTogglers } from '../../utils/LocalState';
 import Link from 'next/link';
-import { useMutation } from '@apollo/client';
 import NProgress from 'nprogress';
 import Router from 'next/router';
 import Nav from './Nav';
 import Cart from '../../cart/Cart';
 import { StyledHeader, HamburgerButton, Logo } from '../../styles/HeaderStyles';
 import HamburgerMenu from '../../burger-menu/HamburgerMenu';
-import { TOGGLE_BURGER_MUTATION } from '../../burger-menu/HamburgerMenu';
 import Search from './Search';
 
 Router.onRouteChangeStart = () => {
@@ -29,7 +27,7 @@ const Header = () => {
         <div className="bar">
           <Logo>
             <Link href="/">
-              <a>Lisa Alley Store</a>
+              <a>LISA ALLEY STORE</a>
             </Link>
           </Logo>
           <Nav />
