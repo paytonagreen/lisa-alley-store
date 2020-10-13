@@ -28,9 +28,13 @@ type User {
 type Item {
   id: ID! @id
   title: String!
+  lowercaseTitle: String!
   description: String!
+  lowercaseDescription: String!
   image: String
   largeImage: String
+  type: String!
+  size: String!
   price: Int!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt

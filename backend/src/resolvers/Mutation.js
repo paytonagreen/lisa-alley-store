@@ -336,7 +336,7 @@ const Mutations = {
     //2. Recalculate the total for the price
     const amount = user.cart.reduce(
       (tally, cartItem) => tally + cartItem.item.price * cartItem.quantity,
-      0
+      500
     );
     console.log(`Going to charge for a total of ${amount}`);
     //3. Create the stripe charge (turn token into $$$$$)

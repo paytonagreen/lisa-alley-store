@@ -11,6 +11,10 @@ type Mutation {
     price: Int
     image: String
     largeImage: String
+    type: String!
+    size: String!
+    lowercaseDescription: String!
+    lowercaseTitle: String!
   ): Item!
   updateItem(id: ID!, title: String, description: String, price: Int): Item!
   deleteItem(id: ID!): Item

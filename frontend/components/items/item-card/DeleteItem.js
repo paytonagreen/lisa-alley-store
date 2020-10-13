@@ -10,17 +10,22 @@ const DELETE_ITEM_MUTATION = gql`
   }
 `;
 
+
 const DeleteItem = ({ id, children }) => {
-  function update(e, payload) {
+  function update(cache, payload) {
     //manually update cache on client so it maches server
     // 1. Read cache for items that we want
     const data = cache.readQuery({ query: ALL_ITEMS_QUERY });
     // 2. Filter deleted Item out
-    data.items = data.items.filter(
+    const updatedItems = data.items.filter(
       (item) => item.id !== payload.data.deleteItem.id
     );
     // 3. Put items back!
-    cache.writeQuery({ query: ALL_ITEMS_QUERY, data });
+    cache.writeQuery({ query: ALL_ITEMS_QUERY,
+      data: {
+        items: updatedItems
+      }
+       });
   }
   const [deleteItem, { error }] = useMutation(DELETE_ITEM_MUTATION, {
     variables: { id },

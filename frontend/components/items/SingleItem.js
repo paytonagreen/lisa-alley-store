@@ -14,6 +14,10 @@ const SINGLE_ITEM_QUERY = gql`
       price
       description
       largeImage
+      type
+      size
+      lowercaseTitle
+      lowercaseDescription
     }
   }
 `;
@@ -34,8 +38,10 @@ const SingleItem = ({ id }) => {
       <img src={item.largeImage} alt={item.title} />
       <div className="details">
         <h2>{item.title}</h2>
-        <p>Price: {formatMoney(item.price)}</p>
-        <p>{item.description}</p>
+        <p><strong>{item.type}</strong></p>
+        <p><strong>Size:</strong> {item.size}</p>
+        <p><strong>Price:</strong> {formatMoney(item.price)}</p>
+        <p><strong>Description:</strong> {item.description}</p>
         <AddToCart id={item.id} />
       </div>
     </SingleItemStyles>
