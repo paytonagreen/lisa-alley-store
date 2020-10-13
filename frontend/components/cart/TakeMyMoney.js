@@ -25,6 +25,13 @@ function totalItems(cart) {
   return cart.reduce((tally, cartItem) => tally + cartItem.quantity, 0);
 }
 
+const stripeProductionKey = "pk_live_51HbZ0QHvjzQ7TFDFAG6OvUO1pUG34S0pVLkl3KpTFZN31BmFq8BG8TI9P8jXBUDnVqA7ysf1oNBONyB9hUzA3Uxa00T8kp8AmF"
+const stripeTestKey = "pk_test_51HbZ0QHvjzQ7TFDF6sK5qjatPa6jUjXVmelXgDj7C5BBi2Hb988ICnUEDh7Z3uz8pnxtA8qX7jjEKyzzrSGReNF400nC0cdvNH"
+
+function determineStripeKey(env) {
+  env === 'production' ? stripeProductionKey : stripeTestKey
+}
+
 const TakeMyMoney = props => {
   const me = useUser();
   const [ createOrder ] = useMutation(CREATE_ORDER_MUTATION, {
@@ -53,7 +60,7 @@ const TakeMyMoney = props => {
       name="Lisa Alley"
       description={`Order of ${totalItems(me.cart)} item${totalItems(me.cart) > 1 ? 's' : '' }`}
       image={me.cart.length && me.cart[0].item && me.cart[0].item.image}
-      stripeKey="pk_test_51HbZ0QHvjzQ7TFDF6sK5qjatPa6jUjXVmelXgDj7C5BBi2Hb988ICnUEDh7Z3uz8pnxtA8qX7jjEKyzzrSGReNF400nC0cdvNH"
+      stripeKey={determineStripeKey()}
       currency="USD"
       email={me.email}
       token={(res) => onToken(res)}
