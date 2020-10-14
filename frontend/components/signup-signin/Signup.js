@@ -45,8 +45,6 @@ const Signup = () => {
 
   const { values, handleSubmit, handleChange, errors } = useForm(callback);
 
-  console.log(errors);
-
   function callback() {
     if (!savingStarted) {
       try {

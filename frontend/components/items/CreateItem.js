@@ -58,9 +58,6 @@ function CreateItem() {
     setLowercaseDescription(lowercaseValues.description);
   }, [values.title, values.description])
 
-  console.log(lowercaseTitle)
-  console.log(lowercaseDescription)
-
   const [createItem, { loading, error }] = useMutation(CREATE_ITEM_MUTATION, {
     variables: {
       ...values,
