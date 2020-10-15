@@ -3,7 +3,7 @@ import styled from "styled-components";
 const CartStyles = styled.div`
   padding: 20px;
   position: relative;
-  background: white;
+  background: ${props => props.theme.offwhite};
   position: fixed;
   height: 100%;
   top: 0;
@@ -19,7 +19,7 @@ const CartStyles = styled.div`
   grid-template-rows: auto 1fr auto;
   ${(props) => props.open && `transform: translateX(0);`};
   h3 {
-    border-top: 3px solid ${props => props.theme.black};
+    /* border-top: 3px solid ${props => props.theme.black}; */
     margin: 0;
     padding-top: 5px;
   }
@@ -52,13 +52,12 @@ const CartStyles = styled.div`
     font-size: 1rem;
     padding: 1rem;
     position: relative;
-    background: white;
     position: fixed;
     height: 100%;
     top: 0;
     right: 0;
-    max-width: 200px;
-    min-width: 200px;
+    max-width: 60vw;
+    min-width: 60vw;
     bottom: 0;
     transform: translateX(100%);
     transition: all 0.3s;
@@ -77,8 +76,8 @@ const CartStyles = styled.div`
       border-top: 10px double ${(props) => props.theme.black};
       margin-top: 1rem;
       padding-top: 1rem;
-      display: grid;
-      grid-template-columns: 1fr;
+      display: flex;
+      flex-direction: column;
       align-items: center;
       font-size: 1rem;
       font-weight: 900;

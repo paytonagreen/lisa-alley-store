@@ -17,6 +17,9 @@ const CartItemStyles = styled.li`
   p {
     margin: 0;
   }
+  @media(max-width: 700px) {
+    display: flex;
+  }
 `;
 
 const CartItem = ({ cartItem }) => {
