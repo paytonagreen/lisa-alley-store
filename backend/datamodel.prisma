@@ -1,6 +1,7 @@
 enum Permission {
   ADMIN
   USER 
+  GUEST
   ITEMCREATE
   ITEMUPDATE
   ITEMDELETE
