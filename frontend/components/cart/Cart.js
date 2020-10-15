@@ -22,7 +22,7 @@ const Cart = () => {
         </CloseButton>
         <Supreme>{me.name}'s Cart</Supreme>
         <p>
-          You Have {me.cart.length} Item
+          You Have {me.cart.length} Item 
           {me.cart.length === 1 ? '' : 's'} in your cart.
         </p>
       </header>
