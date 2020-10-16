@@ -16,7 +16,7 @@ const useForm = (callback, initValues = {}) => {
     if (e) {
       e.preventDefault()
     };
-    if(!errors.email || !errors.password) {
+    if(!errors.email && !errors.password) {
       setIsSubmitting(true)
     } else {
       setErrors({...errors, form: 'Please check form for errors'})

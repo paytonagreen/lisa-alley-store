@@ -87,8 +87,8 @@ const Mutations = {
     //create JWT for them
     const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
     //set JWT as a cookie on the response
-    ctx.response.cookie('token', token, {
-      domain: '.lisa-alley.com',
+    ctx.response.cookie("token", token, {
+      // domain: '.lisa-alley.com',
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year cookie
     });
@@ -134,8 +134,8 @@ const Mutations = {
     //generate JWT token
     const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
     //Set cookie with token
-    ctx.response.cookie('token', token, {
-      domain: '.lisa-alley.com',
+    ctx.response.cookie("token", token, {
+      // domain: '.lisa-alley.com',
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365,
     });
@@ -143,8 +143,8 @@ const Mutations = {
     return user;
   },
   signout(parent, args, ctx, info) {
-    ctx.response.clearCookie('token', {
-      domain: '.lisa-alley.com',
+    ctx.response.clearCookie("token", {
+      // domain: '.lisa-alley.com',
     });
     return { message: 'Goodbye!' };
   },
@@ -208,8 +208,8 @@ const Mutations = {
     //Generate JWT
     const token = jwt.sign({ userId: updatedUser.id }, process.env.APP_SECRET);
     //Set JWT Cookie
-    ctx.response.cookie('token', token, {
-      domain: '.lisa-alley.com',
+    ctx.response.cookie("token", token, {
+      // domain: '.lisa-alley.com',
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365,
     });
