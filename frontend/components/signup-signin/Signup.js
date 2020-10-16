@@ -81,7 +81,7 @@ const Signup = () => {
         <AccountBlurb>  
           Thanks so much foryour interest in my work!
         </AccountBlurb>
-        {errors.form && <p className={errors.form}></p>}
+        {errors.form && <p className="validationError">{errors.form}</p>}
         {called && error && <Error error={error} />}
         {!loading && !error && called && <p>Success! Thanks for signing up!</p>}
         <label htmlFor="email">

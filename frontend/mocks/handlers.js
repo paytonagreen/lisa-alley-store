@@ -52,17 +52,6 @@ export const handlers = [
     }
   }),
 
-  graphql.query('SINGLE_ITEM_UPDATE_QUERY', (req, res, ctx) => {
-    let { id } = req.variables;
-    if (id === 'abc123') {
-      return res(
-        ctx.data({
-          item
-        })
-      );
-    }
-  }),
-
   graphql.mutation('REQUEST_RESET_MUTATION', (req, res, ctx) => {
     let { email } = req.variables;
     if (email === 'test@test.com') {
