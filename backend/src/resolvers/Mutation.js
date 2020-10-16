@@ -94,13 +94,13 @@ const Mutations = {
     });
     //Send a welcome email
     const mailResponse = await transport.sendMail({
-      from: 'lisaalley@paytongreen.com',
+      from: 'lisadianealley@gmail.com',
       to: user.email,
       subject: 'Welcome from Lisa Alley!',
       html: makeANiceEmail(
         `Thanks so much for signing up! \n\n You can browse all my prints <a href="${
           process.env.FRONTEND_URL
-        }>here</a>. If you're interested in commission work, please get in touch directly!`
+        }">here</a>. If you're interested in commission work, please get in touch directly!`
       ),
     });
     //Finally return user to browser
@@ -262,10 +262,10 @@ const Mutations = {
           data: {
             email,
             password,
-            name: "Guest",
-            address1: "300 Guest St",
-            city: "Guestington",
-            state: "Texas",
+            name: 'Guest',
+            address1: '300 Guest St',
+            city: 'Guestington',
+            state: 'Texas',
             zip: 11111,
             permissions: { set: ['GUEST'] },
           },
@@ -302,19 +302,19 @@ const Mutations = {
     }
     //4. If it's not, create a fresh cart item for that user!
     return ctx.db.mutation.createCartItem(
-        {
-          data: {
-            quantity: 1,
-            user: {
-              connect: { id: userId },
-            },
-            item: {
-              connect: { id: args.id },
-            },
+      {
+        data: {
+          quantity: 1,
+          user: {
+            connect: { id: userId },
+          },
+          item: {
+            connect: { id: args.id },
           },
         },
-        info
-      )
+      },
+      info
+    );
   },
   async removeFromCart(parent, args, ctx, info) {
     //1. Find the cart item
