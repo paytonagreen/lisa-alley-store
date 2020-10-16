@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/payton-green/siiiiccccckkkkk-fits/dev
-# timestamp: Mon Oct 12 2020 22:14:29 GMT-0500 (Central Daylight Time)
+# timestamp: Thu Oct 15 2020 17:55:05 GMT-0500 (Central Daylight Time)
 
 type AggregateCartItem {
   count: Int!
@@ -2027,6 +2027,7 @@ type PageInfo {
 enum Permission {
   ADMIN
   USER
+  GUEST
   ITEMCREATE
   ITEMUPDATE
   ITEMDELETE
