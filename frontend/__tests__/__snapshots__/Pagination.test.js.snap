@@ -2,7 +2,7 @@
 
 exports[`<Pagination/> displays pagination for 20 items 1`] = `
 <div
-  class="PaginationStyles-aduuar-0 kZtpSQ"
+  class="PaginationStyles-sc-5gxcs1-0 kDspZA"
   data-testid="pagination"
 >
   <a
@@ -21,7 +21,7 @@ exports[`<Pagination/> displays pagination for 20 items 1`] = `
     <span
       class="totalPages"
     >
-      4
+      3
     </span>
   </p>
   <p>

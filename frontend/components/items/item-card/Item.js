@@ -8,7 +8,7 @@ import AddToCart from './AddToCart';
 
 const Item = ({ item, me }) => {
   return (
-    <ItemStyles background={item.image}>
+    <ItemStyles data-testid={'background'} background={item.image}>
       <Link
         href={{
           pathname: '/item',

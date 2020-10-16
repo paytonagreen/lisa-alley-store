@@ -18,7 +18,7 @@ describe('<Pagination/>', () => {
   it('displays pagination for 20 items', async () => {
     setScreenPage();
 
-    expect(await screen.findByTestId('pages-index')).toHaveTextContent('Page 1 of 4');
+    expect(await screen.findByTestId('pages-index')).toHaveTextContent('Page 1 of 3');
     expect(await screen.findByTestId('pagination')).toMatchSnapshot()
     ;
   });
