@@ -1,9 +1,12 @@
-import React, { useState } from "react";
-import { useMutation, gql } from "@apollo/client";
-import Form from "../styles/Form";
-import Error from "../utils/ErrorMessage";
-import { CURRENT_USER_QUERY } from "../utils/User";
-import useForm from "../../lib/useForm";
+import React, { useState } from 'react';
+import { useMutation, gql } from '@apollo/client';
+import styled from 'styled-components';
+import Router from 'next/router';
+
+import Form from '../styles/Form';
+import Error from '../utils/ErrorMessage';
+import { CURRENT_USER_QUERY } from '../utils/User';
+import useForm from '../../lib/useForm';
 
 const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION(
@@ -38,21 +41,28 @@ const SIGNUP_MUTATION = gql`
   }
 `;
 
+const AccountBlurb = styled.p`
+  max-width: 300px;
+`;
+
 const Signup = () => {
-  const [signup, {loading, error, called }] = useMutation(SIGNUP_MUTATION);
+  const [signup, { loading, error, called }] = useMutation(SIGNUP_MUTATION);
 
   const [savingStarted, setSavingStarted] = useState(false);
 
   const { values, handleSubmit, handleChange, errors } = useForm(callback);
 
-  function callback() {
+  async function callback() {
     if (!savingStarted) {
       try {
         setSavingStarted(true);
-        signup({
+        await signup({
           variables: { ...values },
           refetchQueries: [{ query: CURRENT_USER_QUERY }],
         });
+        Router.push({
+          pathname: '/',
+        })
       } catch (error) {
         console.log(error);
       }
@@ -60,13 +70,17 @@ const Signup = () => {
   }
 
   return (
-    <Form
-      data-testid="signup-form"
-      method="post"
-      onSubmit={handleSubmit}
-    >
+    <Form data-testid="signup-form" method="post" onSubmit={handleSubmit}>
       <fieldset disabled={loading} aria-busy={loading}>
         <h2>Sign Up For An Account</h2>
+        <AccountBlurb>
+          If you would like to create an account, it allows you to securely keep
+          track of your order(s) and helps us to provide more complete customer service. Your
+          information is stored securely will not be shared in any way at any time.
+        </AccountBlurb>
+        <AccountBlurb>  
+          Thanks so much foryour interest in my work!
+        </AccountBlurb>
         {errors.form && <p className={errors.form}></p>}
         {called && error && <Error error={error} />}
         {!loading && !error && called && <p>Success! Thanks for signing up!</p>}
@@ -104,7 +118,9 @@ const Signup = () => {
             onChange={handleChange}
           />
         </label>
-        {errors.password && <p className="validationError">{errors.password}</p>}
+        {errors.password && (
+          <p className="validationError">{errors.password}</p>
+        )}
         <label htmlFor="address1">
           Address Line 1
           <input

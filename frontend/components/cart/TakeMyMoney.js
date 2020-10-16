@@ -62,6 +62,7 @@ const TakeMyMoney = props => {
       stripeKey={determineStripeKey(process.env.NODE_ENV)}
       currency="USD"
       email={me.email}
+      shippingAddress
       token={(res) => onToken(res)}
     >
       {props.children}
