@@ -1,7 +1,14 @@
 import { graphql } from 'msw';
 import { fakeUser, fakeItem } from '../lib/testUtils';
 
-const item = fakeItem();
+const item = {
+  id: 'abc123',
+  title: 'A Cool Item',
+  price: 5000,
+  description: 'This item is so dang cool',
+  image: 'dog.jpg',
+  largeImage: 'largedog.jpg',
+};
 const user = fakeUser();
 
 export const handlers = [
@@ -41,6 +48,17 @@ export const handlers = [
             message: 'Items Not Found!',
           },
         ])
+      );
+    }
+  }),
+
+  graphql.query('SINGLE_ITEM_UPDATE_QUERY', (req, res, ctx) => {
+    let { id } = req.variables;
+    if (id === 'abc123') {
+      return res(
+        ctx.data({
+          item
+        })
       );
     }
   }),

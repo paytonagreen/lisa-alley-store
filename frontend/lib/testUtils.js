@@ -1,7 +1,8 @@
-import casual from 'casual';
 import React from 'react';
+import casual from 'casual';
 import { render } from '@testing-library/react';
 import { ApolloProvider } from '@apollo/client';
+
 import withData from '../lib/withData';
 
 //setup wrapper for tests//

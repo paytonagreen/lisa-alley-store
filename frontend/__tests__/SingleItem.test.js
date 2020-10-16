@@ -5,7 +5,14 @@ import { render, fakeItem } from '../lib/testUtils';
 import { server } from '../mocks/server';
 import { graphql } from 'msw';
 
-const item = fakeItem();
+const item = {
+  id: 'abc123',
+  title: 'A Cool Item',
+  price: 5000,
+  description: 'This item is so dang cool',
+  image: 'dog.jpg',
+  largeImage: 'largedog.jpg',
+};
 
 describe('<SingleItem/>', () => {
   beforeAll(() => server.listen());
@@ -14,7 +21,7 @@ describe('<SingleItem/>', () => {
     const loading = await screen.findByText('Loading...');
     expect(loading).toBeInTheDocument();
     await waitFor(() => {
-      expect(screen.getByRole('heading', { name: `Viewing ${item.title}` }));
+      expect(screen.getByRole('heading', { name: item.title }));
       const img = screen.getByAltText(item.title);
       expect(img.src).toContain(item.largeImage);
       expect(screen.getByText(item.description)).toBeInTheDocument();

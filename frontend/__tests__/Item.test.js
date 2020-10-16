@@ -1,10 +1,9 @@
 import { screen, waitFor } from '@testing-library/react';
 import ItemComponent from '../components/items/item-card/Item';
 import { render, fakeUser, fakeRegularUser } from '../lib/testUtils';
-import formatMoney from '../lib/formatMoney';
 
 const fakeItem = {
-  id: 'ABC123',
+  id: 'abc123',
   title: 'A Cool Item',
   price: 5000,
   description: 'This item is so dang cool',
@@ -15,14 +14,8 @@ const fakeItem = {
 describe('<Item/>', () => {
   it('renders the image properly', async () => {
     render(<ItemComponent item={fakeItem} />);
-    const img = await screen.findByAltText(fakeItem.title);
-    expect(img.src).toContain(fakeItem.image);
-  });
-
-  it('renders the pricetag and title properly', async () => {
-    render(<ItemComponent item={fakeItem} />);
-    expect(await screen.findByText(formatMoney(fakeItem.price))).toBeInTheDocument();
-    expect(await screen.findByText(fakeItem.title)).toBeInTheDocument();
+    const background = await screen.findByTestId(/background/i);
+    expect(background).toHaveStyle('background: url(${props => props.background}) no repeat center center/contain')
   });
 
   it('renders the buttons properly for Admin', async () => {
@@ -38,7 +31,7 @@ describe('<Item/>', () => {
     render(<ItemComponent item={fakeItem} me={fakeRegularUser()} />);
     await waitFor(() => {
       expect(screen.queryByRole('link', {name: /Edit/i})).not.toBeInTheDocument();
-      expect(screen.getByRole('button', {name: /Add To Cart/i})).toBeInTheDocument();
+      expect(screen.queryByRole('button', {name: /Add To Cart/i})).not.toBeInTheDocument();
       expect(screen.queryByRole('button', {name: /Delete This Item/i})).not.toBeInTheDocument();
     });
   });

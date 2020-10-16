@@ -3,7 +3,7 @@
 exports[`<CreateItem/> renders and matches snapshot 1`] = `
 <div>
   <form
-    class="Form-sc-1xszr8q-0 krRxky"
+    class="Form-phs3r-0 vnKat"
     data-test="form"
   >
     <fieldset
@@ -38,7 +38,7 @@ exports[`<CreateItem/> renders and matches snapshot 1`] = `
       <label
         for="price"
       >
-        Price
+        Price (In Cents)
         <input
           id="price"
           name="price"
@@ -47,6 +47,39 @@ exports[`<CreateItem/> renders and matches snapshot 1`] = `
           type="number"
           value=""
         />
+      </label>
+      <label
+        for="type"
+      >
+        Type
+        <select
+          id="type"
+          name="type"
+        >
+          <option
+            value=""
+          />
+          <option
+            value="print"
+          >
+            Print
+          </option>
+          <option
+            value="original"
+          >
+            Original
+          </option>
+          <option
+            value="shirt"
+          >
+            Shirt
+          </option>
+          <option
+            value="hat"
+          >
+            Hat
+          </option>
+        </select>
       </label>
       <label
         for="description"
