@@ -62,25 +62,22 @@ const HamburgerMenu = () => {
     </button>
     )
   };
-  const SigninLink = (
-    <Link href="/signin">
-            <a onClick={handleLinkClick} name="signin">
-              Sign In
-            </a>
-          </Link>
-  )
+  const SigninLink = <Link href="/signin"><a onClick={handleLinkClick} name="signin">Sign In</a></Link>
 
   return (
     <BurgerStyles data-testid="burger" open={burgerOpen}>
       <BurgerCloseButton onClick={toggleBurger}>&times;</BurgerCloseButton>
       <div className="links">
         {/* ALL VIEWS */}
-        {BrowseLink}
         {/* //Admin Only */}
         {me && me.permissions.includes('ADMIN') && SellLink}
+        {BrowseLink}
         {/* Signed In User */}
-        {me && me.permissions.includes("USER") && (OrdersLink && AccountLink && SignoutButton)}
-        {me && SigninLink && (
+        {me && me.permissions.includes('USER') && OrdersLink}
+        {me && me.permissions.includes('USER') && AccountLink}
+        {me && me.permissions.includes('USER') && SignoutButton}
+        {me && me.permissions.includes("GUEST") && SigninLink}
+        {me && (
           <CartLink me={me}/>
         )}
         {/* //Not Signed In */}
