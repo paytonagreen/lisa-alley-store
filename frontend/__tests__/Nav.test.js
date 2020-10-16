@@ -3,6 +3,7 @@ import Nav from '../components/page/header/Nav';
 import { server } from '../mocks/server';
 import { graphql } from 'msw';
 import { render, fakeCartItem, fakeRegularUser } from '../lib/testUtils';
+import { ToggleProvider } from '../components/utils/LocalState';
 
 describe('<Nav/>', () => {
   it('renders a minimal nav when signed out', async () => {
@@ -11,14 +12,14 @@ describe('<Nav/>', () => {
         return res(null);
       })
     );
-    render(<Nav />);
+    render(<ToggleProvider><Nav /></ToggleProvider>);
     expect(
       await screen.findByRole('link', { name: /Sign In/i })
     ).toBeInTheDocument();
   });
 
   it('renders a full admin nav when admin signed in', async () => {
-    render(<Nav />);
+    render(<ToggleProvider><Nav /></ToggleProvider>);
     expect(
       await screen.findByRole('link', { name: /Sell/i })
     ).toBeInTheDocument();
@@ -31,7 +32,7 @@ describe('<Nav/>', () => {
       })
     );
 
-    render(<Nav />);
+    render(<ToggleProvider><Nav /></ToggleProvider>);
     const orders = await screen.findByRole('link', { name: /Orders/i });
     expect(orders).toBeInTheDocument();
   });
@@ -49,7 +50,7 @@ describe('<Nav/>', () => {
         );
       })
     );
-    render(<Nav />);
+    render(<ToggleProvider><Nav /></ToggleProvider>);
     expect(await screen.findByText('9')).toBeInTheDocument();
   });
 });
