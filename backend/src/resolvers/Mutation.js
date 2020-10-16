@@ -280,11 +280,7 @@ const Mutations = {
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24, //1 day
       });
-      return user;
-    }
-    if (!userId) {
-      userId = user.id
-      return userId
+      userId = user.id;
     }
     //2. Query the users current cart
     const [existingCartItem] = await ctx.db.query.cartItems({
@@ -305,10 +301,10 @@ const Mutations = {
       );
     }
     //4. If it's not, create a fresh cart item for that user!
-    return (
-      ctx.db.mutation.createCartItem(
+    return ctx.db.mutation.createCartItem(
         {
           data: {
+            quantity: 1,
             user: {
               connect: { id: userId },
             },
@@ -319,7 +315,6 @@ const Mutations = {
         },
         info
       )
-    );
   },
   async removeFromCart(parent, args, ctx, info) {
     //1. Find the cart item
