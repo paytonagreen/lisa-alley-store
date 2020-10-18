@@ -83,6 +83,7 @@ const UpdateItem = ({ id }) => {
             placeholder="Title"
             required
             defaultValue={data.item.title}
+            value={values.title}
             onChange={handleChange}
           />
         </label>
@@ -95,6 +96,7 @@ const UpdateItem = ({ id }) => {
             placeholder="Price"
             required
             defaultValue={data.item.price}
+            value={values.price}
             onChange={handleChange}
           />
         </label>
@@ -106,6 +108,7 @@ const UpdateItem = ({ id }) => {
             placeholder="Enter A Description"
             required
             defaultValue={data.item.description}
+            value={values.description}
             onChange={handleChange}
           />
         </label>
