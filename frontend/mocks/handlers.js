@@ -9,9 +9,29 @@ const item = {
   image: 'dog.jpg',
   largeImage: 'largedog.jpg',
 };
+
+const order = {
+  id: 'abc123',
+  charge: 5500,
+  total: 5500,
+  createdAt: '2018-04 - 06T19: 24: 16.000Z',
+  user: {
+    id: 'abc123',
+  },
+  items: [
+    {...item},
+    {...item},
+    {...item},
+  ]
+}
 const user = fakeUser();
 
 export const handlers = [
+
+  /*************************************************************
+   * QUERY MOCKS
+   ***************************************************************/
+
   graphql.query('CURRENT_USER_QUERY', (req, res, ctx) => {
     return res(ctx.data({ me: fakeUser() }));
   }),
@@ -52,6 +72,21 @@ export const handlers = [
     }
   }),
 
+  graphql.query('SINGLE_ORDER_QUERY', (req, res, ctx) => {
+    let { id } = req.variables;
+    if(id = 'abc123') {
+      return res(
+        ctx.data({
+          order
+        })
+      )
+    }
+  }),
+
+  /**************************************************************************
+   * MUTATION MOCKS
+   **************************************************************************/
+  
   graphql.mutation('REQUEST_RESET_MUTATION', (req, res, ctx) => {
     let { email } = req.variables;
     if (email === 'test@test.com') {
