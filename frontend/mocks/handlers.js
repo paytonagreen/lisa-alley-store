@@ -8,19 +8,18 @@ const item = {
   description: 'This item is so dang cool',
   image: 'dog.jpg',
   largeImage: 'largedog.jpg',
+  quantity: 1,
 };
 
 const order = {
   id: 'abc123',
-  charge: 5500,
+  charge: 'abcdefg12345678',
   total: 5500,
-  createdAt: '2018-04 - 06T19: 24: 16.000Z',
+  createdAt: "2020-10-16T00:56:06.638Z",
   user: {
     id: 'abc123',
   },
   items: [
-    {...item},
-    {...item},
     {...item},
   ]
 }
