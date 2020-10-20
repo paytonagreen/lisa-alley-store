@@ -16,7 +16,7 @@ type Mutation {
     lowercaseDescription: String!
     lowercaseTitle: String!
   ): Item!
-  updateItem(id: ID!, title: String, description: String, price: Int): Item!
+  updateItem(id: ID!, image: String, largeImage: String, title: String, description: String, price: Int): Item!
   deleteItem(id: ID!): Item
   signup(
     email: String!
