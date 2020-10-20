@@ -50,7 +50,19 @@ const Signup = () => {
 
   const [savingStarted, setSavingStarted] = useState(false);
 
-  const { values, handleSubmit, handleChange, errors } = useForm(callback);
+  const initValues = {
+    email: '',
+    name: '',
+    password: '',
+    address1: '',
+    address2: '',
+    city: '',
+    state: '',
+    zip: '',
+  }
+  
+  const { values, handleSubmit, handleChange, errors } = useForm(callback, initValues);
+
 
   async function callback() {
     if (!savingStarted) {
