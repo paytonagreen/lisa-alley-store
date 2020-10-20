@@ -30,7 +30,6 @@ const SINGLE_ORDER_QUERY = gql`
 `;
 
 const Order = ({id}) => {
-  console.log(id);
   const { loading, error, data } = useQuery(SINGLE_ORDER_QUERY, {
     variables: { id },
   });
@@ -52,7 +51,7 @@ const Order = ({id}) => {
       </p>
       <p>
         <span>Date</span>
-        <span>{format(new Date(order.createdAt), "MMMM d, yyyy h:mm a")}</span>
+        <span>{format(new Date(order.createdAt), "MMMM d, yyyy hh:mm a")}</span>
       </p>
       <p>
         <span>Order Total</span>
