@@ -22,14 +22,36 @@ const SingleItemStyles = styled.div`
     h2 {
       color: ${(props) => props.theme.red};
     }
-    button {
+    .buttons {
       margin-top: 5rem;
+      padding: 2rem;
       width: 100%;
-      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    a {
+      margin: 1rem 0;
+      width: 100%;
+      padding: 1rem;
       border: none;
       border-radius: 5px;
       background-color: ${(props) => props.theme.yellow};
       color: ${(props) => props.theme.black};
+      text-align: center;
+      font-size: 2rem;
+    }
+    button{
+      margin: 2rem 0;
+      width: 100%;
+      padding: 2rem;
+      border: none;
+      border-radius: 5px;
+      background-color: ${(props) => props.theme.yellow};
+      color: ${(props) => props.theme.black};
+      text-align: center;
+      font-size: 2rem;
     }
   }
   @media (max-width: 700px) {

@@ -1,10 +1,14 @@
 import React from 'react';
 import { useQuery, gql } from '@apollo/client';
-import Error from '../utils/ErrorMessage';
 import Head from 'next/head';
+import Link from 'next/link';
+
+import Error from '../utils/ErrorMessage';
 import AddToCart from './item-card/AddToCart';
+import DeleteItem from './item-card/DeleteItem';
 import SingleItemStyles from '../styles/SingleItemStyles';
-import formatMoney from '../../lib/formatMoney'
+import formatMoney from '../../lib/formatMoney';
+import useUser from '../utils/User';
 
 const SINGLE_ITEM_QUERY = gql`
   query SINGLE_ITEM_QUERY($id: ID!) {
@@ -23,6 +27,7 @@ const SINGLE_ITEM_QUERY = gql`
 `;
 
 const SingleItem = ({ id }) => {
+  const me = useUser();
   const { data, loading, error } = useQuery(SINGLE_ITEM_QUERY, {
     variables: { id },
   });
@@ -38,11 +43,34 @@ const SingleItem = ({ id }) => {
       <img src={item.largeImage} alt={item.title} />
       <div className="details">
         <h2>{item.title}</h2>
-        <p><strong>{item.type}</strong></p>
-        <p><strong>Size:</strong> {item.size}</p>
-        <p><strong>Price:</strong> {formatMoney(item.price)}</p>
-        <p><strong>Description:</strong> {item.description}</p>
-        <AddToCart id={item.id} />
+        <p>
+          <strong>{item.type}</strong>
+        </p>
+        <p>
+          <strong>Size:</strong> {item.size}
+        </p>
+        <p>
+          <strong>Price:</strong> {formatMoney(item.price)}
+        </p>
+        <p>
+          <strong>Description:</strong> {item.description}
+        </p>
+        <div className="buttons">
+          <AddToCart id={item.id} />
+          {me && me.permissions.includes('ADMIN') && (
+          <>
+          <Link
+            href={{
+              pathname: '/update',
+              query: { id: item.id },
+            }}
+          >
+            <a>Edit</a>
+          </Link>
+          <DeleteItem id={item.id}>Delete This Item</DeleteItem>
+          </>
+          )}
+        </div>
       </div>
     </SingleItemStyles>
   );
