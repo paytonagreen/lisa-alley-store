@@ -3,7 +3,7 @@ import Head from 'next/head';
 const Meta = () => (
   <Head>
     {/* Global site tag (gtag.js) - Google Analytics */}
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-180962814-1"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FR314WX65Z"></script>
     <script
       dangerouslySetInnerHTML={{
         __html: `
