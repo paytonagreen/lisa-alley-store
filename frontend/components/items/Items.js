@@ -1,5 +1,6 @@
 import React from 'react';
 import { useQuery, gql } from '@apollo/client';
+
 import { Center, ItemsList } from '../styles/ItemListStyles';
 import Item from './item-card/Item';
 import { useUser } from '../utils/User';
