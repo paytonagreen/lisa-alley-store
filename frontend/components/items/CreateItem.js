@@ -164,14 +164,18 @@ function CreateItem() {
             </select>
           </label>
         )}
-        {values.type === 'shirt' && (
+        {values.type === 'original' && (
           <label htmlFor="size">
             Size
-            <select id="size" name="size" onChange={handleChange}>
-              <option value="small">Small</option>
-              <option value="medium">Medium</option>
-              <option value="large">Large</option>
-            </select>
+            <input
+            type="text"
+            id="size"
+            name="size"
+            placeholder="Size"
+            required
+            value={values.size}
+            onChange={handleChange}
+          />
           </label>
         )}
         <label htmlFor="description">
