@@ -13,7 +13,7 @@ const Item = styled.div`
     justify-content: center;
     align-items: center;
     height: 300px;
-    transition: all 2s;
+    transition: all 1s;
     z-index: -1;
     &:hover {
       background: rgba(255,255,255,.7);
