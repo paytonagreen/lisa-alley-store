@@ -18,9 +18,6 @@ function createClient({ headers }) {
     link: ApolloLink.from([
       createUploadLink({
         uri: determineEndpoint,
-        fetchOptions: {
-          credentials: 'include',
-        },
         headers,
       }),
     ]),
