@@ -46,7 +46,7 @@ const Mutations = {
       info
     );
   },
-  async deleteItem(parent, args, ctx, info) {
+  async deleteItem(parent, args, cdtx, info) {
     const where = { id: args.id };
     // 1. Find Item
     const item = await ctx.db.query.item({ where }, `{ id, title, user {id}}`);
@@ -407,13 +407,13 @@ const Mutations = {
       to: user.email,
       subject: 'Thank you for your order!',
       html: makeANiceEmail(
-        `Thanks for your order! \n\n You can review your entire order <a href="${
+        `Thanks for your order! \n\n If you've signed up for an account, you can review your entire order <a href="${
           process.env.FRONTEND_URL
         }/order?id=${order.id}">here</a>.`
       ),
     });
     const adminMailResponse = await transport.sendMail({
-      from: 'lisadianealley@gmail.com',
+      from: 'no-reply@lisa-alley.com',
       to: 'lisadianealley@gmail.com',
       subject: 'New Order Received!',
       html: makeANiceEmail(

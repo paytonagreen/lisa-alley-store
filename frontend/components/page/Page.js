@@ -6,13 +6,14 @@ import Footer from './Footer';
 import Meta from './Meta';
 
 const theme = {
-  red: '#FF0000',
+  red: '#bc140a',
   lavender: '#E6E6FA',
-  yellow: '#FFDB58',
+  yellow: '#f2a900',
   black: '#393939',
   grey: '3A3A3A',
-  teal: '#008080',
+  teal: '#4c797e',
   lightgrey: '#E1E1E1',
+  lightlavender: '#f5f5f8',
   offwhite: '#FCF5EB',
   maxWidth: '1000px',
   bs: '0 12px 24px 0 rgba(0,0,0,0.09)',
