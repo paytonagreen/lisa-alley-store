@@ -88,7 +88,7 @@ const Mutations = {
     const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
     //set JWT as a cookie on the response
     ctx.response.cookie("token", token, {
-      domain: '.lisa-alley.com',
+      // domain: '.lisa-alley.com',
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year cookie
     });
@@ -135,7 +135,7 @@ const Mutations = {
     const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
     //Set cookie with token
     ctx.response.cookie("token", token, {
-      domain: '.lisa-alley.com',
+      // domain: '.lisa-alley.com',
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365,
     });
@@ -144,7 +144,7 @@ const Mutations = {
   },
   signout(parent, args, ctx, info) {
     ctx.response.clearCookie("token", {
-      domain: '.lisa-alley.com',
+      // domain: '.lisa-alley.com',
     });
     return { message: 'Goodbye!' };
   },
@@ -209,7 +209,7 @@ const Mutations = {
     const token = jwt.sign({ userId: updatedUser.id }, process.env.APP_SECRET);
     //Set JWT Cookie
     ctx.response.cookie("token", token, {
-      domain: '.lisa-alley.com',
+      // domain: '.lisa-alley.com',
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365,
     });
@@ -276,7 +276,7 @@ const Mutations = {
       const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
       //set token as cookie on res
       ctx.response.cookie('token', token, {
-        domain: '.lisa-alley.com',
+        // domain: '.lisa-alley.com',
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24, //1 day
       });
@@ -407,13 +407,13 @@ const Mutations = {
       to: user.email,
       subject: 'Thank you for your order!',
       html: makeANiceEmail(
-        `Thanks for your order! \n\n You can review your entire order <a href="${
+        `Thanks for your order! \n\n If you've signed up for an account, you can review your entire order <a href="${
           process.env.FRONTEND_URL
         }/order?id=${order.id}">here</a>.`
       ),
     });
     const adminMailResponse = await transport.sendMail({
-      from: 'lisadianealley@gmail.com',
+      from: 'no-reply@lisa-alley.com',
       to: 'lisadianealley@gmail.com',
       subject: 'New Order Received!',
       html: makeANiceEmail(
