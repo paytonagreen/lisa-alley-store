@@ -12,7 +12,7 @@ const Footer = () => {
           </a>
         </Link>
         <p> | </p>
-        <Link href="mailto:lisaalley@lisaalley.com">
+        <Link href="mailto:lisadianealley@gmail.com">
           <a>
             <p>Email: lisadianealley@gmail.com</p>
           </a>
