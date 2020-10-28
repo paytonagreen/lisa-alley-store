@@ -22,6 +22,7 @@ const SINGLE_ITEM_QUERY = gql`
       size
       lowercaseTitle
       lowercaseDescription
+      quantity
     }
   }
 `;
