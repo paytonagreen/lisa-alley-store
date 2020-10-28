@@ -9,8 +9,8 @@ import Loader from '../../utils/Loader';
 import Error from '../../utils/ErrorMessage';
 
 const PAGINATION_QUERY = gql`
-  query PAGINATION_QUERY {
-    itemsConnection {
+  query PAGINATION_QUERY($view: String!) {
+    itemsConnection(where: {type: $view}) {
       aggregate {
         count
       }
