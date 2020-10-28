@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery, gql } from '@apollo/client';
-import styled from 'styled-components';
+import Link from 'next/link';
 
 import { SectionTitle, SectionDivider, SectionLink } from '../../styles/HomeSectionStyles';
 import { Center, ItemsList } from '../../styles/ItemListStyles';
@@ -10,7 +10,7 @@ import { smallPerPage } from '../../../config';
 import Loader from '../../utils/Loader';
 import Error from '../../utils/ErrorMessage';
 
-const ALL_ORIGINALS_QUERY = gql`
+const FEATURED_ORIGINALS_QUERY = gql`
   query ALL_ORIGINALS_QUERY($skip: Int = 0, $first: Int = ${smallPerPage}) {
     items (where: {
         AND: [
@@ -31,7 +31,7 @@ const ALL_ORIGINALS_QUERY = gql`
 
 const Originals = ({ page }) => {
   const me = useUser();
-  const { data, error, loading } = useQuery(ALL_ORIGINALS_QUERY, {
+  const { data, error, loading } = useQuery(FEATURED_ORIGINALS_QUERY, {
     variables: { skip: page * smallPerPage - smallPerPage, first: smallPerPage },
   });
   return (
@@ -53,4 +53,3 @@ const Originals = ({ page }) => {
 };
 
 export default Originals;
-export { ALL_ORIGINALS_QUERY };

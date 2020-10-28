@@ -1,6 +1,5 @@
 import React from 'react';
 import { useQuery, gql } from '@apollo/client';
-import styled from 'styled-components';
 
 import { Center, ItemsList } from '../../styles/ItemListStyles';
 import Item from '../item-card/Item';

@@ -56,7 +56,7 @@ const SingleItem = ({ id }) => {
           <strong>Description:</strong> {item.description}
         </p>
         <div className="buttons">
-          <AddToCart id={item.id} />
+          {item.quantity >= 1 ? <AddToCart id={item.id}/>: <button>Sold Out</button>}
           {me && me.permissions.includes('ADMIN') && (
           <>
           <Link

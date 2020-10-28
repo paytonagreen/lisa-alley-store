@@ -9,8 +9,9 @@ import { useUser } from '../../utils/User';
 import { smallPerPage } from '../../../config';
 import Loader from '../../utils/Loader';
 import Error from '../../utils/ErrorMessage';
+import Link from 'next/link';
 
-const ALL_PRINTS_QUERY = gql`
+const FEATURED_PRINTS_QUERY = gql`
   query ALL_ITEMS_QUERY($skip: Int = 3, $first: Int = ${smallPerPage}) {
     items (where: {type: "print"} first: $first, skip: $skip, orderBy: createdAt_DESC) {
       id
@@ -26,7 +27,7 @@ const ALL_PRINTS_QUERY = gql`
 
 const Prints = ({ page }) => {
   const me = useUser();
-  const { data, error, loading } = useQuery(ALL_PRINTS_QUERY, {
+  const { data, error, loading } = useQuery(FEATURED_PRINTS_QUERY, {
     variables: { skip: page * smallPerPage - smallPerPage, first: smallPerPage },
   });
   return (
@@ -42,11 +43,10 @@ const Prints = ({ page }) => {
           ))}
         </ItemsList>
       )}
-      <SectionLink>BROWSE ALL PRINTS</SectionLink>
+      <Link href="/prints"><SectionLink>BROWSE ALL PRINTS</SectionLink></Link>
       <SectionDivider />
     </ItemSectionStyles>
   );
 };
 
 export default Prints;
-export { ALL_PRINTS_QUERY };
