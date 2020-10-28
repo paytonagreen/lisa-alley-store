@@ -358,6 +358,7 @@ const Mutations = {
             description
             image
             largeImage
+            quantity
           }
         }
       }`
@@ -385,7 +386,30 @@ const Mutations = {
       delete orderItem.id;
       return orderItem;
     });
-    //5. Create the Order
+
+    //5. Query items in cart
+    const itemsInCart = user.cart.map(async (cartItem) => {
+      const item = await ctx.db.query.item(
+        { where: { id: cartItem.item.id } },
+        `{
+          id
+          quantity
+        }`
+      );
+      console.log(item);
+      console.log(cartItem.quantity);
+      //6. Adjust item quantity
+      const quantityChange = ctx.db.mutation.updateItem(
+        {
+          data: { quantity: (item.quantity - cartItem.quantity) },
+          where: {
+            id: item.id,
+          },
+        },
+        info
+      )
+    })
+    //7. Create the Order
     const order = await ctx.db.mutation.createOrder({
       data: {
         total: charge.amount,
@@ -396,12 +420,12 @@ const Mutations = {
         user: { connect: { id: userId } },
       },
     });
-    //6. Clear user's cart, delete cartItems
+    //8. Clear user's cart, delete cartItems
     const cartItemIds = user.cart.map((cartItem) => cartItem.id);
     await ctx.db.mutation.deleteManyCartItems({
       where: { id_in: cartItemIds },
     });
-    //7. Send e-mail confirmation to user
+    //9. Send e-mail confirmation to user
     const mailResponse = await transport.sendMail({
       from: 'lisadianealley@gmail.com',
       to: user.email,
@@ -412,6 +436,7 @@ const Mutations = {
         }/order?id=${order.id}">here</a>.`
       ),
     });
+    //10. Send e-mail confirmation to Lisa
     const adminMailResponse = await transport.sendMail({
       from: 'no-reply@lisa-alley.com',
       to: 'lisadianealley@gmail.com',
@@ -422,7 +447,7 @@ const Mutations = {
         }/adminOrders">here</a>.`
       ),
     });
-    //8. Return the order to the client
+    //11. Return the order to the client
     return order;
   },
   updateOrder(parent, args, ctx, info) {
