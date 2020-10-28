@@ -9,7 +9,7 @@ import Error from '../utils/ErrorMessage';
 
 const PAGINATION_QUERY = gql`
   query PAGINATION_QUERY {
-    itemsConnection {
+    itemsConnection (where: {type: "print"}) {
       aggregate {
         count
       }
