@@ -2,22 +2,17 @@ import React from 'react';
 import { useQuery, gql } from '@apollo/client';
 import styled from 'styled-components';
 
-import { SectionTitle, SectionDivider, SectionLink } from '../../styles/HomeSectionStyles';
 import { Center, ItemsList } from '../../styles/ItemListStyles';
 import Item from '../item-card/Item';
 import { useUser } from '../../utils/User';
-import { smallPerPage } from '../../../config';
+import ViewsPagination from './ViewsPagination';
+import { perPage } from '../../../config';
 import Loader from '../../utils/Loader';
 import Error from '../../utils/ErrorMessage';
 
 const ALL_ORIGINALS_QUERY = gql`
-  query ALL_ORIGINALS_QUERY($skip: Int = 0, $first: Int = ${smallPerPage}) {
-    items (where: {
-        AND: [
-          { type: "original" }
-          { featured: true }
-        ]
-      }, first: $first, skip: $skip, orderBy: createdAt_DESC) {
+  query ALL_ORIGINALS_QUERY($skip: Int = 3, $first: Int = ${perPage}) {
+    items (where: {type: "original"} first: $first, skip: $skip, orderBy: createdAt_DESC) {
       id
       title
       price
@@ -25,18 +20,18 @@ const ALL_ORIGINALS_QUERY = gql`
       image
       largeImage
       quantity
-      }
+    }
   }
 `;
 
 const Originals = ({ page }) => {
   const me = useUser();
   const { data, error, loading } = useQuery(ALL_ORIGINALS_QUERY, {
-    variables: { skip: page * smallPerPage - smallPerPage, first: smallPerPage },
+    variables: { skip: page * perPage - perPage, first: perPage },
   });
   return (
     <Center>
-      <SectionTitle>ORIGINALS</SectionTitle>
+      <ViewsPagination page={page} />
       {loading && <Center><Loader /></Center>}
       {error && <Error error={error}/>}
       {!loading && !error && (
@@ -46,8 +41,7 @@ const Originals = ({ page }) => {
           ))}
         </ItemsList>
       )}
-      <SectionLink>BROWSE ALL ORIGINALS</SectionLink>
-      <SectionDivider/>
+      <ViewsPagination page={page} />
     </Center>
   );
 };

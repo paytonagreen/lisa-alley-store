@@ -14,6 +14,7 @@ const SINGLE_ITEM_QUERY = gql`
       title
       description
       price
+      quantity
     }
   }
 `;
@@ -26,6 +27,8 @@ const UPDATE_ITEM_MUTATION = gql`
     $price: Int
     $image: String
     $largeImage: String
+    $quantity: Int
+    $featured: Boolean
   ) {
     updateItem(
       id: $id
@@ -34,6 +37,8 @@ const UPDATE_ITEM_MUTATION = gql`
       price: $price
       image: $image
       largeImage: $largeImage
+      quantity: $quantity
+      featured: $featured
     ) {
       id
       title
@@ -41,6 +46,8 @@ const UPDATE_ITEM_MUTATION = gql`
       price
       image
       largeImage
+      quantity
+      featured
     }
   }
 `;
@@ -115,7 +122,6 @@ const UpdateItem = ({ id }) => {
             id="file"
             name="file"
             placeholder="Upload an image"
-            required
             onChange={uploadFile}
           />
           {image && <img src={image} alt="Upload Preview" />}
@@ -146,6 +152,19 @@ const UpdateItem = ({ id }) => {
             onChange={handleChange}
           />
         </label>
+        <label htmlFor="quantity">
+          Quantity
+          <input
+            type="number"
+            id="quantity"
+            name="quantity"
+            placeholder="Quantity"
+            required
+            defaultValue={data.item.quantity}
+            value={values.quantity}
+            onChange={handleChange}
+          />
+        </label>
         <label htmlFor="description">
           Description
           <textarea
@@ -158,6 +177,15 @@ const UpdateItem = ({ id }) => {
             onChange={handleChange}
           />
         </label>
+        <label htmlFor="size">
+            Featured
+            <select id="featured" name="featured" onChange={handleChange}>
+              <option value=""></option>
+              <option value={true}>Yes</option>
+              <option value={false}>No</option>
+            </select>
+          </label>
+
         <button type="submit">Sav{loading ? 'ing' : 'e'} Changes</button>
       </fieldset>
     </Form>

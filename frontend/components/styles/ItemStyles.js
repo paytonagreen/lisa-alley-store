@@ -36,6 +36,35 @@ const Item = styled.div`
       height: 250px;
     }
   }
+
+  .soldout {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    transition: all 1s;
+    background: rgba(255,255,255,.7);
+      p {
+        display: block;
+        transform: translateX(0);
+        z-index: 1;
+      }
+    p {
+      background-color: ${props => props.theme.yellow};
+      opacity: .7;
+      transform: rotate(-15deg) skew(-15deg);
+      padding: 0;
+      width: 75%;
+      text-align: center;
+      color: ${props => props.theme.teal};
+      font-size: 3rem;
+      transition: all 2s;
+    }
+    @media(max-width: 700px) {
+      height: 250px;
+    }
+  }
   
   p {
     line-height: 1.5;

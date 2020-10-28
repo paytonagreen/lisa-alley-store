@@ -18,6 +18,7 @@ const CREATE_ITEM_MUTATION = gql`
     $size: String!
     $lowercaseTitle: String!
     $lowercaseDescription: String!
+    $quantity: Int!
   ) {
     createItem(
       title: $title
@@ -29,6 +30,7 @@ const CREATE_ITEM_MUTATION = gql`
       size: $size
       lowercaseTitle: $lowercaseTitle
       lowercaseDescription: $lowercaseDescription
+      quantity: $quantity
     ) {
       id
     }
@@ -147,7 +149,7 @@ function CreateItem() {
         <label htmlFor="type">
           Type
           <select id="type" name="type" onChange={handleChange}>
-            <option value=""></option>
+            <option value="">Select An Option</option>
             <option value="print">Print</option>
             <option value="original">Original</option>
             <option value="shirt">Shirt</option>
@@ -158,7 +160,7 @@ function CreateItem() {
           <label htmlFor="size">
             Size
             <select id="size" name="size" onChange={handleChange}>
-              <option value=""></option>
+              <option value="">Select An Option</option>
               <option value="11x14">11x14</option>
               <option value="30x30">30x30</option>
             </select>
@@ -178,6 +180,18 @@ function CreateItem() {
           />
           </label>
         )}
+        <label htmlFor="quantity">
+          Quantity
+          <input
+            type="number"
+            id="quantity"
+            name="quantity"
+            placeholder="Quantity"
+            required
+            value={values.quantity}
+            onChange={handleChange}
+          />
+        </label>
         <label htmlFor="description">
           description
           <textarea
