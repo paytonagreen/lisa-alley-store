@@ -19,7 +19,9 @@ const PAGINATION_QUERY = gql`
 `;
 
 const Pagination = ({ page, view }) => {
-  const { data, loading, error } = useQuery(PAGINATION_QUERY);
+  const { data, loading, error } = useQuery(PAGINATION_QUERY, {
+    variables: { view },
+  });
   if (loading) return <Loader />;
   if (error) return <Error error={error} />;
   let count = 0;

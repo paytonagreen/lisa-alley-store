@@ -30,7 +30,7 @@ const Originals = ({ page }) => {
   });
   return (
     <Center>
-      <ViewsPagination page={page} />
+      <ViewsPagination page={page} view="original"/>
       {loading && <Center><Loader /></Center>}
       {error && <Error error={error}/>}
       {!loading && !error && (
@@ -40,7 +40,7 @@ const Originals = ({ page }) => {
           ))}
         </ItemsList>
       )}
-      <ViewsPagination page={page} />
+      <ViewsPagination page={page} view="original"/>
     </Center>
   );
 };

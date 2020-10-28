@@ -4,7 +4,7 @@ import { useQuery, gql } from '@apollo/client';
 import { Center, ItemsList } from '../../styles/ItemListStyles';
 import Item from '../item-card/Item';
 import { useUser } from '../../utils/User';
-import Pagination from '../Pagination';
+import ViewsPagination from '../Pagination';
 import { perPage } from '../../../config';
 import Loader from '../../utils/Loader';
 import Error from '../../utils/ErrorMessage';
@@ -30,7 +30,7 @@ const Prints = ({ page }) => {
   });
   return (
     <Center>
-      <Pagination page={page} />
+      <ViewsPagination page={page} view="print" />
       {loading && <Center><Loader /></Center>}
       {error && <Error error={error}/>}
       {!loading && !error && (
@@ -40,7 +40,7 @@ const Prints = ({ page }) => {
           ))}
         </ItemsList>
       )}
-      <Pagination page={page} />
+      <ViewsPagination page={page} view="print" />
     </Center>
   );
 };
