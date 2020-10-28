@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/payton-green/siiiiccccckkkkk-fits/dev
-# timestamp: Thu Oct 15 2020 17:55:05 GMT-0500 (Central Daylight Time)
+# timestamp: Tue Oct 27 2020 17:07:07 GMT-0500 (Central Daylight Time)
 
 type AggregateCartItem {
   count: Int!
@@ -31,6 +31,7 @@ type CartItem implements Node {
   quantity: Int!
   item: Item
   user: User!
+  createdAt: DateTime!
 }
 
 """A connection to a list of items."""
@@ -75,11 +76,14 @@ enum CartItemOrderByInput {
   id_DESC
   quantity_ASC
   quantity_DESC
+  createdAt_ASC
+  createdAt_DESC
 }
 
 type CartItemPreviousValues {
   id: ID!
   quantity: Int!
+  createdAt: DateTime!
 }
 
 input CartItemScalarWhereInput {
@@ -153,6 +157,28 @@ input CartItemScalarWhereInput {
 
   """All values greater than or equal the given value."""
   quantity_gte: Int
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
 }
 
 type CartItemSubscriptionPayload {
@@ -312,6 +338,28 @@ input CartItemWhereInput {
 
   """All values greater than or equal the given value."""
   quantity_gte: Int
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
   item: ItemWhereInput
   user: UserWhereInput
 }
@@ -336,6 +384,8 @@ type Item implements Node {
   createdAt: DateTime!
   updatedAt: DateTime!
   user: User!
+  quantity: Int!
+  featured: Boolean
 }
 
 """A connection to a list of items."""
@@ -359,6 +409,8 @@ input ItemCreateInput {
   type: String!
   size: String!
   price: Int!
+  quantity: Int
+  featured: Boolean
   user: UserCreateOneInput!
 }
 
@@ -401,6 +453,10 @@ enum ItemOrderByInput {
   createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
+  quantity_ASC
+  quantity_DESC
+  featured_ASC
+  featured_DESC
 }
 
 type ItemPreviousValues {
@@ -416,6 +472,8 @@ type ItemPreviousValues {
   price: Int!
   createdAt: DateTime!
   updatedAt: DateTime!
+  quantity: Int!
+  featured: Boolean
 }
 
 type ItemSubscriptionPayload {
@@ -467,6 +525,8 @@ input ItemUpdateDataInput {
   type: String
   size: String
   price: Int
+  quantity: Int
+  featured: Boolean
   user: UserUpdateOneRequiredInput
 }
 
@@ -480,6 +540,8 @@ input ItemUpdateInput {
   type: String
   size: String
   price: Int
+  quantity: Int
+  featured: Boolean
   user: UserUpdateOneRequiredInput
 }
 
@@ -493,6 +555,8 @@ input ItemUpdateManyMutationInput {
   type: String
   size: String
   price: Int
+  quantity: Int
+  featured: Boolean
 }
 
 input ItemUpdateOneInput {
@@ -944,6 +1008,32 @@ input ItemWhereInput {
 
   """All values greater than or equal the given value."""
   updatedAt_gte: DateTime
+  quantity: Int
+
+  """All values that are not equal to given value."""
+  quantity_not: Int
+
+  """All values that are contained in given list."""
+  quantity_in: [Int!]
+
+  """All values that are not contained in given list."""
+  quantity_not_in: [Int!]
+
+  """All values less than the given value."""
+  quantity_lt: Int
+
+  """All values less than or equal the given value."""
+  quantity_lte: Int
+
+  """All values greater than the given value."""
+  quantity_gt: Int
+
+  """All values greater than or equal the given value."""
+  quantity_gte: Int
+  featured: Boolean
+
+  """All values that are not equal to given value."""
+  featured_not: Boolean
   user: UserWhereInput
 }
 

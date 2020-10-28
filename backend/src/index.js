@@ -35,7 +35,6 @@ let origin;
 server.express.use(async (req, res, next) => {
   const allowedOrigins = ['https://lisa-alley.com', 'https://store.lisa-alley.com', 'http://localhost:3000', 'http://localhost:7777'];
   origin = await req.headers.origin;
-  console.log(origin);
   if (allowedOrigins.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin)
     res.setHeader('Access-Control-Allow-Headers', "X-PINGOTHER,Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization")
