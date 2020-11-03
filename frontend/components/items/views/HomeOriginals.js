@@ -46,7 +46,7 @@ const Originals = ({ page }) => {
           ))}
         </ItemsList>
       )}
-      <SectionLink>BROWSE ALL ORIGINALS</SectionLink>
+      <Link href="originals"><SectionLink>BROWSE ALL ORIGINALS</SectionLink></Link>
       <SectionDivider/>
     </Center>
   );

@@ -2,7 +2,12 @@ import React from 'react';
 import { useQuery, gql } from '@apollo/client';
 import styled from 'styled-components';
 
-import { ItemSectionStyles, SectionTitle, SectionDivider, SectionLink } from '../../styles/HomeSectionStyles';
+import {
+  ItemSectionStyles,
+  SectionTitle,
+  SectionDivider,
+  SectionLink,
+} from '../../styles/HomeSectionStyles';
 import { Center, ItemsList } from '../../styles/ItemListStyles';
 import Item from '../item-card/Item';
 import { useUser } from '../../utils/User';
@@ -13,7 +18,12 @@ import Link from 'next/link';
 
 const FEATURED_PRINTS_QUERY = gql`
   query ALL_ITEMS_QUERY($skip: Int = 3, $first: Int = ${smallPerPage}) {
-    items (where: {type: "print"} first: $first, skip: $skip, orderBy: createdAt_DESC) {
+    items (where: {
+      AND: [
+        {type: "print"},
+        {featured: true}
+       ]
+       } first: $first, skip: $skip, orderBy: createdAt_DESC) {
       id
       title
       price
@@ -28,14 +38,21 @@ const FEATURED_PRINTS_QUERY = gql`
 const Prints = ({ page }) => {
   const me = useUser();
   const { data, error, loading } = useQuery(FEATURED_PRINTS_QUERY, {
-    variables: { skip: page * smallPerPage - smallPerPage, first: smallPerPage },
+    variables: {
+      skip: page * smallPerPage - smallPerPage,
+      first: smallPerPage,
+    },
   });
   return (
     <ItemSectionStyles>
-      <SectionDivider/>
+      <SectionDivider />
       <SectionTitle>PRINTS</SectionTitle>
-      {loading && <Center><Loader /></Center>}
-      {error && <Error error={error}/>}
+      {loading && (
+        <Center>
+          <Loader />
+        </Center>
+      )}
+      {error && <Error error={error} />}
       {!loading && !error && (
         <ItemsList>
           {data.items.map((item) => (
@@ -43,7 +60,9 @@ const Prints = ({ page }) => {
           ))}
         </ItemsList>
       )}
-      <Link href="/prints"><SectionLink>BROWSE ALL PRINTS</SectionLink></Link>
+      <Link href="/prints">
+        <SectionLink>BROWSE ALL PRINTS</SectionLink>
+      </Link>
       <SectionDivider />
     </ItemSectionStyles>
   );
