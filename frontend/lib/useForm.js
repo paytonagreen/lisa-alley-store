@@ -32,6 +32,16 @@ const useForm = (callback, initValues = {}) => {
     );
 
     let val = type === 'number' ? parseFloat(value) : value;
+    switch (val) {
+      case 'true':
+        val = true;
+        break;
+      case 'false': 
+        val = false;
+        break;
+      default:
+        break;
+    }
     switch (name) {
       case 'email':
         setErrors({

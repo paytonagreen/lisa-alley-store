@@ -15,6 +15,7 @@ const SINGLE_ITEM_QUERY = gql`
       description
       price
       quantity
+      featured
     }
   }
 `;
@@ -109,8 +110,7 @@ const UpdateItem = ({ id }) => {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <Error error={error} />;
-  console.log(image);
-  console.log(largeImage);
+  const { item } = data;
   return (
     <Form onSubmit={handleSubmit}>
       <Error error={mutationError} />
@@ -177,12 +177,11 @@ const UpdateItem = ({ id }) => {
             onChange={handleChange}
           />
         </label>
-        <label htmlFor="size">
+        <label htmlFor="featured">
             Featured
             <select id="featured" name="featured" onChange={handleChange}>
-              <option value=""></option>
-              <option value={true}>Yes</option>
-              <option value={false}>No</option>
+              <option value={true} selected={item.featured === true}>Yes</option>
+              <option value={false} selected={item.featured === false}>No</option>
             </select>
           </label>
 

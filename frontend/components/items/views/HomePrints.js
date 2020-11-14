@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery, gql } from '@apollo/client';
 import styled from 'styled-components';
 
+
 import {
   ItemSectionStyles,
   SectionTitle,
