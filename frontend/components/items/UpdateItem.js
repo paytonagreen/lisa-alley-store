@@ -180,6 +180,7 @@ const UpdateItem = ({ id }) => {
         <label htmlFor="featured">
             Featured
             <select id="featured" name="featured" onChange={handleChange}>
+              <option value=""></option>
               <option value={true} selected={item.featured === true}>Yes</option>
               <option value={false} selected={item.featured === false}>No</option>
             </select>
