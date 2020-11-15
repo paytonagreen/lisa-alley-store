@@ -152,6 +152,7 @@ function CreateItem() {
             <option value="">Select An Option</option>
             <option value="print">Print</option>
             <option value="original">Original</option>
+            <option value="gallery">Gallery</option>
             <option value="shirt">Shirt</option>
             <option value="hat">Hat</option>
           </select>
