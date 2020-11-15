@@ -16,7 +16,6 @@ const SINGLE_ITEM_QUERY = gql`
       price
       quantity
       featured
-      image
     }
   }
 `;
@@ -24,26 +23,16 @@ const SINGLE_ITEM_QUERY = gql`
 const UPDATE_ITEM_MUTATION = gql`
   mutation UPDATE_ITEM_MUTATION(
     $id: ID!
-    $title: String
-    $description: String
-    $price: Int
-    $quantity: Int
-    $featured: Boolean
+    $image: String
+    $largeImage: String
   ) {
     updateItem(
       id: $id
-      title: $title
-      description: $description
-      price: $price
-      quantity: $quantity
-      featured: $featured
+      image: $image
+      largeImage: $largeImage
     ) {
-      id
-      title
-      description
-      price
-      quantity
-      featured
+      image
+      largeImage
     }
   }
 `;
@@ -59,16 +48,18 @@ const UpdateItem = ({ id }) => {
   const mutationError = itemMutation[1].error;
 
   const [savingStarted, setSavingStarted] = useState(false);
+  const [ image, setImage ] = useState('');
+  const [ largeImage, setLargeImage ] = useState('');
 
 
-  const { values, handleChange, handleSubmit } = useForm(callback);
+  const { handleSubmit } = useForm(callback);
 
   function callback() {
     if (!savingStarted) {
       try {
         setSavingStarted(true);
         updateItem({
-          variables: { id, ...values },
+          variables: { id, image, largeImage },
           refetchQueries: [{ query: ALL_ITEMS_QUERY }],
         });
         Router.push({
@@ -104,73 +95,24 @@ const UpdateItem = ({ id }) => {
   if (loading) return <p>Loading...</p>;
   if (error) return <Error error={error} />;
   const { item } = data;
+  console.log(item);
+  console.log(image);
+  console.log(largeImage);
   return (
     <Form onSubmit={handleSubmit}>
       <Error error={mutationError} />
       <fieldset disabled={mutationLoading} aria-busy={mutationLoading}>
-        <div className="image-block">
-          <a className='image-link' href={`/updateImage?id=${id}`}>Edit Image</a>
-          {item.image && <img src={item.image} alt="Upload Preview" />}
-        </div>
-        <label htmlFor="title">
-          Title
+      <label htmlFor="file">
+          Image
           <input
-            type="text"
-            id="title"
-            name="title"
-            placeholder="Title"
-            required
-            defaultValue={data.item.title}
-            value={values.title}
-            onChange={handleChange}
+            type="file"
+            id="file"
+            name="file"
+            placeholder="Upload an image"
+            onChange={uploadFile}
           />
+          {image && <img src={image} alt="Upload Preview" />}
         </label>
-        <label htmlFor="price">
-          Price
-          <input
-            type="number"
-            id="price"
-            name="price"
-            placeholder="Price"
-            required
-            defaultValue={data.item.price}
-            value={values.price}
-            onChange={handleChange}
-          />
-        </label>
-        <label htmlFor="quantity">
-          Quantity
-          <input
-            type="number"
-            id="quantity"
-            name="quantity"
-            placeholder="Quantity"
-            required
-            defaultValue={data.item.quantity}
-            value={values.quantity}
-            onChange={handleChange}
-          />
-        </label>
-        <label htmlFor="description">
-          Description
-          <textarea
-            id="description"
-            name="description"
-            placeholder="Enter A Description"
-            required
-            defaultValue={data.item.description}
-            value={values.description}
-            onChange={handleChange}
-          />
-        </label>
-        <label htmlFor="featured">
-            Featured
-            <select id="featured" name="featured" onChange={handleChange}>
-              <option value=""></option>
-              <option value={true} selected={item.featured === true}>Yes</option>
-              <option value={false} selected={item.featured === false}>No</option>
-            </select>
-          </label>
 
         <button type="submit">Sav{loading ? 'ing' : 'e'} Changes</button>
       </fieldset>
