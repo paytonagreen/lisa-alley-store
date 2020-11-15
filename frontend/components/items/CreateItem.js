@@ -92,6 +92,7 @@ function CreateItem() {
     setLargeImage(file.eager[0].secure_url);
   }
 
+  console.log(values)
   return (
     <Form
       data-test="form"
@@ -171,7 +172,8 @@ function CreateItem() {
           <label htmlFor="size">
             Size
             <select id="size" name="size" onChange={handleChange}>
-              <option value="11x14">11x14</option>
+              <option value=""></option>
+              <option value="Gallery">Gallery Example</option>
             </select>
           </label>
         )}
