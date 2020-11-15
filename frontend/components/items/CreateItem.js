@@ -167,6 +167,14 @@ function CreateItem() {
             </select>
           </label>
         )}
+        {values.type === 'gallery' && (
+          <label htmlFor="size">
+            Size
+            <select id="size" name="size" onChange={handleChange}>
+              <option value="11x14">11x14</option>
+            </select>
+          </label>
+        )}
         {values.type === 'original' && (
           <label htmlFor="size">
             Size
