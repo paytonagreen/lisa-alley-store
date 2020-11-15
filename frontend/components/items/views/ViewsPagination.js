@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery, gql } from '@apollo/client';
 
 import PaginationStyles from '../../styles/PaginationStyles';
-import { smallPerPage } from '../../../config';
+import { perPage } from '../../../config';
 import Head from 'next/head';
 import Link from 'next/link';
 import Loader from '../../utils/Loader';
@@ -28,7 +28,8 @@ const Pagination = ({ page, view }) => {
   let pages = 0;
   if (!loading && !error) {
     count = data.itemsConnection.aggregate.count;
-    pages = Math.ceil(count / smallPerPage);
+    console.log(data);
+    pages = Math.ceil(count / perPage);
     return (
       count,
       pages,
@@ -41,7 +42,7 @@ const Pagination = ({ page, view }) => {
           </Head>
           <Link
             href={{
-              pathname: view,
+              pathname: `/${view}s`,
               query: { page: page - 1 },
             }}
           >
@@ -55,7 +56,7 @@ const Pagination = ({ page, view }) => {
           <p>{count} Items Total</p>
           <Link
             href={{
-              pathname: view,
+              pathname: `/${view}s`,
               query: { page: page + 1 },
             }}
           >

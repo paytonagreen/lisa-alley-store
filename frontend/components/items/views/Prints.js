@@ -4,7 +4,7 @@ import { useQuery, gql } from '@apollo/client';
 import { Center, ItemsList } from '../../styles/ItemListStyles';
 import Item from '../item-card/Item';
 import { useUser } from '../../utils/User';
-import ViewsPagination from '../Pagination';
+import ViewsPagination from './ViewsPagination';
 import { perPage } from '../../../config';
 import Loader from '../../utils/Loader';
 import Error from '../../utils/ErrorMessage';
