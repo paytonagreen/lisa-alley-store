@@ -431,20 +431,16 @@ const Mutations = {
       to: user.email,
       subject: 'Thank you for your order!',
       html: makeANiceEmail(
-        `Thanks for your order! \n\n If you've signed up for an account, you can review your entire order <a href="${
-          process.env.FRONTEND_URL
-        }/order?id=${order.id}">here</a>.`
+        `Thanks for your order! \n\n If you've signed up for an account, you can review your entire order <a href="${process.env.FRONTEND_URL}/order?id=${order.id}">here</a>.`
       ),
     });
     //10. Send e-mail confirmation to Lisa
     const adminMailResponse = await transport.sendMail({
       from: 'no-reply@lisa-alley.com',
-      to: 'lisadianealley@gmail.com',
+      to: 'paytonagreen@gmail.com',
       subject: 'New Order Received!',
       html: makeANiceEmail(
-        `You've receved a new order! \n\n You can review all your orders <a href="${
-          process.env.FRONTEND_URL
-        }/adminOrders">here</a>.`
+        `You've received a new order! \n\n You can review all your orders <a href="${process.env.FRONTEND_URL}/adminOrders">here</a>.`
       ),
     });
     //11. Return the order to the client
