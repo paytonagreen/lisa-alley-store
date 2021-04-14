@@ -50,6 +50,16 @@ const OrderList = () => {
         <h2>
           You have {orders.length} order{orders.length === 1 ? "" : "s"}
         </h2>
+        {me && me.permissions.includes("ADMIN") && (
+        <Link
+        href={{
+          pathname: '/adminOrders',
+        }}>
+          <a>
+          <SickButton>Admin View</SickButton>
+          </a>
+        </Link>
+        )}
         <OrderUL>
           {orders.map((order) => (
             <OrderItemStyles key={order.id}>
@@ -76,16 +86,7 @@ const OrderList = () => {
             </OrderItemStyles>
           ))}
         </OrderUL>
-        {me && me.permissions.includes("ADMIN") && (
-        <Link
-        href={{
-          pathname: '/adminOrders',
-        }}>
-          <a>
-          <SickButton>Admin View</SickButton>
-          </a>
-        </Link>
-        )}
+        
       </div>
     );
   }
