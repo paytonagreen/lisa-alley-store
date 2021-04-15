@@ -1,0 +1,94 @@
+# import * from './generated/prisma.graphql'
+
+type SuccessMessage {
+  message: String
+}
+
+type Mutation {
+  createItem(
+    title: String
+    description: String
+    price: Int
+    image: String
+    largeImage: String
+    type: String!
+    size: String!
+    lowercaseDescription: String!
+    lowercaseTitle: String!
+    quantity: Int!
+  ): Item!
+  updateItem(
+    id: ID!
+    image: String
+    largeImage: String
+    title: String
+    description: String
+    price: Int
+    quantity: Int
+    featured: Boolean
+  ): Item!
+  deleteItem(id: ID!): Item
+  signup(
+    email: String!
+    password: String!
+    name: String!
+    address1: String!
+    address2: String
+    city: String!
+    state: String!
+    zip: Int!
+  ): User!
+  updateUser(
+    id: ID!
+    email: String
+    name: String
+    address1: String
+    address2: String
+    city: String
+    state: String
+    zip: Int
+  ): User!
+  signin(email: String!, password: String!): User!
+  signout: SuccessMessage
+  requestReset(email: String!): SuccessMessage
+  resetPassword(
+    resetToken: String!
+    password: String!
+    confirmPassword: String!
+  ): User!
+  updatePermissions(permissions: [Permission], userId: ID!): User
+  addToCart(id: ID!): CartItem
+  removeFromCart(id: ID!): CartItem
+  createOrder(token: String!): Order!
+  updateOrder(id: ID!, fulfilled: Boolean!): Order!
+}
+
+type Query {
+  items(
+    where: ItemWhereInput
+    orderBy: ItemOrderByInput
+    skip: Int
+    first: Int
+  ): [Item]!
+  item(where: ItemWhereUniqueInput!): Item
+  itemsConnection(where: ItemWhereInput): ItemConnection!
+  me: User
+  users: [User]!
+  order(id: ID!): Order
+  orders(orderBy: OrderOrderByInput, skip: Int, first: Int): [Order]!
+  ordersConnection(where: OrderWhereInput): OrderConnection!
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  address1: String!
+  address2: String
+  city: String!
+  state: String!
+  zip: Int!
+  permissions: [Permission!]!
+  cart: [CartItem!]!
+  orders: [OrderItem]
+}

@@ -88,7 +88,7 @@ const Mutations = {
     const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
     //set JWT as a cookie on the response
     ctx.response.cookie("token", token, {
-      // domain: '.lisa-alley.com',
+      domain: '.lisa-alley.com',
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year cookie
     });
@@ -135,7 +135,7 @@ const Mutations = {
     const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
     //Set cookie with token
     ctx.response.cookie("token", token, {
-      // domain: '.lisa-alley.com',
+      domain: '.lisa-alley.com',
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365,
     });
@@ -144,7 +144,7 @@ const Mutations = {
   },
   signout(parent, args, ctx, info) {
     ctx.response.clearCookie("token", {
-      // domain: '.lisa-alley.com',
+      domain: '.lisa-alley.com',
     });
     return { message: 'Goodbye!' };
   },
@@ -168,7 +168,9 @@ const Mutations = {
       to: user.email,
       subject: 'Your Password Reset Token',
       html: makeANiceEmail(
-        `Your Password Reset Token Is Here! \n\n <a href="https://store.lisa-alley.com/reset?resetToken=${resetToken}">Click Here To Reset!</a>`
+        `Your Password Reset Token Is Here! \n\n <a href="${
+          process.env.FRONTEND_URL
+        }/reset?resetToken=${resetToken}">Click Here To Reset!</a>`
       ),
     });
     // Return a message
@@ -207,7 +209,7 @@ const Mutations = {
     const token = jwt.sign({ userId: updatedUser.id }, process.env.APP_SECRET);
     //Set JWT Cookie
     ctx.response.cookie("token", token, {
-      // domain: '.lisa-alley.com',
+      domain: '.lisa-alley.com',
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365,
     });
@@ -274,7 +276,7 @@ const Mutations = {
       const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
       //set token as cookie on res
       ctx.response.cookie('token', token, {
-        // domain: '.lisa-alley.com',
+        domain: '.lisa-alley.com',
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24, //1 day
       });
@@ -429,16 +431,16 @@ const Mutations = {
       to: user.email,
       subject: 'Thank you for your order!',
       html: makeANiceEmail(
-        `Thanks for your order! \n\n If you've signed up for an account, you can review your entire order <a href="${process.env.FRONTEND_URL}/order?id=${order.id}">here</a>.`
+        `Thanks for your order! \n\n If you've signed up for an account, you can review your entire order <a href="https://store.lisa-alley.com/order?id=${order.id}">here</a>.`
       ),
     });
     //10. Send e-mail confirmation to Lisa
     const adminMailResponse = await transport.sendMail({
       from: 'no-reply@lisa-alley.com',
-      to: 'paytonagreen@gmail.com',
+      to: 'lisadianealley@gmail.com',
       subject: 'New Order Received!',
       html: makeANiceEmail(
-        `You've received a new order! \n\n You can review all your orders <a href="${process.env.FRONTEND_URL}/adminOrders">here</a>.`
+        `You've received a new order! \n\n You can review all your orders <a href="https://store.lisa-alley.com/adminOrders">here</a>.`
       ),
     });
     //11. Return the order to the client
