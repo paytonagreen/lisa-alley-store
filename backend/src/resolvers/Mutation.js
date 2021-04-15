@@ -168,9 +168,7 @@ const Mutations = {
       to: user.email,
       subject: 'Your Password Reset Token',
       html: makeANiceEmail(
-        `Your Password Reset Token Is Here! \n\n <a href="${
-          process.env.FRONTEND_URL
-        }/reset?resetToken=${resetToken}">Click Here To Reset!</a>`
+        `Your Password Reset Token Is Here! \n\n <a href="https://store.lisa-alley.com/reset?resetToken=${resetToken}">Click Here To Reset!</a>`
       ),
     });
     // Return a message
