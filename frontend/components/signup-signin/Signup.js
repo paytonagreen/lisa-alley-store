@@ -7,6 +7,7 @@ import useForm from '../../lib/useForm';
 
 import Form from '../styles/Form';
 import Error from '../utils/ErrorMessage';
+import AccountBlurb from '../styles/AccountBlurb';
 
 const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION(

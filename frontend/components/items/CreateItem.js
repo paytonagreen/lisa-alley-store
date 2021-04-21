@@ -93,7 +93,6 @@ function CreateItem() {
     setLargeImage(file.eager[0].secure_url);
   }
 
-  console.log(values)
   return (
     <Form
       data-test="form"
