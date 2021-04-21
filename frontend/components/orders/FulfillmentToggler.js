@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useMutation, gql } from '@apollo/client';
 
 import { FulfilledButton } from '../styles/AdminOrderStyles';

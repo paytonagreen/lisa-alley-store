@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import Downshift, { resetIdCounter } from "downshift";
-import Router from "next/router";
-import { ApolloConsumer, gql } from "@apollo/client";
-import debounce from "lodash.debounce";
-import { DropDown, DropDownItem, SearchStyles } from "../../styles/DropDown";
+import { useState } from 'react';
+import Downshift, { resetIdCounter } from 'downshift';
+import Router from 'next/router';
+import { ApolloConsumer, gql } from '@apollo/client';
+import debounce from 'lodash.debounce';
+
+import { DropDown, DropDownItem, SearchStyles } from '../../styles/DropDown';
 
 const SEARCH_ITEMS_QUERY = gql`
   query SEARCH_ITEMS_QUERY($searchTerm: String!) {
@@ -27,7 +28,7 @@ const SEARCH_ITEMS_QUERY = gql`
 
 function routeToItem(item) {
   Router.push({
-    pathname: "/item",
+    pathname: '/item',
     query: {
       id: item.id,
     },
@@ -53,7 +54,7 @@ const AutoComplete = () => {
     <SearchStyles>
       <Downshift
         onChange={routeToItem}
-        itemToString={(item) => (item === null ? "" : item.title)}
+        itemToString={(item) => (item === null ? '' : item.title)}
       >
         {({
           getInputProps,
@@ -71,10 +72,10 @@ const AutoComplete = () => {
                       e.persist();
                       onChange(e, client);
                     },
-                    type: "search",
-                    className: loading ? "loading" : "",
-                    id: "search",
-                    placeholder: "Search For An Item",
+                    type: 'search',
+                    className: loading ? 'loading' : '',
+                    id: 'search',
+                    placeholder: 'Search For An Item',
                   })}
                 />
               )}
@@ -87,7 +88,7 @@ const AutoComplete = () => {
                     key={item.id}
                     highlighted={index === highlightedIndex}
                   >
-                    <img width="50" src={item.image} alt={item.title} />
+                    <img width='50' src={item.image} alt={item.title} />
                     {item.title}
                   </DropDownItem>
                 ))}

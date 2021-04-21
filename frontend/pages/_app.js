@@ -1,8 +1,9 @@
 import App from 'next/app';
 import Page from '../components/page/Page';
 import { ApolloProvider } from '@apollo/client';
-import { ToggleProvider } from '../components/utils/LocalState';
 import withData from '../lib/withData';
+
+import { ToggleProvider } from '../components/utils/LocalState';
 
 function MyApp({ Component, apollo, pageProps }) {
   return (

@@ -7,7 +7,11 @@ import withData from '../lib/withData';
 
 //setup wrapper for tests//
 const Providers = ({ children, apollo }) => {
-  return <ApolloProvider client={apollo} addTypename={false}>{children}</ApolloProvider>;
+  return (
+    <ApolloProvider client={apollo} addTypename={false}>
+      {children}
+    </ApolloProvider>
+  );
 };
 
 const customProviders = withData(Providers);
@@ -129,4 +133,3 @@ export {
   fakeCartUser,
   customRender as render,
 };
-

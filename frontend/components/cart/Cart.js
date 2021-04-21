@@ -2,8 +2,8 @@ import { useTogglers } from '../utils/LocalState';
 import { useUser } from '../utils/User';
 import formatMoney from '../../lib/formatMoney';
 import calcTotalPrice from '../../lib/calcTotalPrice';
-import TakeMyMoney from './TakeMyMoney';
 
+import TakeMyMoney from './TakeMyMoney';
 import CartStyles from '../styles/CartStyles';
 import Supreme from '../styles/Supreme';
 import CloseButton from '../styles/CloseButton';

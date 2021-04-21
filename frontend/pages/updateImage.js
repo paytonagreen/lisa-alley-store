@@ -1,10 +1,8 @@
 import UpdateImage from '../components/items/UpdateImage';
 
-
-const UpdateImagePage = props => (
+const UpdateImagePage = (props) => (
   <div>
-    <UpdateImage id={props.query.id}/>
-    
+    <UpdateImage id={props.query.id} />
   </div>
 );
 

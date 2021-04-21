@@ -1,11 +1,10 @@
 import CreateItem from '../components/items/CreateItem';
 import PleaseSignIn from '../components/utils/PleaseSignIn';
 
-
-const Sell = props => (
+const Sell = (props) => (
   <div>
     <PleaseSignIn>
-      <CreateItem/>
+      <CreateItem />
     </PleaseSignIn>
   </div>
 );

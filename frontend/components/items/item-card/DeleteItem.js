@@ -1,4 +1,3 @@
-import React from 'react';
 import { useMutation, gql } from '@apollo/client';
 
 import { ALL_ITEMS_QUERY } from '../Items';

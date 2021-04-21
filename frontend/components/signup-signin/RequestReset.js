@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { useMutation, gql } from "@apollo/client";
+import React, { useState } from 'react';
+import { useMutation, gql } from '@apollo/client';
 
-import Form from "../styles/Form";
-import Error from "../utils/ErrorMessage";
+import Form from '../styles/Form';
+import Error from '../utils/ErrorMessage';
 
 const REQUEST_RESET_MUTATION = gql`
   mutation REQUEST_RESET_MUTATION($email: String!) {
@@ -13,7 +13,7 @@ const REQUEST_RESET_MUTATION = gql`
 `;
 
 const RequestReset = () => {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
   const [reset, { error, loading, called }] = useMutation(
     REQUEST_RESET_MUTATION,
     {
@@ -22,13 +22,13 @@ const RequestReset = () => {
   );
   return (
     <Form
-      method="post"
-      data-testid="form"
+      method='post'
+      data-testid='form'
       onSubmit={async (e) => {
         e.preventDefault();
         try {
           await reset();
-          setEmail("");
+          setEmail('');
         } catch (error) {
           console.log(error);
         }
@@ -40,17 +40,17 @@ const RequestReset = () => {
         {!error && !loading && called && (
           <p>Success! Check your e-mail for a reset link.</p>
         )}
-        <label htmlFor="email">
+        <label htmlFor='email'>
           Email
           <input
-            type="email"
-            name="email"
-            placeholder="email"
+            type='email'
+            name='email'
+            placeholder='email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </label>
-        <button type="submit">Request Reset!</button>
+        <button type='submit'>Request Reset!</button>
       </fieldset>
     </Form>
   );

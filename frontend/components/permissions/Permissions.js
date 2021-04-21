@@ -1,9 +1,10 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import { useQuery, useMutation, gql } from "@apollo/client";
+import PropTypes from "prop-types";
+
 import Error from "../utils/ErrorMessage";
 import Table from "../styles/Table";
 import SickButton from "../styles/SickButton";
-import PropTypes from "prop-types";
 
 const possiblePermissions = [
   "ADMIN",

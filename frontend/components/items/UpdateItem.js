@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useMutation, useQuery, gql } from '@apollo/client';
 import Router from 'next/router';
 

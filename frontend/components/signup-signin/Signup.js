@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useMutation, gql } from '@apollo/client';
-import styled from 'styled-components';
 import Router from 'next/router';
+
+import { CURRENT_USER_QUERY } from '../utils/User';
+import useForm from '../../lib/useForm';
 
 import Form from '../styles/Form';
 import Error from '../utils/ErrorMessage';
-import { CURRENT_USER_QUERY } from '../utils/User';
-import useForm from '../../lib/useForm';
 
 const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION(
@@ -41,10 +41,6 @@ const SIGNUP_MUTATION = gql`
   }
 `;
 
-const AccountBlurb = styled.p`
-  max-width: 300px;
-`;
-
 const Signup = () => {
   const [signup, { loading, error, called }] = useMutation(SIGNUP_MUTATION);
 
@@ -59,10 +55,12 @@ const Signup = () => {
     city: '',
     state: '',
     zip: '',
-  }
-  
-  const { values, handleSubmit, handleChange, errors } = useForm(callback, initValues);
+  };
 
+  const { values, handleSubmit, handleChange, errors } = useForm(
+    callback,
+    initValues
+  );
 
   async function callback() {
     if (!savingStarted) {
@@ -74,7 +72,7 @@ const Signup = () => {
         });
         Router.push({
           pathname: '/',
-        })
+        });
       } catch (error) {
         console.log(error);
       }
@@ -82,113 +80,112 @@ const Signup = () => {
   }
 
   return (
-    <Form data-testid="signup-form" method="post" onSubmit={handleSubmit}>
+    <Form data-testid='signup-form' method='post' onSubmit={handleSubmit}>
       <fieldset disabled={loading} aria-busy={loading}>
         <h2>Sign Up For An Account</h2>
         <AccountBlurb>
           If you would like to create an account, it allows you to securely keep
-          track of your order(s) and helps us to provide more complete customer service. Your
-          information is stored securely will not be shared in any way at any time.
+          track of your order(s) and helps us to provide more complete customer
+          service. Your information is stored securely will not be shared in any
+          way at any time.
         </AccountBlurb>
-        <AccountBlurb>  
-          Thanks so much foryour interest in my work!
-        </AccountBlurb>
-        {errors.form && <p className="validationError">{errors.form}</p>}
+        <AccountBlurb>Thanks so much foryour interest in my work!</AccountBlurb>
+        {errors.form && <p className='validationError'>{errors.form}</p>}
         {called && error && <Error error={error} />}
         {!loading && !error && called && <p>Success! Thanks for signing up!</p>}
-        <label htmlFor="email">
+        <label htmlFor='email'>
           Email
           <input
-            id="email"
-            type="email"
-            name="email"
-            placeholder="email"
+            id='email'
+            type='email'
+            name='email'
+            placeholder='email'
             value={values.email}
             onChange={handleChange}
           />
         </label>
-        {errors.email && <p className="validationError">{errors.email}</p>}
-        <label htmlFor="name">
+        {errors.email && <p className='validationError'>{errors.email}</p>}
+        <label htmlFor='name'>
           Name
           <input
-            id="name"
-            type="text"
-            name="name"
-            placeholder="name"
+            id='name'
+            type='text'
+            name='name'
+            placeholder='name'
             value={values.name}
             onChange={handleChange}
           />
         </label>
-        <label htmlFor="password">
+        <label htmlFor='password'>
           Password
           <input
-            id="password"
-            type="password"
-            name="password"
-            placeholder="password"
+            id='password'
+            type='password'
+            name='password'
+            placeholder='password'
             value={values.password}
             onChange={handleChange}
           />
         </label>
         {errors.password && (
-          <p className="validationError">{errors.password}</p>
+          <p className='validationError'>{errors.password}</p>
         )}
-        <label htmlFor="address1">
+        <label htmlFor='address1'>
           Address Line 1
           <input
-            id="address1"
-            type="text"
-            name="address1"
-            placeholder="Address Line 1"
+            id='address1'
+            type='text'
+            name='address1'
+            placeholder='Address Line 1'
             value={values.address1}
             onChange={handleChange}
           />
         </label>
-        <label htmlFor="address2">
+        <label htmlFor='address2'>
           Address Line 2
           <input
-            id="address2"
-            type="text"
-            name="address2"
-            placeholder="Address Line 2"
+            id='address2'
+            type='text'
+            name='address2'
+            placeholder='Address Line 2'
             value={values.address2}
             onChange={handleChange}
           />
         </label>
-        <label htmlFor="city">
+        <label htmlFor='city'>
           City
           <input
-            id="city"
-            type="text"
-            name="city"
-            placeholder="City"
+            id='city'
+            type='text'
+            name='city'
+            placeholder='City'
             value={values.city}
             onChange={handleChange}
           />
         </label>
-        <label htmlFor="state">
+        <label htmlFor='state'>
           State
           <input
-            id="state"
-            type="input"
-            name="state"
-            placeholder="State"
+            id='state'
+            type='input'
+            name='state'
+            placeholder='State'
             value={values.state}
             onChange={handleChange}
           />
         </label>
-        <label htmlFor="zip">
+        <label htmlFor='zip'>
           Zip Code
           <input
-            id="zip"
-            type="number"
-            name="zip"
-            placeholder="Zip Code"
+            id='zip'
+            type='number'
+            name='zip'
+            placeholder='Zip Code'
             value={values.zip}
             onChange={handleChange}
           />
         </label>
-        <button type="submit">Sign Up!</button>
+        <button type='submit'>Sign Up!</button>
       </fieldset>
     </Form>
   );
