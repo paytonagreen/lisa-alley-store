@@ -1,13 +1,15 @@
 import React from "react";
 import { useQuery, gql } from "@apollo/client";
 import Link from "next/link";
-import Error from "../utils/ErrorMessage";
-import styled from "styled-components";
-import SickButton from '../styles/SickButton'
+
 import { formatDistance } from "date-fns";
 import formatMoney from "../../lib/formatMoney";
-import OrderItemStyles from "../styles/OrderItemStyles";
 import useUser from '../utils/User';
+
+import Error from "../utils/ErrorMessage";
+import SickButton from '../styles/SickButton'
+import OrderItemStyles from "../styles/OrderItemStyles";
+import OrderUL from '../styles/OrderUL';
 
 const ALL_ORDERS_QUERY = gql`
   query ALL_ORDERS_QUERY {
@@ -24,16 +26,6 @@ const ALL_ORDERS_QUERY = gql`
         image
       }
     }
-  }
-`;
-
-const OrderUL = styled.ul`
-  display: grid;
-  grid-gap: 4rem;
-  grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
-  padding: 0;
-  @media(max-width: 700px) {
-    grid-template-columns: 1fr;
   }
 `;
 

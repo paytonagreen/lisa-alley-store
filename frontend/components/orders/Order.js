@@ -1,11 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { useQuery, gql } from "@apollo/client";
-import { format } from "date-fns";
-import Head from "next/head";
-import formatMoney from "../../lib/formatMoney";
-import Error from "../utils/ErrorMessage";
-import OrderStyles from "../styles/OrderStyles";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { useQuery, gql } from '@apollo/client';
+import Head from 'next/head';
+
+import { format } from 'date-fns';
+import formatMoney from '../../lib/formatMoney';
+
+import Error from '../utils/ErrorMessage';
+import OrderStyles from '../styles/OrderStyles';
 
 const SINGLE_ORDER_QUERY = gql`
   query SINGLE_ORDER_QUERY($id: ID!) {
@@ -29,7 +31,7 @@ const SINGLE_ORDER_QUERY = gql`
   }
 `;
 
-const Order = ({id}) => {
+const Order = ({ id }) => {
   const { loading, error, data } = useQuery(SINGLE_ORDER_QUERY, {
     variables: { id },
   });
@@ -51,7 +53,7 @@ const Order = ({id}) => {
       </p>
       <p>
         <span>Date</span>
-        <span>{format(new Date(order.createdAt), "MMMM d, yyyy hh:mm a")}</span>
+        <span>{format(new Date(order.createdAt), 'MMMM d, yyyy hh:mm a')}</span>
       </p>
       <p>
         <span>Order Total</span>
@@ -61,11 +63,11 @@ const Order = ({id}) => {
         <span>Item Count</span>
         <span>{order.items.length}</span>
       </p>
-      <div className="items">
+      <div className='items'>
         {order.items.map((item) => (
-          <div key={item.id} className="order-item">
+          <div key={item.id} className='order-item'>
             <img src={item.image} alt={item.title} />
-            <div className="item-details">
+            <div className='item-details'>
               <h2>{item.title}</h2>
               <p>Each: {formatMoney(item.price)}</p>
               <p>Subtotal: {formatMoney(item.price * item.quantity)}</p>
