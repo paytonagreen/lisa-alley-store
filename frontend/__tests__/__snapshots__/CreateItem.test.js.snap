@@ -3,7 +3,7 @@
 exports[`<CreateItem/> renders and matches snapshot 1`] = `
 <div>
   <form
-    class="Form-phs3r-0 vnKat"
+    class="Form-phs3r-0 bOqHdm"
     data-test="form"
   >
     <fieldset
@@ -58,7 +58,9 @@ exports[`<CreateItem/> renders and matches snapshot 1`] = `
         >
           <option
             value=""
-          />
+          >
+            Select An Option
+          </option>
           <option
             value="print"
           >
@@ -68,6 +70,11 @@ exports[`<CreateItem/> renders and matches snapshot 1`] = `
             value="original"
           >
             Original
+          </option>
+          <option
+            value="gallery"
+          >
+            Gallery
           </option>
           <option
             value="shirt"
@@ -80,6 +87,19 @@ exports[`<CreateItem/> renders and matches snapshot 1`] = `
             Hat
           </option>
         </select>
+      </label>
+      <label
+        for="quantity"
+      >
+        Quantity
+        <input
+          id="quantity"
+          name="quantity"
+          placeholder="Quantity"
+          required=""
+          type="number"
+          value=""
+        />
       </label>
       <label
         for="description"
