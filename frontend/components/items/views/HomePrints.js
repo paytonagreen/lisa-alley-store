@@ -1,7 +1,9 @@
 import React from 'react';
 import { useQuery, gql } from '@apollo/client';
-import styled from 'styled-components';
+import Link from 'next/link';
 
+import { useUser } from '../../utils/User';
+import { smallPerPage } from '../../../config';
 
 import {
   ItemSectionStyles,
@@ -11,11 +13,8 @@ import {
 } from '../../styles/HomeSectionStyles';
 import { Center, ItemsList } from '../../styles/ItemListStyles';
 import Item from '../item-card/Item';
-import { useUser } from '../../utils/User';
-import { smallPerPage } from '../../../config';
 import Loader from '../../utils/Loader';
 import Error from '../../utils/ErrorMessage';
-import Link from 'next/link';
 
 const FEATURED_PRINTS_QUERY = gql`
   query ALL_ITEMS_QUERY($skip: Int = 3, $first: Int = ${smallPerPage}) {
@@ -61,7 +60,7 @@ const Prints = ({ page }) => {
           ))}
         </ItemsList>
       )}
-      <Link href="/prints">
+      <Link href='/prints'>
         <SectionLink>BROWSE ALL PRINTS</SectionLink>
       </Link>
       <SectionDivider />

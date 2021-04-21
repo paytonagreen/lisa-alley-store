@@ -1,11 +1,12 @@
 import React from 'react';
 import { useQuery, gql } from '@apollo/client';
 
+import { useUser } from '../utils/User';
+import { perPage } from '../../config';
+
 import { Center, ItemsList } from '../styles/ItemListStyles';
 import Item from './item-card/Item';
-import { useUser } from '../utils/User';
 import Pagination from './Pagination';
-import { perPage } from '../../config';
 import Loader from '../utils/Loader';
 import Error from '../utils/ErrorMessage';
 
@@ -31,8 +32,12 @@ const Items = ({ page }) => {
   return (
     <Center>
       <Pagination page={page} />
-      {loading && <Center><Loader /></Center>}
-      {error && <Error error={error}/>}
+      {loading && (
+        <Center>
+          <Loader />
+        </Center>
+      )}
+      {error && <Error error={error} />}
       {!loading && !error && (
         <ItemsList>
           {data.items.map((item) => (

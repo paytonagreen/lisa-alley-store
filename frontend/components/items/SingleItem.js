@@ -3,12 +3,13 @@ import { useQuery, gql } from '@apollo/client';
 import Head from 'next/head';
 import Link from 'next/link';
 
+import formatMoney from '../../lib/formatMoney';
+import useUser from '../utils/User';
+
 import Error from '../utils/ErrorMessage';
 import AddToCart from './item-card/AddToCart';
 import DeleteItem from './item-card/DeleteItem';
 import SingleItemStyles from '../styles/SingleItemStyles';
-import formatMoney from '../../lib/formatMoney';
-import useUser from '../utils/User';
 
 const SINGLE_ITEM_QUERY = gql`
   query SINGLE_ITEM_QUERY($id: ID!) {

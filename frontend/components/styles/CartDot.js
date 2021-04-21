@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const CardDot = styled.div`
+const CartDot = styled.div`
   background: ${(props) => props.theme.teal};
   color: white;
   border-radius: 50%;

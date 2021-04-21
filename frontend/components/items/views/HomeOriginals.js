@@ -2,11 +2,16 @@ import React from 'react';
 import { useQuery, gql } from '@apollo/client';
 import Link from 'next/link';
 
-import { SectionTitle, SectionDivider, SectionLink } from '../../styles/HomeSectionStyles';
-import { Center, ItemsList } from '../../styles/ItemListStyles';
-import Item from '../item-card/Item';
 import { useUser } from '../../utils/User';
 import { smallPerPage } from '../../../config';
+
+import {
+  SectionTitle,
+  SectionDivider,
+  SectionLink,
+} from '../../styles/HomeSectionStyles';
+import { Center, ItemsList } from '../../styles/ItemListStyles';
+import Item from '../item-card/Item';
 import Loader from '../../utils/Loader';
 import Error from '../../utils/ErrorMessage';
 
@@ -32,13 +37,20 @@ const FEATURED_ORIGINALS_QUERY = gql`
 const Originals = ({ page }) => {
   const me = useUser();
   const { data, error, loading } = useQuery(FEATURED_ORIGINALS_QUERY, {
-    variables: { skip: page * smallPerPage - smallPerPage, first: smallPerPage },
+    variables: {
+      skip: page * smallPerPage - smallPerPage,
+      first: smallPerPage,
+    },
   });
   return (
     <Center>
       <SectionTitle>ORIGINALS</SectionTitle>
-      {loading && <Center><Loader /></Center>}
-      {error && <Error error={error}/>}
+      {loading && (
+        <Center>
+          <Loader />
+        </Center>
+      )}
+      {error && <Error error={error} />}
       {!loading && !error && (
         <ItemsList>
           {data.items.map((item) => (
@@ -46,8 +58,10 @@ const Originals = ({ page }) => {
           ))}
         </ItemsList>
       )}
-      <Link href="originals"><SectionLink>BROWSE ALL ORIGINALS</SectionLink></Link>
-      <SectionDivider/>
+      <Link href='originals'>
+        <SectionLink>BROWSE ALL ORIGINALS</SectionLink>
+      </Link>
+      <SectionDivider />
     </Center>
   );
 };

@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { useMutation, useQuery, gql } from '@apollo/client';
 import Router from 'next/router';
 
-import { ALL_ITEMS_QUERY } from './Items'
+import { ALL_ITEMS_QUERY } from './Items';
+import useForm from '../../lib/useForm';
+
 import Form from '../styles/Form';
-import useForm from '../../lib/useForm'
 import Error from '../utils/ErrorMessage';
 
 const SINGLE_ITEM_QUERY = gql`
@@ -60,7 +61,6 @@ const UpdateItem = ({ id }) => {
 
   const [savingStarted, setSavingStarted] = useState(false);
 
-
   const { values, handleChange, handleSubmit } = useForm(callback);
 
   function callback() {
@@ -75,7 +75,7 @@ const UpdateItem = ({ id }) => {
           pathname: '/item',
           query: { id },
         });
-      } catch(error) {
+      } catch (error) {
         console.log(error);
       }
     }
@@ -108,71 +108,77 @@ const UpdateItem = ({ id }) => {
     <Form onSubmit={handleSubmit}>
       <Error error={mutationError} />
       <fieldset disabled={mutationLoading} aria-busy={mutationLoading}>
-        <div className="image-block">
-          <a className='image-link' href={`/updateImage?id=${id}`}>Edit Image</a>
-          {item.image && <img src={item.image} alt="Upload Preview" />}
+        <div className='image-block'>
+          <a className='image-link' href={`/updateImage?id=${id}`}>
+            Edit Image
+          </a>
+          {item.image && <img src={item.image} alt='Upload Preview' />}
         </div>
-        <label htmlFor="title">
+        <label htmlFor='title'>
           Title
           <input
-            type="text"
-            id="title"
-            name="title"
-            placeholder="Title"
+            type='text'
+            id='title'
+            name='title'
+            placeholder='Title'
             required
             defaultValue={data.item.title}
             value={values.title}
             onChange={handleChange}
           />
         </label>
-        <label htmlFor="price">
+        <label htmlFor='price'>
           Price
           <input
-            type="number"
-            id="price"
-            name="price"
-            placeholder="Price"
+            type='number'
+            id='price'
+            name='price'
+            placeholder='Price'
             required
             defaultValue={data.item.price}
             value={values.price}
             onChange={handleChange}
           />
         </label>
-        <label htmlFor="quantity">
+        <label htmlFor='quantity'>
           Quantity
           <input
-            type="number"
-            id="quantity"
-            name="quantity"
-            placeholder="Quantity"
+            type='number'
+            id='quantity'
+            name='quantity'
+            placeholder='Quantity'
             required
             defaultValue={data.item.quantity}
             value={values.quantity}
             onChange={handleChange}
           />
         </label>
-        <label htmlFor="description">
+        <label htmlFor='description'>
           Description
           <textarea
-            id="description"
-            name="description"
-            placeholder="Enter A Description"
+            id='description'
+            name='description'
+            placeholder='Enter A Description'
             required
             defaultValue={data.item.description}
             value={values.description}
             onChange={handleChange}
           />
         </label>
-        <label htmlFor="featured">
-            Featured
-            <select id="featured" name="featured" onChange={handleChange}>
-              <option value=""></option>
-              <option value={true} selected={item.featured === true}>Yes</option>
-              <option value={false} selected={item.featured === false}>No</option>
-            </select>
-          </label>
+        <label htmlFor='featured'>
+          Featured
+          <select id='featured' name='featured' onChange={handleChange}>
+            <option value=''></option>
+            <option value={true} selected={item.featured === true}>
+              Yes
+            </option>
+            <option value={false} selected={item.featured === false}>
+              No
+            </option>
+          </select>
+        </label>
 
-        <button type="submit">Sav{loading ? 'ing' : 'e'} Changes</button>
+        <button type='submit'>Sav{loading ? 'ing' : 'e'} Changes</button>
       </fieldset>
     </Form>
   );

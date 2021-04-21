@@ -3,9 +3,10 @@ import { useMutation, gql } from '@apollo/client';
 import Router from 'next/router';
 
 import useForm from '../../lib/useForm';
+import { ALL_ITEMS_QUERY } from './Items';
+
 import Form from '../styles/Form';
 import Error from '../utils/ErrorMessage';
-import { ALL_ITEMS_QUERY } from './Items';
 
 const CREATE_ITEM_MUTATION = gql`
   mutation CREATE_ITEM_MUTATION(

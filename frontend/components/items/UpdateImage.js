@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { useMutation, useQuery, gql } from '@apollo/client';
 import Router from 'next/router';
 
-import { ALL_ITEMS_QUERY } from './Items'
+import { ALL_ITEMS_QUERY } from './Items';
+import useForm from '../../lib/useForm';
+
 import Form from '../styles/Form';
-import useForm from '../../lib/useForm'
 import Error from '../utils/ErrorMessage';
 
 const SINGLE_ITEM_QUERY = gql`
@@ -21,16 +22,8 @@ const SINGLE_ITEM_QUERY = gql`
 `;
 
 const UPDATE_ITEM_MUTATION = gql`
-  mutation UPDATE_ITEM_MUTATION(
-    $id: ID!
-    $image: String
-    $largeImage: String
-  ) {
-    updateItem(
-      id: $id
-      image: $image
-      largeImage: $largeImage
-    ) {
+  mutation UPDATE_ITEM_MUTATION($id: ID!, $image: String, $largeImage: String) {
+    updateItem(id: $id, image: $image, largeImage: $largeImage) {
       image
       largeImage
     }
@@ -48,9 +41,8 @@ const UpdateItem = ({ id }) => {
   const mutationError = itemMutation[1].error;
 
   const [savingStarted, setSavingStarted] = useState(false);
-  const [ image, setImage ] = useState('');
-  const [ largeImage, setLargeImage ] = useState('');
-
+  const [image, setImage] = useState('');
+  const [largeImage, setLargeImage] = useState('');
 
   const { handleSubmit } = useForm(callback);
 
@@ -66,7 +58,7 @@ const UpdateItem = ({ id }) => {
           pathname: '/item',
           query: { id },
         });
-      } catch(error) {
+      } catch (error) {
         console.log(error);
       }
     }
@@ -102,19 +94,19 @@ const UpdateItem = ({ id }) => {
     <Form onSubmit={handleSubmit}>
       <Error error={mutationError} />
       <fieldset disabled={mutationLoading} aria-busy={mutationLoading}>
-      <label htmlFor="file">
+        <label htmlFor='file'>
           Image
           <input
-            type="file"
-            id="file"
-            name="file"
-            placeholder="Upload an image"
+            type='file'
+            id='file'
+            name='file'
+            placeholder='Upload an image'
             onChange={uploadFile}
           />
-          {image && <img src={image} alt="Upload Preview" />}
+          {image && <img src={image} alt='Upload Preview' />}
         </label>
 
-        <button type="submit">Sav{loading ? 'ing' : 'e'} Changes</button>
+        <button type='submit'>Sav{loading ? 'ing' : 'e'} Changes</button>
       </fieldset>
     </Form>
   );
