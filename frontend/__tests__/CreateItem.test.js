@@ -8,6 +8,18 @@ jest.mock('next/router', () => ({
   push: jest.fn(),
 }));
 
+const fillForm = async () => {
+  await userEvent.type(screen.getByPlaceholderText('Title'), item.title);
+  await userEvent.type(
+    screen.getByPlaceholderText('Price'),
+    item.price.toString()
+  );
+  await userEvent.type(
+    screen.getByPlaceholderText('Enter A Description'),
+    item.description
+  );
+}
+
 const item = fakeItem();
 describe('<CreateItem/>', () => {
   it('renders and matches snapshot', async () => {
@@ -22,15 +34,7 @@ describe('<CreateItem/>', () => {
       <CreateItem />
     );
 
-    await userEvent.type(screen.getByPlaceholderText('Title'), item.title);
-    await userEvent.type(
-      screen.getByPlaceholderText('Price'),
-      item.price.toString()
-    );
-    await userEvent.type(
-      screen.getByPlaceholderText('Enter A Description'),
-      item.description
-    );
+    await fillForm()
 
     expect(screen.getByDisplayValue(item.title)).toBeInTheDocument();
     expect(screen.getByDisplayValue(item.price.toString())).toBeInTheDocument();
@@ -40,15 +44,9 @@ describe('<CreateItem/>', () => {
     render(
         <CreateItem />
     );
-    await userEvent.type(screen.getByPlaceholderText('Title'), item.title);
-    await userEvent.type(
-      screen.getByPlaceholderText('Price'),
-      item.price.toString()
-    );
-    await userEvent.type(
-      screen.getByPlaceholderText('Enter A Description'),
-      item.description
-    );
+    
+    await fillForm();
+    
     await userEvent.click(screen.getByText('Submit'));
     await waitFor(() => {
       expect(Router.push).toHaveBeenCalled();

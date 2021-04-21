@@ -81,26 +81,6 @@ const UpdateItem = ({ id }) => {
     }
   }
 
-  async function uploadFile(e) {
-    console.log('uploading file...');
-    const files = e.target.files;
-    const data = new FormData();
-    data.append('file', files[0]);
-    data.append('upload_preset', 'sickfits');
-
-    const res = await fetch(
-      'https://api.cloudinary.com/v1_1/dtqqdu0so/image/upload',
-      {
-        method: 'POST',
-        body: data,
-      }
-    );
-    const file = await res.json();
-    console.log(file);
-    setImage(file.secure_url);
-    setLargeImage(file.eager[0].secure_url);
-  }
-
   if (loading) return <p>Loading...</p>;
   if (error) return <Error error={error} />;
   const { item } = data;

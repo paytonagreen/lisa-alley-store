@@ -15,18 +15,15 @@ export const order = {
   id: 'abc123',
   charge: 'abcdefg12345678',
   total: 5500,
-  createdAt: "2020-10-16T00:56:06.638Z",
+  createdAt: '2020-10-16T00:56:06.638Z',
   user: {
     id: 'abc123',
   },
-  items: [
-    {...item},
-  ]
-}
+  items: [{ ...item }],
+};
 const user = fakeUser();
 
 export const handlers = [
-
   /*************************************************************
    * QUERY MOCKS
    ***************************************************************/
@@ -73,19 +70,19 @@ export const handlers = [
 
   graphql.query('SINGLE_ORDER_QUERY', (req, res, ctx) => {
     let { id } = req.variables;
-    if(id = 'abc123') {
+    if ((id = 'abc123')) {
       return res(
         ctx.data({
-          order
+          order,
         })
-      )
+      );
     }
   }),
 
   /**************************************************************************
    * MUTATION MOCKS
    **************************************************************************/
-  
+
   graphql.mutation('REQUEST_RESET_MUTATION', (req, res, ctx) => {
     let { email } = req.variables;
     if (email === 'test@test.com') {
@@ -131,23 +128,35 @@ export const handlers = [
     );
   }),
 
-  graphql.mutation('UPDATE_USER_MUTATION', (req,res,ctx) => {
+  graphql.mutation('UPDATE_USER_MUTATION', (req, res, ctx) => {
     return res(
       ctx.data({
         updateUser: {
-          ...user
-        }
+          ...user,
+        },
       })
-    )
+    );
+  }),
+
+  graphql.mutation('UPDATE_ITEM_MUTATION', (req, res, ctx) => {
+    return res(
+      ctx.data({
+        updateItem: {
+          ...item,
+          id: 'abc123',
+          __typename: 'Item',
+        },
+      })
+    );
   }),
 
   graphql.mutation('RESET_MUTATION', (req, res, ctx) => {
     return res(
       ctx.data({
         resetPassword: {
-          ...user
-        }
+          ...user,
+        },
       })
-    )
-  })
+    );
+  }),
 ];
