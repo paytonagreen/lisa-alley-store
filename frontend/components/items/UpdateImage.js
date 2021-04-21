@@ -86,10 +86,7 @@ const UpdateItem = ({ id }) => {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <Error error={error} />;
-  const { item } = data;
-  console.log(item);
-  console.log(image);
-  console.log(largeImage);
+
   return (
     <Form onSubmit={handleSubmit}>
       <Error error={mutationError} />
