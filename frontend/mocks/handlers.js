@@ -1,7 +1,7 @@
 import { graphql } from 'msw';
 import { fakeUser, fakeItem } from '../lib/testUtils';
 
-const item = {
+export const item = {
   id: 'abc123',
   title: 'A Cool Item',
   price: 5000,
@@ -11,7 +11,7 @@ const item = {
   quantity: 1,
 };
 
-const order = {
+export const order = {
   id: 'abc123',
   charge: 'abcdefg12345678',
   total: 5500,
