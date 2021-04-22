@@ -49,27 +49,28 @@ const UPDATE_ITEM_MUTATION = gql`
 `;
 
 const UpdateItem = ({ id }) => {
+  const { values, handleChange, handleSubmit } = useForm(callback);
+
   const { data, loading, error } = useQuery(SINGLE_ITEM_QUERY, {
     variables: { id },
   });
 
-  const itemMutation = useMutation(UPDATE_ITEM_MUTATION);
+  const itemMutation = useMutation(UPDATE_ITEM_MUTATION, {
+    variables: { id, ...values },
+    refetchQueries: [{ query: ALL_ITEMS_QUERY }],
+  });
+
   const [updateItem] = itemMutation;
   const mutationLoading = itemMutation[1].loading;
   const mutationError = itemMutation[1].error;
 
   const [savingStarted, setSavingStarted] = useState(false);
 
-  const { values, handleChange, handleSubmit } = useForm(callback);
-
-  function callback() {
+  async function callback() {
     if (!savingStarted) {
       try {
         setSavingStarted(true);
-        updateItem({
-          variables: { id, ...values },
-          // refetchQueries: [{ query: ALL_ITEMS_QUERY }],
-        });
+        const res = await updateItem();
         Router.push({
           pathname: '/item',
           query: { id },

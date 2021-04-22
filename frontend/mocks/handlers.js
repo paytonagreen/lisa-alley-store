@@ -5,6 +5,7 @@ export const item = {
   id: 'abc123',
   title: 'A Cool Item',
   price: 5000,
+  type: 'print',
   description: 'This item is so dang cool',
   image: 'dog.jpg',
   largeImage: 'largedog.jpg',
@@ -33,8 +34,7 @@ export const handlers = [
   }),
 
   graphql.query('ALL_ITEMS_QUERY', (req, res, ctx) => {
-    const { type, first, skip, orderBy } = req.variables;
-    return res(ctx.data({ items: [item, item, item] }));
+    return res(ctx.data({ items: [{__typename: 'Item', ...item}, {__typename: 'Item', ...item}] }));
   }),
 
   graphql.query('PAGINATION_QUERY', (req, res, ctx) => {
@@ -140,7 +140,6 @@ export const handlers = [
 
   graphql.mutation('UPDATE_ITEM_MUTATION', (req, res, ctx) => {
     let { id } = req.variables;
-    console.log(id);
     return res(
       ctx.data({
         updateItem: {

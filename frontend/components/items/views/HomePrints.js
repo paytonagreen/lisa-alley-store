@@ -42,6 +42,8 @@ const Prints = ({ page }) => {
       first: smallPerPage,
     },
   });
+
+  console.log(data);
   return (
     <ItemSectionStyles>
       <SectionDivider />

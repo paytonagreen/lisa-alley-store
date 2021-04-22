@@ -28,6 +28,8 @@ const Items = ({ page }) => {
   const { data, error, loading } = useQuery(ALL_ITEMS_QUERY, {
     variables: { skip: page * perPage - perPage, first: perPage },
   });
+
+  console.log(data);
   return (
     <Center>
       <Pagination page={page} />
