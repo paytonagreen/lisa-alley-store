@@ -33,8 +33,8 @@ export const handlers = [
   }),
 
   graphql.query('ALL_ITEMS_QUERY', (req, res, ctx) => {
-    //variables??
-    return res(ctx.data({ items: [fakeItem(), fakeItem(), fakeItem()] }));
+    const { type, first, skip, orderBy } = req.variables;
+    return res(ctx.data({ items: [item, item, item] }));
   }),
 
   graphql.query('PAGINATION_QUERY', (req, res, ctx) => {
@@ -139,6 +139,8 @@ export const handlers = [
   }),
 
   graphql.mutation('UPDATE_ITEM_MUTATION', (req, res, ctx) => {
+    let { id } = req.variables;
+    console.log(id);
     return res(
       ctx.data({
         updateItem: {

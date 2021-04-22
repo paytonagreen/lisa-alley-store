@@ -21,7 +21,6 @@ const SINGLE_ITEM_QUERY = gql`
     }
   }
 `;
-
 const UPDATE_ITEM_MUTATION = gql`
   mutation UPDATE_ITEM_MUTATION(
     $id: ID!
@@ -69,7 +68,7 @@ const UpdateItem = ({ id }) => {
         setSavingStarted(true);
         updateItem({
           variables: { id, ...values },
-          refetchQueries: [{ query: ALL_ITEMS_QUERY }],
+          // refetchQueries: [{ query: ALL_ITEMS_QUERY }],
         });
         Router.push({
           pathname: '/item',
@@ -102,7 +101,7 @@ const UpdateItem = ({ id }) => {
             name='title'
             placeholder='Title'
             required
-            defaultValue={data.item.title}
+            defaultValue={item.title}
             value={values.title}
             onChange={handleChange}
           />
@@ -115,7 +114,7 @@ const UpdateItem = ({ id }) => {
             name='price'
             placeholder='Price'
             required
-            defaultValue={data.item.price}
+            defaultValue={item.price}
             value={values.price}
             onChange={handleChange}
           />
@@ -128,7 +127,7 @@ const UpdateItem = ({ id }) => {
             name='quantity'
             placeholder='Quantity'
             required
-            defaultValue={data.item.quantity}
+            defaultValue={item.quantity}
             value={values.quantity}
             onChange={handleChange}
           />
@@ -140,21 +139,22 @@ const UpdateItem = ({ id }) => {
             name='description'
             placeholder='Enter A Description'
             required
-            defaultValue={data.item.description}
+            defaultValue={item.description}
             value={values.description}
             onChange={handleChange}
           />
         </label>
         <label htmlFor='featured'>
           Featured
-          <select id='featured' name='featured' onChange={handleChange}>
+          <select
+            defaultValue={item.featured}
+            id='featured'
+            name='featured'
+            onChange={handleChange}
+          >
             <option value=''></option>
-            <option value={true} selected={item.featured === true}>
-              Yes
-            </option>
-            <option value={false} selected={item.featured === false}>
-              No
-            </option>
+            <option value={true}>Yes</option>
+            <option value={false}>No</option>
           </select>
         </label>
 

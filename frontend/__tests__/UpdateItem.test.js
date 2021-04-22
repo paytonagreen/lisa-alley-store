@@ -11,11 +11,6 @@ jest.mock('next/router', () => ({
   push: jest.fn(),
 }));
 
-const newItem = {
-  title: 'A Cooler Item',
-  price: '5500',
-  description: 'Can you believe how cool this is'
-}
 const fillForm = async () => {
   await userEvent.clear(title);
   await userEvent.type(title, 'A Cooler Item');
@@ -29,11 +24,13 @@ describe('<UpdateItem/>', () => {
   it('renders properly', async () => {
     render(<UpdateItem id='abc123' />);
     await waitForElementToBeRemoved(() => screen.getByText(/Loading.../i));
+    await waitFor(() => screen.findByDisplayValue(item.title))
     expect(screen.queryByDisplayValue(item.title)).toBeInTheDocument();
   });
   it('populates the form with item data', async () => {
     render(<UpdateItem id='abc123' />);
     await waitForElementToBeRemoved(() => screen.getByText(/Loading.../i));
+    await waitFor(() => screen.getByDisplayValue(item.title));
     const title = screen.getByDisplayValue(item.title);
     const price = screen.getByDisplayValue(item.price.toString());
     const description = screen.getByLabelText(/Description/i);
@@ -51,7 +48,7 @@ describe('<UpdateItem/>', () => {
     expect(await screen.findByDisplayValue('Can you believe how cool this is')
     ).toBeInTheDocument();
   });
-  it.skip('redirects to the <Item /> upon submit', async () => {
+  it('redirects to the <Item /> upon submit', async () => {
     render(<UpdateItem id='abc123' />);
     await waitForElementToBeRemoved(() => screen.getByText(/Loading.../i));
     await fillForm();

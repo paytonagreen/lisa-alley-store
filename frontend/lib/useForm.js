@@ -77,6 +77,7 @@ const useForm = (callback, initValues = {}) => {
     handleChange,
     handleSubmit,
     values,
+    setValues,
     lowercaseValues,
     errors,
   };
