@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useMutation, gql } from '@apollo/client';
 import Router from 'next/router';
 
 import useForm from '../../lib/useForm';
+import { ALL_ITEMS_QUERY } from './Items';
+
 import Form from '../styles/Form';
 import Error from '../utils/ErrorMessage';
-import { ALL_ITEMS_QUERY } from './Items';
 
 const CREATE_ITEM_MUTATION = gql`
   mutation CREATE_ITEM_MUTATION(
@@ -18,6 +19,7 @@ const CREATE_ITEM_MUTATION = gql`
     $size: String!
     $lowercaseTitle: String!
     $lowercaseDescription: String!
+    $quantity: Int!
   ) {
     createItem(
       title: $title
@@ -29,6 +31,7 @@ const CREATE_ITEM_MUTATION = gql`
       size: $size
       lowercaseTitle: $lowercaseTitle
       lowercaseDescription: $lowercaseDescription
+      quantity: $quantity
     ) {
       id
     }
@@ -147,9 +150,10 @@ function CreateItem() {
         <label htmlFor="type">
           Type
           <select id="type" name="type" onChange={handleChange}>
-            <option value=""></option>
+            <option value="">Select An Option</option>
             <option value="print">Print</option>
             <option value="original">Original</option>
+            <option value="gallery">Gallery</option>
             <option value="shirt">Shirt</option>
             <option value="hat">Hat</option>
           </select>
@@ -158,9 +162,18 @@ function CreateItem() {
           <label htmlFor="size">
             Size
             <select id="size" name="size" onChange={handleChange}>
-              <option value=""></option>
+              <option value="">Select An Option</option>
               <option value="11x14">11x14</option>
               <option value="30x30">30x30</option>
+            </select>
+          </label>
+        )}
+        {values.type === 'gallery' && (
+          <label htmlFor="size">
+            Size
+            <select id="size" name="size" onChange={handleChange}>
+              <option value=""></option>
+              <option value="Gallery">Gallery Example</option>
             </select>
           </label>
         )}
@@ -178,6 +191,18 @@ function CreateItem() {
           />
           </label>
         )}
+        <label htmlFor="quantity">
+          Quantity
+          <input
+            type="number"
+            id="quantity"
+            name="quantity"
+            placeholder="Quantity"
+            required
+            value={values.quantity}
+            onChange={handleChange}
+          />
+        </label>
         <label htmlFor="description">
           description
           <textarea

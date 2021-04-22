@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useMutation, useQuery, gql } from '@apollo/client';
-import Form from '../styles/Form';
+
 import useForm from '../../lib/useForm';
-import Error from '../utils/ErrorMessage';
 import { CURRENT_USER_QUERY } from '../utils/User';
+
+import Form from '../styles/Form';
+import Error from '../utils/ErrorMessage';
 
 const UPDATE_USER_MUTATION = gql`
   mutation UPDATE_USER_MUTATION(
@@ -68,97 +70,97 @@ const UpdateUser = () => {
   if (error) return <Error error={error} />;
 
   return (
-    <Form data-testid="updateUserForm" onSubmit={handleSubmit}>
+    <Form data-testid='updateUserForm' onSubmit={handleSubmit}>
       <fieldset disabled={mutationLoading} aria-busy={mutationLoading}>
         {!mutationError && !mutationLoading && mutationCalled && (
           <p>Success! Account updated.</p>
         )}
         <h2>Update Your Account</h2>
         <Error error={mutationError} />
-        <label htmlFor="email">
+        <label htmlFor='email'>
           Email
           <input
-            id="email"
-            type="email"
-            name="email"
-            placeholder="email"
+            id='email'
+            type='email'
+            name='email'
+            placeholder='email'
             required
             defaultValue={data.me.email}
             onChange={handleChange}
           />
         </label>
-        <label htmlFor="name">
+        <label htmlFor='name'>
           Name
           <input
-            id="name"
-            type="text"
-            name="name"
-            placeholder="name"
+            id='name'
+            type='text'
+            name='name'
+            placeholder='name'
             required
             defaultValue={data.me.name}
             onChange={handleChange}
           />
         </label>
-        <label htmlFor="address1">
+        <label htmlFor='address1'>
           Address Line 1
           <input
-            id="address1"
-            type="text"
-            name="address1"
-            placeholder="Address Line 1"
+            id='address1'
+            type='text'
+            name='address1'
+            placeholder='Address Line 1'
             required
             defaultValue={data.me.address1}
             onChange={handleChange}
           />
         </label>
-        <label htmlFor="address2">
+        <label htmlFor='address2'>
           Address Line 2
           <input
-            id="address2"
-            type="text"
-            name="address2"
-            placeholder="Address Line 2"
+            id='address2'
+            type='text'
+            name='address2'
+            placeholder='Address Line 2'
             defaultValue={data.me.address2}
             onChange={handleChange}
           />
         </label>
-        <label htmlFor="city">
+        <label htmlFor='city'>
           City
           <input
-            id="city"
-            type="text"
-            name="city"
-            placeholder="City"
+            id='city'
+            type='text'
+            name='city'
+            placeholder='City'
             required
             defaultValue={data.me.city}
             onChange={handleChange}
           />
         </label>
-        <label htmlFor="state">
+        <label htmlFor='state'>
           State
           <input
-            id="state"
-            type="input"
-            name="state"
-            placeholder="State"
+            id='state'
+            type='input'
+            name='state'
+            placeholder='State'
             required
             defaultValue={data.me.state}
             onChange={handleChange}
           />
         </label>
-        <label htmlFor="zip">
+        <label htmlFor='zip'>
           Zip Code
           <input
-            id="zip"
-            type="number"
-            name="zip"
-            placeholder="Zip Code"
+            id='zip'
+            type='number'
+            name='zip'
+            placeholder='Zip Code'
             required
             defaultValue={data.me.zip}
             onChange={handleChange}
           />
         </label>
-        <button type="submit">
+        <button type='submit'>
           Sav{mutationLoading ? 'ing' : 'e'} Changes
         </button>
       </fieldset>

@@ -1,20 +1,14 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useMutation, gql } from '@apollo/client';
-import styled from 'styled-components';
 import Head from 'next/head';
 import Router from 'next/router';
 
-import Form from '../styles/Form';
-import Error from '../utils/ErrorMessage';
 import { CURRENT_USER_QUERY } from '../utils/User';
 
-const AccountLink = styled.a`
-  font-size: 1.25rem;
-  line-height: 2;
-  margin: 5rem 0;
-  cursor: pointer;
-`;
+import AccountLink from '../styles/AccountLink';
+import Form from '../styles/Form';
+import Error from '../utils/ErrorMessage';
 
 const SIGNIN_MUTATION = gql`
   mutation SIGNIN_MUTATION($email: String!, $password: String!) {
@@ -39,7 +33,7 @@ const Signin = () => {
         <title>Lisa Alley | Sign In</title>
       </Head>
       <Form
-        method="post"
+        method='post'
         onSubmit={async (e) => {
           e.preventDefault();
           try {
@@ -56,33 +50,33 @@ const Signin = () => {
         <fieldset disabled={loading} aria-busy={loading}>
           <h2>Sign In To Your Account</h2>
           <Error error={error} />
-          <label htmlFor="email">
+          <label htmlFor='email'>
             Email
             <input
-              type="email"
-              name="email"
-              placeholder="email"
+              type='email'
+              name='email'
+              placeholder='email'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </label>
-          <label htmlFor="password">
+          <label htmlFor='password'>
             Password
             <input
-              type="password"
-              name="password"
-              placeholder="password"
+              type='password'
+              name='password'
+              placeholder='password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </label>
-          <button type="submit">Sign In!</button>
+          <button type='submit'>Sign In!</button>
           <br />
-          <Link href="/signup">
+          <Link href='/signup'>
             <AccountLink>Sign Up For An Account</AccountLink>
           </Link>
           <br />
-          <Link href="/requestReset">
+          <Link href='/requestReset'>
             <AccountLink>Forgot Password?</AccountLink>
           </Link>
         </fieldset>

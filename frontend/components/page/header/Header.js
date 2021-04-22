@@ -1,8 +1,9 @@
 import NProgress from 'nprogress';
 import Router from 'next/router';
 
-import Nav from './Nav';
 import { useTogglers } from '../../utils/LocalState';
+
+import Nav from './Nav';
 import Cart from '../../cart/Cart';
 import { StyledHeader, HamburgerButton, Logo } from '../../styles/HeaderStyles';
 import HamburgerMenu from '../../burger-menu/HamburgerMenu';
@@ -24,13 +25,13 @@ const Header = () => {
     <>
       <HamburgerButton onClick={toggleBurger}>MENU</HamburgerButton>
       <StyledHeader>
-        <div className="bar">
+        <div className='bar'>
           <Logo>
-              <a href="https://lisa-alley.com">LISA ALLEY STORE</a>
+            <a href='https://lisa-alley.com'>LISA ALLEY STORE</a>
           </Logo>
           <Nav />
         </div>
-        <div className="sub-bar">
+        <div className='sub-bar'>
           <Search />
         </div>
         <Cart />

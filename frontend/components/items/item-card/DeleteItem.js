@@ -1,5 +1,5 @@
-import React from 'react';
 import { useMutation, gql } from '@apollo/client';
+
 import { ALL_ITEMS_QUERY } from '../Items';
 
 const DELETE_ITEM_MUTATION = gql`
@@ -9,7 +9,6 @@ const DELETE_ITEM_MUTATION = gql`
     }
   }
 `;
-
 
 const DeleteItem = ({ id, children }) => {
   function update(cache, payload) {
@@ -21,11 +20,12 @@ const DeleteItem = ({ id, children }) => {
       (item) => item.id !== payload.data.deleteItem.id
     );
     // 3. Put items back!
-    cache.writeQuery({ query: ALL_ITEMS_QUERY,
+    cache.writeQuery({
+      query: ALL_ITEMS_QUERY,
       data: {
-        items: updatedItems
-      }
-       });
+        items: updatedItems,
+      },
+    });
   }
   const [deleteItem, { error }] = useMutation(DELETE_ITEM_MUTATION, {
     variables: { id },

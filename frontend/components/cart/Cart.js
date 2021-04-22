@@ -1,14 +1,14 @@
 import { useTogglers } from '../utils/LocalState';
 import { useUser } from '../utils/User';
+import formatMoney from '../../lib/formatMoney';
+import calcTotalPrice from '../../lib/calcTotalPrice';
+
+import TakeMyMoney from './TakeMyMoney';
 import CartStyles from '../styles/CartStyles';
 import Supreme from '../styles/Supreme';
 import CloseButton from '../styles/CloseButton';
 import SickButton from '../styles/SickButton';
 import CartItem from './CartItem';
-import formatMoney from '../../lib/formatMoney';
-import calcTotalPrice from '../../lib/calcTotalPrice';
-import TakeMyMoney from './TakeMyMoney';
-
 
 const Cart = () => {
   const me = useUser();

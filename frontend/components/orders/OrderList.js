@@ -1,13 +1,14 @@
-import React from "react";
 import { useQuery, gql } from "@apollo/client";
 import Link from "next/link";
-import Error from "../utils/ErrorMessage";
-import styled from "styled-components";
-import SickButton from '../styles/SickButton'
+
 import { formatDistance } from "date-fns";
 import formatMoney from "../../lib/formatMoney";
-import OrderItemStyles from "../styles/OrderItemStyles";
 import useUser from '../utils/User';
+
+import Error from "../utils/ErrorMessage";
+import SickButton from '../styles/SickButton'
+import OrderItemStyles from "../styles/OrderItemStyles";
+import OrderUL from '../styles/OrderUL';
 
 const ALL_ORDERS_QUERY = gql`
   query ALL_ORDERS_QUERY {
@@ -27,16 +28,6 @@ const ALL_ORDERS_QUERY = gql`
   }
 `;
 
-const OrderUL = styled.ul`
-  display: grid;
-  grid-gap: 4rem;
-  grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
-  padding: 0;
-  @media(max-width: 700px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
 const OrderList = () => {
   const { data, error, loading } = useQuery(ALL_ORDERS_QUERY);
   const me = useUser();
@@ -50,6 +41,16 @@ const OrderList = () => {
         <h2>
           You have {orders.length} order{orders.length === 1 ? "" : "s"}
         </h2>
+        {me && me.permissions.includes("ADMIN") && (
+        <Link
+        href={{
+          pathname: '/adminOrders',
+        }}>
+          <a>
+          <SickButton>Admin View</SickButton>
+          </a>
+        </Link>
+        )}
         <OrderUL>
           {orders.map((order) => (
             <OrderItemStyles key={order.id}>
@@ -76,16 +77,7 @@ const OrderList = () => {
             </OrderItemStyles>
           ))}
         </OrderUL>
-        {me && me.permissions.includes("ADMIN") && (
-        <Link
-        href={{
-          pathname: '/adminOrders',
-        }}>
-          <a>
-          <SickButton>Admin View</SickButton>
-          </a>
-        </Link>
-        )}
+        
       </div>
     );
   }

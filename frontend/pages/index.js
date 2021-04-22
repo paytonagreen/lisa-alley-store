@@ -1,9 +1,13 @@
-import Items from '../components/items/Items';
+import Prints from '../components/items/views/HomePrints';
+import Originals from '../components/items/views/HomeOriginals';
 
-const Home = props => (
-  <div>
-    <Items page={parseFloat(props.query.page || 1)}/>
-  </div>
-);
+function PrintsPage(props) {
+  return (
+    <>
+      <Prints page={parseFloat(props.query.page || 1)} />
+      <Originals page={parseFloat(props.query.page || 1)} />
+    </>
+  );
+}
 
-export default Home;
+export default PrintsPage;

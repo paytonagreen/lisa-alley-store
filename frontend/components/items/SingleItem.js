@@ -1,14 +1,14 @@
-import React from 'react';
 import { useQuery, gql } from '@apollo/client';
 import Head from 'next/head';
 import Link from 'next/link';
+
+import formatMoney from '../../lib/formatMoney';
+import useUser from '../utils/User';
 
 import Error from '../utils/ErrorMessage';
 import AddToCart from './item-card/AddToCart';
 import DeleteItem from './item-card/DeleteItem';
 import SingleItemStyles from '../styles/SingleItemStyles';
-import formatMoney from '../../lib/formatMoney';
-import useUser from '../utils/User';
 
 const SINGLE_ITEM_QUERY = gql`
   query SINGLE_ITEM_QUERY($id: ID!) {
@@ -22,6 +22,7 @@ const SINGLE_ITEM_QUERY = gql`
       size
       lowercaseTitle
       lowercaseDescription
+      quantity
     }
   }
 `;
@@ -56,7 +57,7 @@ const SingleItem = ({ id }) => {
           <strong>Description:</strong> {item.description}
         </p>
         <div className="buttons">
-          <AddToCart id={item.id} />
+          {item.quantity >= 1 ? <AddToCart id={item.id}/>: <button>Sold Out</button>}
           {me && me.permissions.includes('ADMIN') && (
           <>
           <Link

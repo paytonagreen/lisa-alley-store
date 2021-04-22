@@ -15,8 +15,18 @@ type Mutation {
     size: String!
     lowercaseDescription: String!
     lowercaseTitle: String!
+    quantity: Int!
   ): Item!
-  updateItem(id: ID!, image: String, largeImage: String, title: String, description: String, price: Int): Item!
+  updateItem(
+    id: ID!
+    image: String
+    largeImage: String
+    title: String
+    description: String
+    price: Int
+    quantity: Int
+    featured: Boolean
+  ): Item!
   deleteItem(id: ID!): Item
   signup(
     email: String!
@@ -50,10 +60,7 @@ type Mutation {
   addToCart(id: ID!): CartItem
   removeFromCart(id: ID!): CartItem
   createOrder(token: String!): Order!
-  updateOrder(
-    id: ID!
-    fulfilled: Boolean!
-  ): Order!
+  updateOrder(id: ID!, fulfilled: Boolean!): Order!
 }
 
 type Query {

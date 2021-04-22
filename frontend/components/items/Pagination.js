@@ -1,15 +1,16 @@
-import React from 'react';
-import PaginationStyles from '../styles/PaginationStyles';
 import { useQuery, gql } from '@apollo/client';
-import { perPage } from '../../config';
 import Head from 'next/head';
 import Link from 'next/link';
+
+import { perPage } from '../../config';
+
+import PaginationStyles from '../styles/PaginationStyles';
 import Loader from '../utils/Loader';
 import Error from '../utils/ErrorMessage';
 
 const PAGINATION_QUERY = gql`
   query PAGINATION_QUERY {
-    itemsConnection (where: {type: "print"}) {
+    itemsConnection(where: { type: "print" }) {
       aggregate {
         count
       }
@@ -30,7 +31,7 @@ const Pagination = ({ page }) => {
       count,
       pages,
       (
-        <PaginationStyles data-testid="pagination">
+        <PaginationStyles data-testid='pagination'>
           <Head>
             <title>
               Lisa Alley - Page {page} of {pages}
@@ -42,12 +43,12 @@ const Pagination = ({ page }) => {
               query: { page: page - 1 },
             }}
           >
-            <a className="prev" aria-disabled={page <= 1}>
+            <a className='prev' aria-disabled={page <= 1}>
               Prev
             </a>
           </Link>
-          <p data-testid="pages-index">
-            Page {page} of <span className="totalPages">{pages}</span>
+          <p data-testid='pages-index'>
+            Page {page} of <span className='totalPages'>{pages}</span>
           </p>
           <p>{count} Items Total</p>
           <Link
@@ -56,7 +57,7 @@ const Pagination = ({ page }) => {
               query: { page: page + 1 },
             }}
           >
-            <a className="next" aria-disabled={page === pages}>
+            <a className='next' aria-disabled={page === pages}>
               Next
             </a>
           </Link>

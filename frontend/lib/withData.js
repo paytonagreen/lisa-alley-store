@@ -2,6 +2,7 @@ import withApollo from 'next-with-apollo';
 import { ApolloClient, ApolloLink, InMemoryCache } from '@apollo/client';
 import { getDataFromTree } from '@apollo/react-ssr';
 import { createUploadLink } from 'apollo-upload-client';
+
 import { endpoint, prodEndpoint } from '../config';
 
 function determineEndpoint() {

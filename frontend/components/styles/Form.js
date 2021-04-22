@@ -68,6 +68,19 @@ const Form = styled.form`
       animation: ${loading} 0.5s linear infinite;
     }
   }
+  .image-block {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .image-link {
+    padding: 1rem;
+    background: ${props => props.theme.red};
+    color: white;
+    margin: 1rem;
+  }
 `;
 
 export default Form;

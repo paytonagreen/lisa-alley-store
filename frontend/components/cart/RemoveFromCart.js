@@ -1,8 +1,8 @@
-import React from "react";
-import { useMutation, gql } from "@apollo/client";
-import styled from "styled-components";
-import PropTypes from "prop-types";
-import { CURRENT_USER_QUERY } from "../utils/User";
+import { useMutation, gql } from '@apollo/client';
+import PropTypes from 'prop-types';
+
+import { CURRENT_USER_QUERY } from '../utils/User';
+import BigButton from '../styles/BigButton';
 
 const REMOVE_FROM_CART_MUTATION = gql`
   mutation removeFromCart($id: ID!) {
@@ -12,15 +12,6 @@ const REMOVE_FROM_CART_MUTATION = gql`
   }
 `;
 
-const BigButton = styled.button`
-  font-size: 3rem;
-  background: none;
-  border: 0;
-  &:hover {
-    color: ${(props) => props.theme.red};
-    cursor: pointer;
-  }
-`;
 
 const RemoveFromCart = ({ id }) => {
   //Called as soon as post-mutation server response
@@ -33,15 +24,15 @@ const RemoveFromCart = ({ id }) => {
       (cartItem) => cartItem.id !== cartItemId
     );
     //Write it back to the cache
-    cache.writeQuery({ 
+    cache.writeQuery({
       query: CURRENT_USER_QUERY,
       data: {
         ...data,
         me: {
-        ...data.me,
-        cart: updatedCart,
-        }
-      } 
+          ...data.me,
+          cart: updatedCart,
+        },
+      },
     });
   };
   const [removeFromCart, { loading }] = useMutation(REMOVE_FROM_CART_MUTATION, {
@@ -49,9 +40,9 @@ const RemoveFromCart = ({ id }) => {
     update,
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
     optimisticResponse: {
-      __typename: "Mutation",
+      __typename: 'Mutation',
       removeFromCart: {
-        __typename: "CartItem",
+        __typename: 'CartItem',
         id,
       },
     },

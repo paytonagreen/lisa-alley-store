@@ -46,7 +46,7 @@ const Mutations = {
       info
     );
   },
-  async deleteItem(parent, args, cdtx, info) {
+  async deleteItem(parent, args, ctx, info) {
     const where = { id: args.id };
     // 1. Find Item
     const item = await ctx.db.query.item({ where }, `{ id, title, user {id}}`);
@@ -88,7 +88,7 @@ const Mutations = {
     const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
     //set JWT as a cookie on the response
     ctx.response.cookie("token", token, {
-      domain: '.lisa-alley.com',
+      // domain: '.lisa-alley.com',
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year cookie
     });
@@ -135,7 +135,7 @@ const Mutations = {
     const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
     //Set cookie with token
     ctx.response.cookie("token", token, {
-      domain: '.lisa-alley.com',
+      // domain: '.lisa-alley.com',
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365,
     });
@@ -144,7 +144,7 @@ const Mutations = {
   },
   signout(parent, args, ctx, info) {
     ctx.response.clearCookie("token", {
-      domain: '.lisa-alley.com',
+      // domain: '.lisa-alley.com',
     });
     return { message: 'Goodbye!' };
   },
@@ -207,7 +207,7 @@ const Mutations = {
     const token = jwt.sign({ userId: updatedUser.id }, process.env.APP_SECRET);
     //Set JWT Cookie
     ctx.response.cookie("token", token, {
-      domain: '.lisa-alley.com',
+      // domain: '.lisa-alley.com',
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365,
     });
@@ -274,7 +274,7 @@ const Mutations = {
       const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
       //set token as cookie on res
       ctx.response.cookie('token', token, {
-        domain: '.lisa-alley.com',
+        // domain: '.lisa-alley.com',
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24, //1 day
       });
@@ -356,6 +356,7 @@ const Mutations = {
             description
             image
             largeImage
+            quantity
           }
         }
       }`
@@ -383,7 +384,30 @@ const Mutations = {
       delete orderItem.id;
       return orderItem;
     });
-    //5. Create the Order
+
+    //5. Query items in cart
+    const itemsInCart = user.cart.map(async (cartItem) => {
+      const item = await ctx.db.query.item(
+        { where: { id: cartItem.item.id } },
+        `{
+          id
+          quantity
+        }`
+      );
+      console.log(item);
+      console.log(cartItem.quantity);
+      //6. Adjust item quantity
+      const quantityChange = ctx.db.mutation.updateItem(
+        {
+          data: { quantity: (item.quantity - cartItem.quantity) },
+          where: {
+            id: item.id,
+          },
+        },
+        info
+      )
+    })
+    //7. Create the Order
     const order = await ctx.db.mutation.createOrder({
       data: {
         total: charge.amount,
@@ -394,33 +418,30 @@ const Mutations = {
         user: { connect: { id: userId } },
       },
     });
-    //6. Clear user's cart, delete cartItems
+    //8. Clear user's cart, delete cartItems
     const cartItemIds = user.cart.map((cartItem) => cartItem.id);
     await ctx.db.mutation.deleteManyCartItems({
       where: { id_in: cartItemIds },
     });
-    //7. Send e-mail confirmation to user
+    //9. Send e-mail confirmation to user
     const mailResponse = await transport.sendMail({
       from: 'lisadianealley@gmail.com',
       to: user.email,
       subject: 'Thank you for your order!',
       html: makeANiceEmail(
-        `Thanks for your order! \n\n If you've signed up for an account, you can review your entire order <a href="${
-          process.env.FRONTEND_URL
-        }/order?id=${order.id}">here</a>.`
+        `Thanks for your order! \n\n If you've signed up for an account, you can review your entire order <a href="${process.env.FRONTEND_URL}/order?id=${order.id}">here</a>.`
       ),
     });
+    //10. Send e-mail confirmation to Lisa
     const adminMailResponse = await transport.sendMail({
       from: 'no-reply@lisa-alley.com',
-      to: 'lisadianealley@gmail.com',
+      to: 'paytonagreen@gmail.com',
       subject: 'New Order Received!',
       html: makeANiceEmail(
-        `You've receved a new order! \n\n You can review all your orders <a href="${
-          process.env.FRONTEND_URL
-        }/adminOrders">here</a>.`
+        `You've received a new order! \n\n You can review all your orders <a href="${process.env.FRONTEND_URL}/adminOrders">here</a>.`
       ),
     });
-    //8. Return the order to the client
+    //11. Return the order to the client
     return order;
   },
   updateOrder(parent, args, ctx, info) {
